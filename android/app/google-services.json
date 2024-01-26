@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "840918420570",
+    "project_id": "lsbu-uni-connect",
+    "storage_bucket": "lsbu-uni-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840918420570:android:8004fdb0a4333a892b9c63",
+        "android_client_info": {
+          "package_name": "com.kanta.uniconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSaCQMfYU-NjSfm8p_9uVjSM7B_4LD1tE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
