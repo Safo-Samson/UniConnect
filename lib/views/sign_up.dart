@@ -1,14 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
-import 'dart:developer' as devtols show log;
 import 'package:uniconnect/utils/spaces.dart';
 
-class SignUp extends StatelessWidget {
-  SignUp({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  bool _isEmailValid = false;
+  bool _passwordsMatch = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _emailController.addListener(_validateEmail);
+  }
+
+  void _validateEmail() {
+    setState(() {
+      _isEmailValid = isValidEmail(_emailController.text);
+    });
+  }
+
+  void _validatePassword() {
+    setState(() {
+      _passwordsMatch =
+          _passwordController.text == _confirmPasswordController.text &&
+              _passwordController.text.isNotEmpty;
+    });
+  }
+
+  // Function to validate an email address
+  bool isValidEmail(String email) {
+    return email.contains('@') && email.isNotEmpty;
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,15 +64,15 @@ class SignUp extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
                 'Almost there!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: BrandFonts.h1,
-                    fontFamily: BrandFonts.fontFamily),
+                  fontWeight: FontWeight.bold,
+                  fontSize: BrandFonts.h1,
+                  fontFamily: BrandFonts.fontFamily,
+                ),
               ),
               verticalSpace(20.0),
               const Text(
@@ -36,39 +80,52 @@ class SignUp extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: BrandFonts.regularText,
+                  fontFamily: BrandFonts.fontFamily,
                 ),
               ),
               verticalSpace(20.0),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
                   hintText: 'example@gmail.com',
                   border: OutlineInputBorder(),
                   labelText: 'email',
                 ),
               ),
               verticalSpace(20.0),
-              const TextField(
-                obscureText: true, // Use secure text for passwords.
-                decoration: InputDecoration(
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                onChanged: (_) => _validatePassword(),
+                decoration: const InputDecoration(
                   hintText: 'password',
                   border: OutlineInputBorder(),
                   labelText: 'password',
                 ),
               ),
               verticalSpace(20.0),
-              const TextField(
-                obscureText: true, // Use secure text for passwords.
-                decoration: InputDecoration(
-                  hintText: 'confim password',
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: true,
+                onChanged: (_) => _validatePassword(),
+                decoration: const InputDecoration(
+                  hintText: 'confirm password',
                   border: OutlineInputBorder(),
-                  labelText: 'confrim password',
+                  labelText: 'confirm password',
                 ),
               ),
+              if (!_passwordsMatch)
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'Passwords do not match',
+                    style: TextStyle(color: BrandColor.error),
+                  ),
+                ),
               verticalSpace(20.0),
               InkWell(
                 onTap: () {
-                  devtols.log('Button pressed');
-                  // todo; navigate to why 2 emails page
+                  Navigator.pushNamed(context, '/why-2-emails');
                 },
                 child: Text(
                   'wondering why 2 emails?',
@@ -81,9 +138,13 @@ class SignUp extends StatelessWidget {
               ),
               verticalSpace(25.0),
               ElevatedButton(
-                onPressed: () {
-                  // Handle button press
-                },
+                onPressed: _isEmailValid && _passwordsMatch
+                    ? () {
+                        // Handle button press
+                        Navigator.popAndPushNamed(
+                            context, '/more-info-sign-up');
+                      }
+                    : null, // Disable button if email is not valid or passwords don't match
                 child: const Text('Submit',
                     style: TextStyle(fontSize: BrandFonts.textButtonSize)),
               ),

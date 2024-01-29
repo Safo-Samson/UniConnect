@@ -51,6 +51,7 @@ class _GetStartedState extends State<GetStarted> {
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
                   fontFamily: BrandFonts.fontFamily,
+                 
                 ),
               ),
               verticalSpace(20),
