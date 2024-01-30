@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
 
@@ -40,7 +41,7 @@ class WhyNationalityInfo extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Handle button press
-                  Navigator.pushNamed(context, '/more-info-sign-up');
+                  Navigator.pushNamed(context, moreInfoSignUpRoute);
                 },
                 child: const Text('Okay, got it!',
                     style: TextStyle(

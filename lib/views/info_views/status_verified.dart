@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
 
@@ -44,7 +45,7 @@ class StudentVerified extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Handle button press
-                  Navigator.popAndPushNamed(context, '/sign-up');
+                  Navigator.popAndPushNamed(context, signupRoute);
                 },
                 child: const Text('Got it, continue',
                     style: TextStyle(

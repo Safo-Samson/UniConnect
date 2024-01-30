@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
@@ -35,7 +36,8 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       _passwordsMatch =
           _passwordController.text == _confirmPasswordController.text &&
-              _passwordController.text.isNotEmpty;
+              _passwordController.text.isNotEmpty &&
+              _confirmPasswordController.text.isNotEmpty;
     });
   }
 
@@ -125,7 +127,7 @@ class _SignUpState extends State<SignUp> {
               verticalSpace(20.0),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/why-2-emails');
+                  Navigator.pushNamed(context, why2EmailsRoute);
                 },
                 child: Text(
                   'wondering why 2 emails?',
@@ -142,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                     ? () {
                         // Handle button press
                         Navigator.popAndPushNamed(
-                            context, '/more-info-sign-up');
+                            context, moreInfoSignUpRoute);
                       }
                     : null, // Disable button if email is not valid or passwords don't match
                 child: const Text('Submit',

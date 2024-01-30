@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uniconnect/constants/countries.dart';
 import 'package:uniconnect/constants/course_list.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
@@ -148,7 +149,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/why-nationality-info');
+                      Navigator.pushNamed(context, whyNationalityRoute);
                     },
                     child: Text(
                       'why this?',
@@ -187,6 +188,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 onPressed: isSubmitButtonEnabled()
                     ? () {
                         // Handle button press
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, locationInfoRoute, (route) => false);
                       }
                     : null,
                 child: const Text('Submit',

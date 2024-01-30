@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
 
@@ -61,7 +62,7 @@ class _GetStartedState extends State<GetStarted> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Handle button press
-                    Navigator.popAndPushNamed(context, '/student-verify');
+                    Navigator.popAndPushNamed(context, studentVerifyRoute);
                   },
                   child: const Text('Get Started',
                       style: TextStyle(

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/carousel_info_constants.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/views/get_started.dart';
+import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
+import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.dart';
+import 'package:uniconnect/views/info_views/carousel_info/local_connect_info.dart';
+import 'package:uniconnect/views/info_views/carousel_info/location_info.dart';
 import 'package:uniconnect/views/info_views/nationality_info.dart';
 import 'package:uniconnect/views/more-sign-up-info.dart';
 import 'package:uniconnect/views/sign_up.dart';
@@ -12,6 +18,8 @@ void main() {
   runApp(const HomePage());
 }
 
+
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -22,15 +30,25 @@ class HomePage extends StatelessWidget {
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
       home: const GetStarted(),
-      // home: MoreSignUpInfo(),
+      // home: FinishCarousel(widgetData: finishCarouselData),
     
       routes: {
-        '/sign-up': (context) => SignUp(),
-        '/student-verify': (context) => const StudentVerify(),
-        '/why-2-emails': (context) => const WhyTwoEmails(),
-        '/status-verified': (context) => const StudentVerified(),
-        '/why-nationality-info': (context) => const WhyNationalityInfo(),
-        '/more-info-sign-up': (context) => const MoreSignUpInfo(),
+        signupRoute: (context) => const SignUp(),
+        studentVerifyRoute: (context) => const StudentVerify(),
+        why2EmailsRoute: (context) => const WhyTwoEmails(),
+        statusVerifiedRoute: (context) => const StudentVerified(),
+        whyNationalityRoute: (context) => const WhyNationalityInfo(),
+        moreInfoSignUpRoute: (context) => const MoreSignUpInfo(),
+        localConnectRoute: (context) =>
+            LocalConnect(widgetData: localConnectData),
+        globalConnectRoute: (context) =>
+            GlobalConnect(widgetData: globalConnectData),
+        locationInfoRoute: (context) =>
+            const LocationInfo(widgetData: locationData),
+        finishCarouselRoute: (context) =>
+            FinishCarousel(widgetData: finishCarouselData),
+
+        
       },
     );
   }
