@@ -8,6 +8,7 @@ import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.da
 import 'package:uniconnect/views/info_views/carousel_info/local_connect_info.dart';
 import 'package:uniconnect/views/info_views/carousel_info/location_info.dart';
 import 'package:uniconnect/views/info_views/nationality_info.dart';
+import 'package:uniconnect/views/login_view.dart';
 import 'package:uniconnect/views/more-sign-up-info.dart';
 import 'package:uniconnect/views/sign_up.dart';
 import 'package:uniconnect/views/info_views/status_verified.dart';
@@ -29,8 +30,8 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
-      home: const GetStarted(),
-      // home: FinishCarousel(widgetData: finishCarouselData),
+      // home: const GetStarted(),
+      home: const LoginView(),
     
       routes: {
         signupRoute: (context) => const SignUp(),
