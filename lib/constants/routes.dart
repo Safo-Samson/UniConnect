@@ -9,3 +9,5 @@ const globalConnectRoute = '/global-connect';
 const finishCarouselRoute = '/finish-carousel';
 const getStartedRoute = '/get-started';
 const locationInfoRoute = '/location-info';
+const loginOrSignUpRoute = '/login-or-sign-up';
+const loginRoute = '/login';

@@ -10,6 +10,7 @@ import 'package:uniconnect/views/info_views/carousel_info/location_info.dart';
 import 'package:uniconnect/views/info_views/nationality_info.dart';
 import 'package:uniconnect/views/login_view.dart';
 import 'package:uniconnect/views/more-sign-up-info.dart';
+import 'package:uniconnect/views/sign_or_login_view.dart';
 import 'package:uniconnect/views/sign_up.dart';
 import 'package:uniconnect/views/info_views/status_verified.dart';
 import 'package:uniconnect/views/student_verify.dart';
@@ -31,10 +32,12 @@ class HomePage extends StatelessWidget {
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
       // home: const GetStarted(),
-      home: const LoginView(),
+      home: const LoginOrSignUpView(),
     
       routes: {
         signupRoute: (context) => const SignUp(),
+        loginRoute: (context) => const LoginView(),
+        loginOrSignUpRoute: (context) => const LoginOrSignUpView(), 
         studentVerifyRoute: (context) => const StudentVerify(),
         why2EmailsRoute: (context) => const WhyTwoEmails(),
         statusVerifiedRoute: (context) => const StudentVerified(),
