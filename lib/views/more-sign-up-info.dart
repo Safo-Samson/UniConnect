@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uniconnect/constants/countries.dart';
+import 'package:uniconnect/constants/countries_with_flag.dart';
 import 'package:uniconnect/constants/course_list.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
@@ -165,6 +166,25 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 ],
               ),
               verticalSpace(10.0),
+              // DropdownButtonFormField<String>(
+              //   isExpanded: true,
+              //   decoration: const InputDecoration(
+              //     hintText: 'Select a Country',
+              //     border: OutlineInputBorder(),
+              //     labelText: 'Select a Country',
+              //   ),
+              //   items: allCountries.map((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              //   onChanged: (String? value) {
+              //     selectedCountryController.text = value ?? '';
+              //     setState(() {});
+              //   },
+              // ),
+
               DropdownButtonFormField<String>(
                 isExpanded: true,
                 decoration: const InputDecoration(
@@ -172,7 +192,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                   border: OutlineInputBorder(),
                   labelText: 'Select a Country',
                 ),
-                items: allCountries.map((String value) {
+                items: allCountriesWithFlags.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
