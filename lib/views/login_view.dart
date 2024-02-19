@@ -13,18 +13,28 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
   bool _isEmailValid = false;
   bool _passwordsMatch = true;
 
   @override
   void initState() {
-    super.initState();
-
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     _emailController.addListener(_validateEmail);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+
+    super.dispose();
   }
 
   void _validateEmail() {
@@ -47,14 +57,7 @@ class _LoginViewState extends State<LoginView> {
     return email.contains('@') && email.isNotEmpty;
   }
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
 
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

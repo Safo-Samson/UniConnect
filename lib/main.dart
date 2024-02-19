@@ -17,6 +17,8 @@ import 'package:uniconnect/views/student_verify.dart';
 import 'package:uniconnect/views/info_views/why_2_emails.dart';
 
 void main() {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Require that the Flutter app is initialized before running the app
   runApp(const HomePage());
 }
 
@@ -31,8 +33,8 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
-      // home: const GetStarted(),
-      home: const LoginOrSignUpView(),
+      home: const GetStarted(),
+      // home: const LoginOrSignUpView(),
     
       routes: {
         signupRoute: (context) => const SignUp(),
