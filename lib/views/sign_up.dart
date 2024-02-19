@@ -198,7 +198,8 @@ class _SignUpState extends State<SignUp> {
                   return Center(
                     child: Text(
                       'Error: ${snapshot.error}',
-                      style: const TextStyle(color: Colors.red),
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 185, 26, 14)),
                     ),
                   );
                 } else {
