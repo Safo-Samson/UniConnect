@@ -5,6 +5,8 @@ import 'package:uniconnect/services/auth/auth_user.dart';
 
 // called it MyAuthProvider because AuthProvider is already taken by firebase_auth
 abstract class MyAuthProvider {
+
+  Future<void> initialize();
   AuthUser? get currentUser;
 
   Future<AuthUser> login({

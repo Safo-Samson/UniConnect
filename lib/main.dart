@@ -1,8 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
-import 'package:uniconnect/firebase_options.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/views/get_started.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
@@ -21,7 +21,7 @@ import 'package:uniconnect/views/info_views/why_2_emails.dart';
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await AuthService.firebase().initialize(); // Initialize the firebase app
   runApp(const HomePage());
 }
 

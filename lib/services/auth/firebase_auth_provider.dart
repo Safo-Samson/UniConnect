@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:uniconnect/firebase_options.dart';
 import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_provider.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 
 class FirebaseAuthProvider implements MyAuthProvider {
+
+
   @override
   AuthUser? get currentUser {
     final user = FirebaseAuth.instance.currentUser;
@@ -83,5 +87,11 @@ class FirebaseAuthProvider implements MyAuthProvider {
     } catch (e) {
       throw GenericAuthException();
     }
+  }
+  
+  @override
+  Future<void> initialize() async {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
   }
 }

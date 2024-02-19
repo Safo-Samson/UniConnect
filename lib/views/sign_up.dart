@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/services/auth/auth_exceptions.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
@@ -66,119 +67,120 @@ class _SignUpState extends State<SignUp> {
         elevation: 0, // No shadow
       ),
       body: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView(
-                      children: [
-                        const Text(
-                          'Almost there!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: BrandFonts.h1,
-                            fontFamily: BrandFonts.fontFamily,
-                          ),
-                        ),
-                        verticalSpace(20.0),
-                        const Text(
-                          'Enter your personal email and password to register your account',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: BrandFonts.regularText,
-                            fontFamily: BrandFonts.fontFamily,
-                          ),
-                        ),
-                        verticalSpace(20.0),
-                        TextField(
-                          controller: _emailController,
-                          keyboardType:
-                              TextInputType.emailAddress, // Show email keyboard
-                          decoration: const InputDecoration(
-                            hintText: 'example@gmail.com',
-                            border: OutlineInputBorder(),
-                            labelText: 'email',
-                          ),
-                        ),
-                        verticalSpace(20.0),
-                        TextField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          autocorrect: false,
-                          enableSuggestions: false,
-                          onChanged: (_) => _validatePassword(),
-                          decoration: const InputDecoration(
-                            hintText: 'password',
-                            border: OutlineInputBorder(),
-                            labelText: 'password',
-                          ),
-                        ),
-                        verticalSpace(20.0),
-                        TextField(
-                          controller: _confirmPasswordController,
-                          obscureText: true,
-                          autocorrect: false,
-                          enableSuggestions: false,
-                          onChanged: (_) => _validatePassword(),
-                          decoration: const InputDecoration(
-                            hintText: 'confirm password',
-                            border: OutlineInputBorder(),
-                            labelText: 'confirm password',
-                          ),
-                        ),
-                        if (!_passwordsMatch)
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Text(
-                              'Passwords do not match',
-                              style: TextStyle(color: BrandColor.error),
-                            ),
-                          ),
-                        verticalSpace(20.0),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, why2EmailsRoute);
-                          },
-                          child: Text(
-                            'wondering why 2 emails?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: BrandColor.infoLinks,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                        verticalSpace(25.0),
-                        ElevatedButton(
-                          onPressed: _isEmailValid && _passwordsMatch
-                              ? () async {
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            children: [
+              const Text(
+                'Almost there!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: BrandFonts.h1,
+                  fontFamily: BrandFonts.fontFamily,
+                ),
+              ),
+              verticalSpace(20.0),
+              const Text(
+                'Enter your personal email and password to register your account',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: BrandFonts.regularText,
+                  fontFamily: BrandFonts.fontFamily,
+                ),
+              ),
+              verticalSpace(20.0),
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress, // Show email keyboard
+                decoration: const InputDecoration(
+                  hintText: 'example@gmail.com',
+                  border: OutlineInputBorder(),
+                  labelText: 'email',
+                ),
+              ),
+              verticalSpace(20.0),
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                onChanged: (_) => _validatePassword(),
+                decoration: const InputDecoration(
+                  hintText: 'password',
+                  border: OutlineInputBorder(),
+                  labelText: 'password',
+                ),
+              ),
+              verticalSpace(20.0),
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                onChanged: (_) => _validatePassword(),
+                decoration: const InputDecoration(
+                  hintText: 'confirm password',
+                  border: OutlineInputBorder(),
+                  labelText: 'confirm password',
+                ),
+              ),
+              if (!_passwordsMatch)
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'Passwords do not match',
+                    style: TextStyle(color: BrandColor.error),
+                  ),
+                ),
+              verticalSpace(20.0),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, why2EmailsRoute);
+                },
+                child: Text(
+                  'wondering why 2 emails?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: BrandColor.infoLinks,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              verticalSpace(25.0),
+              ElevatedButton(
+                onPressed: _isEmailValid && _passwordsMatch
+                    ? () async {
                         try {
                           final enteredEmail = _emailController.text;
                           final enteredPassword = _passwordController.text;
 
-                          final userCredential = await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
+                          final userCredential =
+                              await AuthService.firebase().createUser(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
                           print(userCredential);
-                          print('Done');
+
+                          // ignore: use_build_context_synchronously
                           Navigator.popAndPushNamed(
                               context, moreInfoSignUpRoute);
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            print('No user found for that email.');
-                          } else if (e.code == 'wrong-password') {
-                            print('Wrong password provided for that user.');
-                          }
+                        } on UserNotFoundAuthException {
+                          print('No user found for that email.');
+                        } on WrongPasswordAuthException {
+                          print('Wrong password provided for that user.');
+                        } on EmailAlreadyInUseAuthException {
+                          print('Email is already in use.');
+                        } on WeakPasswordAuthException {
+                          print('Password is too weak.');
                         }
-                                }
-                              : null, // Disable button if email is not valid or passwords don't match
-                          child: const Text('Submit',
-                              style: TextStyle(
-                                  fontSize: BrandFonts.textButtonSize)),
-                        ),
-                      ],
-                    ),
+                      }
+                    : null, // Disable button if email is not valid or passwords don't match
+                child: const Text('Submit',
+                    style: TextStyle(fontSize: BrandFonts.textButtonSize)),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,7 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: empty_catches
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/services/auth/auth_exceptions.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
@@ -95,19 +97,21 @@ class _LoginViewState extends State<LoginView> {
                         final enteredPassword = _passwordController.text;
 
                         try {
-                          await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
+
+                          
+                          await AuthService.firebase().login(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
+                          // ignore: use_build_context_synchronously
                           Navigator.popAndPushNamed(
                               context, moreInfoSignUpRoute);
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            print('No user found for that email.');
-                          } else if (e.code == 'wrong-password') {
-                            print('Wrong password provided for that user.');
-                          }
+                      
+                        } on UserNotFoundAuthException {
+                        } on WrongPasswordAuthException {
+                        } on InvalidEmailAuthException {
+                        } on GenericAuthException {
+                         
                         }
                       }
                     : null, // Disable button if email is not valid or passwords don't match
