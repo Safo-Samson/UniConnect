@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
@@ -15,15 +16,12 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  late final TextEditingController _confirmPasswordController;
   bool _isEmailValid = false;
-  bool _passwordsMatch = true;
 
   @override
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _confirmPasswordController = TextEditingController();
     _emailController.addListener(_validateEmail);
     super.initState();
   }
@@ -32,7 +30,6 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
 
     super.dispose();
   }
@@ -43,21 +40,10 @@ class _LoginViewState extends State<LoginView> {
     });
   }
 
-  void _validatePassword() {
-    setState(() {
-      _passwordsMatch =
-          _passwordController.text == _confirmPasswordController.text &&
-              _passwordController.text.isNotEmpty &&
-              _confirmPasswordController.text.isNotEmpty;
-    });
-  }
-
   // Function to validate an email address
   bool isValidEmail(String email) {
     return email.contains('@') && email.isNotEmpty;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +80,6 @@ class _LoginViewState extends State<LoginView> {
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                onChanged: (_) => _validatePassword(),
                 decoration: const InputDecoration(
                   hintText: 'password',
                   border: OutlineInputBorder(),
@@ -104,9 +89,26 @@ class _LoginViewState extends State<LoginView> {
               verticalSpace(20.0),
               verticalSpace(25.0),
               ElevatedButton(
-                onPressed: _isEmailValid && _passwordsMatch
-                    ? () {
-                        // Navigator.popAndPushNamed(context, moreInfoSignUpRoute);
+                onPressed: _isEmailValid
+                    ? () async {
+                        final enteredEmail = _emailController.text;
+                        final enteredPassword = _passwordController.text;
+
+                        try {
+                          await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                            email: enteredEmail,
+                            password: enteredPassword,
+                          );
+                          Navigator.popAndPushNamed(
+                              context, moreInfoSignUpRoute);
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          }
+                        }
                       }
                     : null, // Disable button if email is not valid or passwords don't match
                 child: const Text('Login',
@@ -130,6 +132,7 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
+      
     );
   }
 }

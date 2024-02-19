@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/firebase_options.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/views/get_started.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
@@ -16,9 +18,10 @@ import 'package:uniconnect/views/info_views/status_verified.dart';
 import 'package:uniconnect/views/student_verify.dart';
 import 'package:uniconnect/views/info_views/why_2_emails.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const HomePage());
 }
 
@@ -34,7 +37,7 @@ class HomePage extends StatelessWidget {
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
       home: const GetStarted(),
-      // home: const LoginOrSignUpView(),
+      // home: const LoginView(),
     
       routes: {
         signupRoute: (context) => const SignUp(),

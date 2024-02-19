@@ -1,6 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:uniconnect/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
@@ -67,19 +65,7 @@ class _SignUpState extends State<SignUp> {
         backgroundColor: Colors.transparent,
         elevation: 0, // No shadow
       ),
-        body: FutureBuilder(
-          future: Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform,
-          ),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-
-              case ConnectionState.done:
-                return Center(
+      body: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: ListView(
@@ -165,19 +151,26 @@ class _SignUpState extends State<SignUp> {
                         ElevatedButton(
                           onPressed: _isEmailValid && _passwordsMatch
                               ? () async {
-                                  final enteredEmail = _emailController.text;
-                                  final enteredPassword =
-                                      _passwordController.text;
+                        try {
+                          final enteredEmail = _emailController.text;
+                          final enteredPassword = _passwordController.text;
 
-                                  final userCredential = await FirebaseAuth
-                                      .instance
-                                      .createUserWithEmailAndPassword(
-                                    email: enteredEmail,
-                                    password: enteredPassword,
-                                  );
-                                  print(userCredential);
-                                  print('Done');
-                                  // Navigator.popAndPushNamed(context, moreInfoSignUpRoute);
+                          final userCredential = await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                            email: enteredEmail,
+                            password: enteredPassword,
+                          );
+                          print(userCredential);
+                          print('Done');
+                          Navigator.popAndPushNamed(
+                              context, moreInfoSignUpRoute);
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          }
+                        }
                                 }
                               : null, // Disable button if email is not valid or passwords don't match
                           child: const Text('Submit',
@@ -186,30 +179,8 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ],
                     ),
-                  ),
-                );
-              case ConnectionState.none:
-                return const Center(
-                  child: Text('No connection state'),
-                );
-
-              default:
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      'Error: ${snapshot.error}',
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 185, 26, 14)),
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Text('No connection state'),
-                  );
-                }
-            }
-          },
-        )
+        ),
+      ),
     );
   }
 }
