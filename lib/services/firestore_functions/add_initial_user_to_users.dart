@@ -24,7 +24,7 @@ Future<void> addUser({
 
   await usersCollection.doc(userID).set({
     'username': username,
-    'userID': userID,
+    'userId': userID,
     // Add more fields as needed
   });
 }
@@ -47,6 +47,15 @@ Future<void> updateUserWithYear(
 Future<void> addUserToGeneralCollection(String userId, String course,
     String nationality, String residence, String year) async {
   try {
+
+    if (nationality.length > 1) {
+      // Split the nationality because it contains two words, first as flag
+      List<String> parts = nationality.split(' ');
+
+      // Assign the second word to the nationality variable
+      nationality = parts[1];
+    }
+
     // Reference to the users subcollection under the selected course
     CollectionReference generalUsersCollection =
         FirebaseFirestore.instance.collection('GeneralUsers');

@@ -4,6 +4,15 @@ import 'dart:developer' as devtols show log;
 Future<void> addUserToNationalitySubcollection(
     String userId, String country) async {
   try {
+   
+    if (country.length > 1) {
+      // Split the country because it contains two words, first as flag
+      List<String> parts = country.split(' ');
+
+      // Assign the second word to the country variable
+      country = parts[1];
+    }
+
     // Reference to the users subcollection under the selected country
     CollectionReference usersCollection = FirebaseFirestore.instance
         .collection('nationalities')
@@ -53,5 +62,3 @@ Future<void> addUserToCoursesSubcollection(String userId, String course) async {
     devtols.log('Error adding user to courses subcollection: $e');
   }
 }
-
-

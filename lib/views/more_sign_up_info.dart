@@ -244,7 +244,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                           'year': selectedYearController.text,
                           'dob': dobController.text,
                           'course': selectedCourseController.text,
-                          'nationality': selectedCountryController.text,
+                          'nationality':
+                              selectedCountryController.text.split(' ')[1],
                         };
 
                         if (userId != null) {
