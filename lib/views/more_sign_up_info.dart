@@ -247,7 +247,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
 
                         if (userId != null) {
                           showLoadingDialog(
-                              context: context, text: 'saving data...');
+                              context: context, text: 'saving data....');
                           await addUserToNationalitySubcollection(
                               userId, selectedCountryController.text);
                           await addUserToResidenceSubcollection(
