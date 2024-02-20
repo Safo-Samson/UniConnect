@@ -53,3 +53,5 @@ Future<void> addUserToCoursesSubcollection(String userId, String course) async {
     devtols.log('Error adding user to courses subcollection: $e');
   }
 }
+
+

@@ -42,3 +42,25 @@ Future<void> updateUserWithYear(
     devtols.log('Error updating user document: $e');
   }
 }
+
+
+Future<void> addUserToGeneralCollection(String userId, String course,
+    String nationality, String residence, String year) async {
+  try {
+    // Reference to the users subcollection under the selected course
+    CollectionReference generalUsersCollection =
+        FirebaseFirestore.instance.collection('GeneralUsers');
+
+    // Add the user's ID as a document in the subcollection
+    await generalUsersCollection.doc(userId).set({
+      'userId': userId,
+      'course': course,
+      'nationality': nationality,
+      'residence': residence,
+      'year': year,
+    });
+    devtols.log('User added to GeneralUsers subcollection');
+  } catch (e) {
+    devtols.log('Error adding user to courses subcollection: $e');
+  }
+}

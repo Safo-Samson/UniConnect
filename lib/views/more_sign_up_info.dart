@@ -252,6 +252,13 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                           await addUserToCoursesSubcollection(
                               userId, selectedCourseController.text);
                           await updateUserWithYear(userId, dataToUpdate);
+                          await addUserToGeneralCollection(
+                              userId,
+                              selectedCourseController.text,
+                              selectedCountryController.text,
+                              selectedResidentController.text,
+                              selectedYearController.text);
+                              
                           devtols
                               .log('User succesfully added to all collections');
                         } else {
