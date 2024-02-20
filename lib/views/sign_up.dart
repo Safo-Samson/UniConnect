@@ -1,10 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/firestore_functions/add_initial_user_to_users.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
+import 'dart:developer' as devtols show log;
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -58,6 +61,8 @@ class _SignUpState extends State<SignUp> {
   bool isValidEmail(String email) {
     return email.contains('@') && email.isNotEmpty;
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -155,24 +160,32 @@ class _SignUpState extends State<SignUp> {
                           final enteredEmail = _emailController.text;
                           final enteredPassword = _passwordController.text;
 
-                          final userCredential =
-                              await AuthService.firebase().createUser(
+                         
+                          await AuthService.firebase().createUser(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
-                          print(userCredential);
+                          
+                          final currentUser =
+                              AuthService.firebase().currentUser;
+                          final userId = currentUser?.id;
 
+                          // Store initial user data in Firestore after successful signup
+                          if (userId != null) {
+                            await addUser(userID: userId, email: enteredEmail);
+                          }
+                          
                           // ignore: use_build_context_synchronously
                           Navigator.popAndPushNamed(
                               context, moreInfoSignUpRoute);
                         } on UserNotFoundAuthException {
-                          print('No user found for that email.');
+                          devtols.log('No user found for that email.');
                         } on WrongPasswordAuthException {
-                          print('Wrong password provided for that user.');
+                          devtols.log('Wrong password provided for that user.');
                         } on EmailAlreadyInUseAuthException {
-                          print('Email is already in use.');
+                          devtols.log('Email is already in use.');
                         } on WeakPasswordAuthException {
-                          print('Password is too weak.');
+                          devtols.log('Password is too weak.');
                         }
                       }
                     : null, // Disable button if email is not valid or passwords don't match

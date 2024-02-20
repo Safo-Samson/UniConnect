@@ -17,35 +17,6 @@ class GetStarted extends StatefulWidget {
 class _GetStartedState extends State<GetStarted> {
   double opacity = 0.0; // Initial opacity value
   
-  // Future<void> addTestData() async {
-  //   final firestore = FirebaseFirestore.instance;
-
-  //   try {
-  //     for (String country in testDataCountries) {
-  //       await firestore.collection('nationalities').doc(country).set({
-  //         'name': country,
-  //       });
-
-  //       for (String course in testDataCourses) {
-  //         await firestore.collection('courses').doc(course).set({
-  //           'name': course,
-  //         });
-  //       }
-
-  //       for (String resident in testDataResidents) {
-  //         await firestore.collection('residence').doc(resident).set({
-  //           'name': resident,
-  //         });
-  //       }
-  //     }
-
-  //     devtols.log('All documents added successfully!');
-  //   } catch (e) {
-  //     devtols.log('Error: $e');
-  //   }
-  // }
-
-
   @override
   void initState() {
     super.initState();

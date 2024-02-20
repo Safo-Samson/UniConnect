@@ -39,4 +39,6 @@ class AuthService implements MyAuthProvider {
   Future<void> initialize() async {
     return provider.initialize();
   }
+
+  
 }

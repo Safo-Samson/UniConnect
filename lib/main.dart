@@ -37,8 +37,8 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
-      home: const GetStarted(),
-      // home: const LoginView(),
+      // home: const GetStarted(),
+      home: const SignUp(),
 
       routes: {
         signupRoute: (context) => const SignUp(),

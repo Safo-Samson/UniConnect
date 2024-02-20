@@ -4,9 +4,13 @@ import 'package:uniconnect/constants/countries_with_flag.dart';
 import 'package:uniconnect/constants/course_list.dart';
 import 'package:uniconnect/constants/residents.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/firestore_functions/add_initial_user_to_users.dart';
+import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
+import 'dart:developer' as devtols show log;
 
 class MoreSignUpInfo extends StatefulWidget {
   const MoreSignUpInfo({super.key});
@@ -229,10 +233,34 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
               verticalSpace(20.0),
               ElevatedButton(
                 onPressed: isSubmitButtonEnabled()
-                    ? () {
+                    ? () async {
                         // Handle button press
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, locationInfoRoute, (route) => false);
+
+                        final currentUser = AuthService.firebase().currentUser;
+                        final userId = currentUser?.id;
+
+                        Map<String, dynamic> dataToUpdate = {
+                          'year': selectedYearController.text,
+                          'dob': dobController.text,
+                        };
+
+                        if (userId != null) {
+                          await addUserToNationalitySubcollection(
+                              userId, selectedCountryController.text);
+                          await addUserToResidenceSubcollection(
+                              userId, selectedResidentController.text);
+                          await addUserToCoursesSubcollection(
+                              userId, selectedCourseController.text);
+                          await updateUserWithYear(userId, dataToUpdate);
+                          devtols
+                              .log('User succesfully added to all collections');
+                        } else {
+                          devtols.log('User ID is null');
+                        }
+
+                        // ignore: use_build_context_synchronously
+                        // Navigator.pushNamedAndRemoveUntil(
+                        //     context, locationInfoRoute, (route) => false);
                       }
                     : null,
                 child: const Text('Submit',
