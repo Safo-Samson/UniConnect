@@ -243,6 +243,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                         Map<String, dynamic> dataToUpdate = {
                           'year': selectedYearController.text,
                           'dob': dobController.text,
+                          'course': selectedCourseController.text,
+                          'nationality': selectedCountryController.text,
                         };
 
                         if (userId != null) {
