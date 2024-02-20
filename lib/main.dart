@@ -11,12 +11,13 @@ import 'package:uniconnect/views/info_views/carousel_info/local_connect_info.dar
 import 'package:uniconnect/views/info_views/carousel_info/location_info.dart';
 import 'package:uniconnect/views/info_views/nationality_info.dart';
 import 'package:uniconnect/views/login_view.dart';
-import 'package:uniconnect/views/more-sign-up-info.dart';
+import 'package:uniconnect/views/more_sign_up_info.dart';
 import 'package:uniconnect/views/sign_or_login_view.dart';
 import 'package:uniconnect/views/sign_up.dart';
 import 'package:uniconnect/views/info_views/status_verified.dart';
 import 'package:uniconnect/views/student_verify.dart';
 import 'package:uniconnect/views/info_views/why_2_emails.dart';
+// import 'dart:developer' as devtols show log;
 
 void main() async {
   WidgetsFlutterBinding
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
       ),
       home: const GetStarted(),
       // home: const LoginView(),
-    
+
       routes: {
         signupRoute: (context) => const SignUp(),
         loginRoute: (context) => const LoginView(),
@@ -62,5 +63,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
 

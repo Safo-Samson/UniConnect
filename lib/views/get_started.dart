@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
+// import 'dart:developer' as devtols show log;
 
 class GetStarted extends StatefulWidget {
   const GetStarted({Key? key}) : super(key: key);
@@ -13,14 +16,47 @@ class GetStarted extends StatefulWidget {
 
 class _GetStartedState extends State<GetStarted> {
   double opacity = 0.0; // Initial opacity value
+  
+  // Future<void> addTestData() async {
+  //   final firestore = FirebaseFirestore.instance;
+
+  //   try {
+  //     for (String country in testDataCountries) {
+  //       await firestore.collection('nationalities').doc(country).set({
+  //         'name': country,
+  //       });
+
+  //       for (String course in testDataCourses) {
+  //         await firestore.collection('courses').doc(course).set({
+  //           'name': course,
+  //         });
+  //       }
+
+  //       for (String resident in testDataResidents) {
+  //         await firestore.collection('residence').doc(resident).set({
+  //           'name': resident,
+  //         });
+  //       }
+  //     }
+
+  //     devtols.log('All documents added successfully!');
+  //   } catch (e) {
+  //     devtols.log('Error: $e');
+  //   }
+  // }
+
 
   @override
   void initState() {
     super.initState();
+
+    // addTestData(); // Add test data to Firestore
+
     // Start the animation sequence after a delay
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         opacity = 1.0; // Set opacity to 1 after one second
+      
       });
     });
   }
@@ -52,7 +88,6 @@ class _GetStartedState extends State<GetStarted> {
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
                   fontFamily: BrandFonts.fontFamily,
-                 
                 ),
               ),
               verticalSpace(20),

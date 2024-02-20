@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:uniconnect/constants/countries.dart';
 import 'package:uniconnect/constants/countries_with_flag.dart';
 import 'package:uniconnect/constants/course_list.dart';
+import 'package:uniconnect/constants/residents.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
@@ -16,21 +16,42 @@ class MoreSignUpInfo extends StatefulWidget {
 }
 
 class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
-  final usernameController = TextEditingController();
-  final selectedCourseController = TextEditingController();
-  final selectedYearController = TextEditingController();
-  final dobController = TextEditingController();
-  final selectedCountryController = TextEditingController();
+  late final TextEditingController selectedCourseController;
+  late final TextEditingController selectedYearController;
+  late final TextEditingController dobController;
+  late final TextEditingController selectedCountryController;
+  late final TextEditingController selectedResidentController;
 
   // Initialize with the current date
   DateTime selectedDate = DateTime.now();
 
   bool isSubmitButtonEnabled() {
-    return usernameController.text.isNotEmpty &&
-        selectedCourseController.text.isNotEmpty &&
+    return selectedCourseController.text.isNotEmpty &&
         selectedYearController.text.isNotEmpty &&
         dobController.text.isNotEmpty &&
-        selectedCountryController.text.isNotEmpty;
+        selectedCountryController.text.isNotEmpty &&
+        selectedResidentController.text.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    selectedCourseController = TextEditingController();
+    selectedCountryController = TextEditingController();
+    selectedYearController = TextEditingController();
+    dobController = TextEditingController();
+    selectedResidentController = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    selectedCourseController.dispose();
+    selectedYearController.dispose();
+    dobController.dispose();
+    selectedCountryController.dispose();
+    selectedResidentController.dispose();
+    super.dispose();
   }
 
   @override
@@ -61,17 +82,17 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 ),
               ),
               verticalSpace(20.0),
-              TextField(
-                onChanged: (value) {
-                  setState(() {});
-                },
-                controller: usernameController,
-                decoration: const InputDecoration(
-                  hintText: 'username',
-                  border: OutlineInputBorder(),
-                  labelText: 'username',
-                ),
-              ),
+              // TextField(
+              //   onChanged: (value) {
+              //     setState(() {});
+              //   },
+              //   controller: usernameController,
+              //   decoration: const InputDecoration(
+              //     hintText: 'username',
+              //     border: OutlineInputBorder(),
+              //     labelText: 'username',
+              //   ),
+              // ),
               verticalSpace(20.0),
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
@@ -90,6 +111,26 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                   setState(() {});
                 },
               ),
+
+              verticalSpace(20.0),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  hintText: 'Select Hall or N/A if not applicable',
+                  border: OutlineInputBorder(),
+                  labelText: 'Select Hall ',
+                ),
+                items: allResidents.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  selectedResidentController.text = value ?? '';
+                  setState(() {});
+                },
+              ),
+
               verticalSpace(20.0),
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
@@ -166,24 +207,6 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 ],
               ),
               verticalSpace(10.0),
-              // DropdownButtonFormField<String>(
-              //   isExpanded: true,
-              //   decoration: const InputDecoration(
-              //     hintText: 'Select a Country',
-              //     border: OutlineInputBorder(),
-              //     labelText: 'Select a Country',
-              //   ),
-              //   items: allCountries.map((String value) {
-              //     return DropdownMenuItem<String>(
-              //       value: value,
-              //       child: Text(value),
-              //     );
-              //   }).toList(),
-              //   onChanged: (String? value) {
-              //     selectedCountryController.text = value ?? '';
-              //     setState(() {});
-              //   },
-              // ),
 
               DropdownButtonFormField<String>(
                 isExpanded: true,
