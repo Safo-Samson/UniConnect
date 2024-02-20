@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
@@ -6,8 +7,10 @@ import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/firestore_functions/add_initial_user_to_users.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
+import 'package:uniconnect/utils/dialogs/error_dialog.dart';
+import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
 import 'package:uniconnect/utils/spaces.dart';
-import 'dart:developer' as devtols show log;
+// import 'dart:developer' as devtols show log;
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -61,8 +64,6 @@ class _SignUpState extends State<SignUp> {
   bool isValidEmail(String email) {
     return email.contains('@') && email.isNotEmpty;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -160,32 +161,39 @@ class _SignUpState extends State<SignUp> {
                           final enteredEmail = _emailController.text;
                           final enteredPassword = _passwordController.text;
 
-                         
                           await AuthService.firebase().createUser(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
-                          
+
                           final currentUser =
                               AuthService.firebase().currentUser;
                           final userId = currentUser?.id;
 
                           // Store initial user data in Firestore after successful signup
                           if (userId != null) {
+                            showLoadingDialog(
+                                context: context,
+                                text: 'creating your account...');
                             await addUser(userID: userId, email: enteredEmail);
                           }
-                          
-                          // ignore: use_build_context_synchronously
+
                           Navigator.popAndPushNamed(
                               context, moreInfoSignUpRoute);
-                        } on UserNotFoundAuthException {
-                          devtols.log('No user found for that email.');
-                        } on WrongPasswordAuthException {
-                          devtols.log('Wrong password provided for that user.');
-                        } on EmailAlreadyInUseAuthException {
-                          devtols.log('Email is already in use.');
                         } on WeakPasswordAuthException {
-                          devtols.log('Password is too weak.');
+                          await showErrorDialog(
+                              context, 'Password is too weak.');
+                        } on EmailAlreadyInUseAuthException {
+                          await showErrorDialog(
+                              context, 'Email already in use.');
+                        } on GenericAuthException {
+                          await showErrorDialog(context, 'An error occurred.');
+                        } on InvalidEmailAuthException {
+                          await showErrorDialog(
+                              context, 'Email is badly formatted.');
+                        } catch (e) {
+                          showErrorDialog(context,
+                              'An Error Occurred. Please try again.  ');
                         }
                       }
                     : null, // Disable button if email is not valid or passwords don't match

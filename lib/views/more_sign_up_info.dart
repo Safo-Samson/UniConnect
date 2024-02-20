@@ -9,6 +9,7 @@ import 'package:uniconnect/services/firestore_functions/add_initial_user_to_user
 import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
+import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
 import 'package:uniconnect/utils/spaces.dart';
 import 'dart:developer' as devtols show log;
 
@@ -245,6 +246,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                         };
 
                         if (userId != null) {
+                          showLoadingDialog(
+                              context: context, text: 'saving data...');
                           await addUserToNationalitySubcollection(
                               userId, selectedCountryController.text);
                           await addUserToResidenceSubcollection(
@@ -258,7 +261,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                               selectedCountryController.text,
                               selectedResidentController.text,
                               selectedYearController.text);
-                              
+
                           devtols
                               .log('User succesfully added to all collections');
                         } else {
@@ -266,8 +269,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                         }
 
                         // ignore: use_build_context_synchronously
-                        // Navigator.pushNamedAndRemoveUntil(
-                        //     context, locationInfoRoute, (route) => false);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, locationInfoRoute, (route) => false);
                       }
                     : null,
                 child: const Text('Submit',

@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
@@ -6,6 +6,8 @@ import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
+import 'package:uniconnect/utils/dialogs/error_dialog.dart';
+import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
 import 'package:uniconnect/utils/spaces.dart';
 
 class LoginView extends StatefulWidget {
@@ -97,21 +99,27 @@ class _LoginViewState extends State<LoginView> {
                         final enteredPassword = _passwordController.text;
 
                         try {
-
-                          
                           await AuthService.firebase().login(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
-                          // ignore: use_build_context_synchronously
+
+                          showLoadingDialog(
+                              context: context, text: 'Logging in...');
                           Navigator.popAndPushNamed(
-                              context, moreInfoSignUpRoute);
-                      
+                              context, finishCarouselRoute);
                         } on UserNotFoundAuthException {
+                          await showErrorDialog(
+                              context, 'No user found for that credentials.');
                         } on WrongPasswordAuthException {
+                          await showErrorDialog(
+                              context, 'Wrong credentials provided.');
                         } on InvalidEmailAuthException {
+                          await showErrorDialog(context,
+                              'Wrong credentials provided for that user.');
                         } on GenericAuthException {
-                         
+                          await showErrorDialog(
+                              context, 'Wrong credentials provided.');
                         }
                       }
                     : null, // Disable button if email is not valid or passwords don't match
@@ -136,7 +144,6 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
-      
     );
   }
 }
