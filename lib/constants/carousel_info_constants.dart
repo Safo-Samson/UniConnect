@@ -33,5 +33,5 @@ final Map finishCarouselData = {
   'description':
       'Time to be apart of the students’ world, and interact with anyone, no room for loneliness !!',
   'buttonText': "Let's Explore!",
-  'buttonRoute': loginOrSignUpRoute,
+  'buttonRoute': friendSuggestionsRoute,
 };
