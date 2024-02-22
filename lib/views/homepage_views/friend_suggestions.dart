@@ -18,8 +18,11 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
     year: 'Year',
     residence: 'Residence',
     bio: 'Bio',
-    country: 'Ghana',
+    flag: '🇦🇷',
+    country: 'Argentina',
   );
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

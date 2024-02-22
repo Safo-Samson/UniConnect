@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
@@ -42,7 +43,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Icon(Icons.flag),
+              Text(widget.user.flag, style: const TextStyle(fontSize: 17)),
               Text(
                 widget.user.country.substring(0, 3),
               ),

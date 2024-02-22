@@ -6,6 +6,7 @@ class UserProfile {
   String? bio;
   String year;
   String country;
+  String flag;
 
   UserProfile({
     required this.username,
@@ -13,6 +14,7 @@ class UserProfile {
     required this.year,
     required this.residence,
     required this.country,
+    required this.flag,
     this.imageUrl,
     this.bio,
   });
