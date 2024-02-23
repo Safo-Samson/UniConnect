@@ -11,6 +11,4 @@ class BrandFonts {
   static const double textButtonSize = 15;
 
  
-
-
 }
