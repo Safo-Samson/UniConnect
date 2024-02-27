@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/utils/brand_colours.dart';
+import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 
 
@@ -48,7 +49,8 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(widget.user.flag,
-                  style: const TextStyle(fontSize: 17, color: Colors.black)),
+                  style: const TextStyle(
+                      fontSize: BrandFonts.flagSize, color: Colors.black)),
               Text(
                 widget.user.country.substring(0, 3),
                 style: const TextStyle(color: Colors.black),

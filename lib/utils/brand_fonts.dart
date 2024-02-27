@@ -10,5 +10,9 @@ class BrandFonts {
 
   static const double textButtonSize = 15;
 
- 
+  static const double flagSize = 18;
+
+  static const double iconSize = 24;
+
+                    
 }

@@ -33,7 +33,10 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
         elevation: 8,
         title: const Text(
           'Friend Suggestions',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: BrandFonts.fontFamily,
+          ),
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -61,7 +64,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                     IconButton(
                       icon: const Icon(
                         Icons.filter_alt_sharp,
-                        size: 25,
+                        size: BrandFonts.iconSize,
                       ),
                       onPressed: () {
                         // Handle filter button press
@@ -71,7 +74,10 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'find friends...',
-                          prefixIcon: const Icon(Icons.search),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            size: BrandFonts.iconSize,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
@@ -89,7 +95,10 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(
+              Icons.notifications,
+              size: BrandFonts.iconSize,
+            ),
             onPressed: () {
               // Handle button press
             },

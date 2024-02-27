@@ -19,6 +19,7 @@ class HomeBottomNavigation extends StatelessWidget {
             icon: const Icon(Icons.home),
           ),
           IconButton(
+          
             onPressed: () {
               Navigator.pushNamed(context, '/friends');
             },
