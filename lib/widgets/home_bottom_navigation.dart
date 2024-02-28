@@ -41,7 +41,7 @@ class HomeBottomNavigation extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/messages');
+              Navigator.pushNamed(context, chatMessagesRoute);
             },
             icon: const Icon(Icons.message, size: BrandFonts.iconSize),
           ),

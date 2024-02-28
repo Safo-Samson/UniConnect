@@ -5,6 +5,7 @@ import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/views/get_started.dart';
+import 'package:uniconnect/views/homepage_views/chat_messages.dart';
 import 'package:uniconnect/views/homepage_views/friend_suggestions.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
 import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.dart';
@@ -39,8 +40,8 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
-      home: const GetStarted(),
-      // home: const FriendSuggestions(),
+      // home: const GetStarted(),
+      home: const ChatMessagePage(),
 
       routes: {
         signupRoute: (context) => const SignUp(),
@@ -59,6 +60,7 @@ class HomePage extends StatelessWidget {
             const LocationInfo(widgetData: locationData),
         finishCarouselRoute: (context) => const FinishCarousel(),
         friendSuggestionsRoute: (context) => const FriendSuggestions(),
+        chatMessagesRoute: (context) => const ChatMessagePage(),
 
         
       },
