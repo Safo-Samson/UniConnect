@@ -172,7 +172,6 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                   AuthService.firebase().signOut();
                   Navigator.pushReplacementNamed(context, loginRoute);
                 }
-                
               },
             ),
           ],
@@ -197,15 +196,63 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
 
                 if (snapshot.hasData) {
                   final users = snapshot.data as Iterable<UserProfile>;
+                  
+                  if (users.isEmpty) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                              fontSize: BrandFonts.regularText,
+                              color: Colors.black,
+                            ),
+                            children: [
+                              const TextSpan(
+                                text: 'Currently no users from ',
+                              ),
+                              TextSpan(
+                                text: currentUserNationality,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text:
+                                    '. Please apply filters to personalize your search.',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  // Heading to display the number of users
+                  Widget userList = Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          'Showing ${users.length} users',
+                          style: const TextStyle(
+                            fontSize: BrandFonts.h1,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: users.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final user = users.elementAt(index);
 
-                  return ListView.builder(
-                    itemCount: users.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final user = users.elementAt(index);
-
-                      return UserProfileContainer(user: user);
-                    },
+                            return UserProfileContainer(user: user);
+                          },
+                        ),
+                      ),
+                    ],
                   );
+
+                  return userList;
                 }
                 return const Center(
                   child: Text('No users found'),
