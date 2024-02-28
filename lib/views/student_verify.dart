@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 
@@ -91,6 +92,21 @@ class _StudentVerifyState extends State<StudentVerify> {
                 'Verify',
                 style: TextStyle(
                   fontSize: BrandFonts.textButtonSize,
+                ),
+              ),
+            ),
+
+            verticalSpace(20.0),
+            InkWell(
+              onTap: () {
+                Navigator.pushReplacementNamed(context, loginRoute);
+              },
+              child: Text(
+                'Already Have an Account? Login Here',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: BrandColor.infoLinks,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),

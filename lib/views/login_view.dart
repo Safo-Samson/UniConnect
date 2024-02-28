@@ -110,8 +110,8 @@ class _LoginViewState extends State<LoginView> {
 
                           showLoadingDialog(
                               context: context, text: 'Logging in...');
-                          Navigator.popAndPushNamed(
-                              context, friendSuggestionsRoute);
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              friendSuggestionsRoute, (route) => false);
                         } on UserNotFoundAuthException {
                           await showErrorDialog(
                               context, 'No user found for that credentials.');
@@ -133,7 +133,7 @@ class _LoginViewState extends State<LoginView> {
               verticalSpace(20.0),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, studentVerifyRoute);
+                  Navigator.pushReplacementNamed(context, studentVerifyRoute);
                 },
                 child: Text(
                   'Have no account? create one',

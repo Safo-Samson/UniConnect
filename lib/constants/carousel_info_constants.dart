@@ -27,11 +27,11 @@ final Map globalConnectData = {
   'buttonRoute': finishCarouselRoute,
 };
 
-final Map finishCarouselData = {
-  'title': 'You are all set!',
-  'image': 'assets/img/lauch-space.jpg',
-  'description':
-      'Time to be apart of the students’ world, and interact with anyone, no room for loneliness !!',
-  'buttonText': "Let's Explore!",
-  'buttonRoute': friendSuggestionsRoute,
-};
+// final Map finishCarouselData = {
+//   'title': 'You are all set!',
+//   'image': 'assets/img/lauch-space.jpg',
+//   'description':
+//       'Time to be apart of the students’ world, and interact with anyone, no room for loneliness !!',
+//   'buttonText': "Let's Explore!",
+//   'buttonRoute': friendSuggestionsRoute,
+// };

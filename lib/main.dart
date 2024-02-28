@@ -57,8 +57,7 @@ class HomePage extends StatelessWidget {
             GlobalConnect(widgetData: globalConnectData),
         locationInfoRoute: (context) =>
             const LocationInfo(widgetData: locationData),
-        finishCarouselRoute: (context) =>
-            FinishCarousel(widgetData: finishCarouselData),
+        finishCarouselRoute: (context) => const FinishCarousel(),
         friendSuggestionsRoute: (context) => const FriendSuggestions(),
 
         

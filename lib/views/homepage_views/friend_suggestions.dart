@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
@@ -5,6 +7,7 @@ import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/services/cloud_crud/get_users.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
+import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
@@ -22,7 +25,6 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
   late String currentUserNationality;
 
   final AuthUser user = AuthService.firebase().currentUser!;
-
 
   Future<void> initializeData() async {
     _cloud = FirebaseCloud();
@@ -47,8 +49,6 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
     // _cloud.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -166,9 +166,13 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
             ),
             ListTile(
               title: const Text('Log Out'),
-              onTap: () {
-                AuthService.firebase().signOut();
-                Navigator.pushReplacementNamed(context, loginRoute);
+              onTap: () async {
+                final result = await showLogoutDialog(context);
+                if (result) {
+                  AuthService.firebase().signOut();
+                  Navigator.pushReplacementNamed(context, loginRoute);
+                }
+                
               },
             ),
           ],

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/cloud_crud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 // import 'dart:developer' as devtols show log;
@@ -9,6 +10,7 @@ class FirebaseCloud {
   final allNationalities =
       FirebaseFirestore.instance.collection('nationalities');
   final allresidences = FirebaseFirestore.instance.collection('residences');
+  String currentUserId = AuthService.firebase().currentUser!.uid;
 
   void getAllUsers() async {}
 
@@ -23,7 +25,9 @@ class FirebaseCloud {
               .get();
 
       List<String> userIds = allUsersWithNationality.docs
-          .map((doc) => doc.id) // Get user IDs
+          .map((doc) => doc.id)
+          .where((id) =>
+              id != currentUserId) // Exclude current user's ID // Get user IDs
           .toList();
 
       // Step 2: Fetch user details from the users collection using the user IDs
