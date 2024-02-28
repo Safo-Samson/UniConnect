@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:developer' as devtols show log;
 
+
+late final String currentUserNationality;
 Future<void> addUserToNationalitySubcollection(
     String userId, String country) async {
   try {
@@ -13,6 +15,8 @@ Future<void> addUserToNationalitySubcollection(
       country = parts[1];
     }
 
+    currentUserNationality =
+        country; // Assign the country to the global variable
     // Reference to the users subcollection under the selected country
     CollectionReference usersCollection = FirebaseFirestore.instance
         .collection('nationalities')

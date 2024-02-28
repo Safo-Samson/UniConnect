@@ -238,7 +238,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                         // Handle button press
 
                         final currentUser = AuthService.firebase().currentUser;
-                        final userId = currentUser?.id;
+                        final userId = currentUser?.uid;
 
                         Map<String, dynamic> dataToUpdate = {
                           'year': selectedYearController.text,
@@ -246,6 +246,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                           'course': selectedCourseController.text,
                           'nationality':
                               selectedCountryController.text.split(' ')[1],
+                          'residence': selectedResidentController.text,
+                          'flag': selectedCountryController.text.split(' ')[0],
                         };
 
                         if (userId != null) {
@@ -258,12 +260,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                           await addUserToCoursesSubcollection(
                               userId, selectedCourseController.text);
                           await updateUserWithYear(userId, dataToUpdate);
-                          await addUserToGeneralCollection(
-                              userId,
-                              selectedCourseController.text,
-                              selectedCountryController.text,
-                              selectedResidentController.text,
-                              selectedYearController.text);
+                        
 
                           devtols
                               .log('User succesfully added to all collections');

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/auth/auth_user.dart';
+import 'package:uniconnect/services/cloud_crud/get_users.dart';
+import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
 import 'package:uniconnect/utils/brand_fonts.dart';
 import 'package:uniconnect/utils/spaces.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
+import 'dart:developer' as devtols show log;
 
 class FriendSuggestions extends StatefulWidget {
   const FriendSuggestions({super.key});
@@ -13,16 +18,16 @@ class FriendSuggestions extends StatefulWidget {
 }
 
 class _FriendSuggestionsState extends State<FriendSuggestions> {
-  UserProfile user = UserProfile(
-    username: 'Username',
-    course: 'Course',
-    year: 'Year',
-    residence: 'Residence',
-    bio: 'Bio',
-    flag: '🇦🇷',
-    country: 'Argentina',
-  );
+  late final FirebaseCloud _cloud;
 
+  final AuthUser user = AuthService.firebase().currentUser!;
+
+  @override
+  void initState() {
+    _cloud = FirebaseCloud();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +110,6 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
           ),
         ],
       ),
-
-
       drawer: Drawer(
         child: ListView(
           children: [
@@ -152,10 +155,35 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return UserProfileContainer(user: user);
+            child: FutureBuilder(
+              future: _cloud.getUsersWithNationality(currentUserNationality),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Error fetching users'),
+                  );
+                }
+                if (snapshot.hasData) {
+                  final users = snapshot.data as Iterable<UserProfile>;
+
+                  return ListView.builder(
+                    itemCount: users.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      
+                      final user = users.elementAt(index);
+                      
+                      return UserProfileContainer(user: user);
+                    },
+                  );
+                }
+                return const Center(
+                  child: Text('No users found'),
+                );
               },
             ),
           ),

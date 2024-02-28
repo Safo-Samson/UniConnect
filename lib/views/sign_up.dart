@@ -168,7 +168,7 @@ class _SignUpState extends State<SignUp> {
 
                           final currentUser =
                               AuthService.firebase().currentUser;
-                          final userId = currentUser?.id;
+                          final userId = currentUser?.uid;
 
                           // Store initial user data in Firestore after successful signup
                           if (userId != null) {
