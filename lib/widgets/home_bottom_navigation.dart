@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 
 class HomeBottomNavigation extends StatelessWidget {
   const HomeBottomNavigation({super.key});
@@ -22,7 +23,8 @@ class HomeBottomNavigation extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/feed');
+              showNothingDialog(context,
+                  '''This functionality is not available yet. The idea of the home page is to show the user a feed of posts or discussions from other students. Will be implemented soon''');
             },
             icon: const Icon(Icons.home, size: BrandFonts.iconSize),
           ),
@@ -35,9 +37,11 @@ class HomeBottomNavigation extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/groups');
+              showNothingDialog(context,
+                  'This functionality is where students can join groups of students with similar interests. Will be implemented soon');
             },
-            icon: const Icon(Icons.people, size: BrandFonts.iconSize),
+            icon:
+                const Icon(Icons.home_work_rounded, size: BrandFonts.iconSize),
           ),
           IconButton(
             onPressed: () {

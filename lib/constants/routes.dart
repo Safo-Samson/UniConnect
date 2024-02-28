@@ -13,3 +13,4 @@ const loginOrSignUpRoute = '/login-or-sign-up';
 const loginRoute = '/login';
 const friendSuggestionsRoute = '/friend-suggestions';
 const chatMessagesRoute = '/chat-messages';
+const feedRoute = '/feed';
