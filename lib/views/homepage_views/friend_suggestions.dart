@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/services/cloud_crud/get_users.dart';
-import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
-// import 'dart:developer' as devtols show log;
+import 'dart:developer' as devtols show log;
 
 class FriendSuggestions extends StatefulWidget {
   const FriendSuggestions({super.key});
@@ -19,15 +19,36 @@ class FriendSuggestions extends StatefulWidget {
 
 class _FriendSuggestionsState extends State<FriendSuggestions> {
   late final FirebaseCloud _cloud;
+  late String currentUserNationality;
 
   final AuthUser user = AuthService.firebase().currentUser!;
 
+
+  Future<void> initializeData() async {
+    _cloud = FirebaseCloud();
+    // Retrieve user's nationality and assign it to currentUserNationality
+    currentUserNationality =
+        await AuthService.firebase().getUserNationality(user.uid);
+
+    devtols.log(currentUserNationality);
+    setState(() {
+      // Call setState to rebuild the widget tree with the fetched nationality
+    });
+  }
+
   @override
   void initState() {
-    _cloud = FirebaseCloud();
-
+    initializeData();
     super.initState();
   }
+
+  @override
+  void dispose() {
+    // _cloud.dispose();
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +167,8 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
             ListTile(
               title: const Text('Log Out'),
               onTap: () {
-                // Handle button press
+                AuthService.firebase().signOut();
+                Navigator.pushReplacementNamed(context, loginRoute);
               },
             ),
           ],
@@ -168,15 +190,15 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                     child: Text('Error fetching users'),
                   );
                 }
+
                 if (snapshot.hasData) {
                   final users = snapshot.data as Iterable<UserProfile>;
 
                   return ListView.builder(
                     itemCount: users.length,
                     itemBuilder: (BuildContext context, int index) {
-                      
                       final user = users.elementAt(index);
-                      
+
                       return UserProfileContainer(user: user);
                     },
                   );

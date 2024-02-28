@@ -104,11 +104,14 @@ class _LoginViewState extends State<LoginView> {
                             email: enteredEmail,
                             password: enteredPassword,
                           );
+                          
+                        
+                         
 
                           showLoadingDialog(
                               context: context, text: 'Logging in...');
                           Navigator.popAndPushNamed(
-                              context, finishCarouselRoute);
+                              context, friendSuggestionsRoute);
                         } on UserNotFoundAuthException {
                           await showErrorDialog(
                               context, 'No user found for that credentials.');

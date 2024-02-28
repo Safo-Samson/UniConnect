@@ -57,4 +57,5 @@ class FirebaseCloud {
       throw CouldNotGetUser();
     }
   }
+
 }
