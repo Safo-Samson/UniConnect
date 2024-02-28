@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uniconnect/utils/brand_fonts.dart';
-import 'package:uniconnect/utils/spaces.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/spaces.dart';
+
 
 class CarouselTemplate extends StatefulWidget {
   final Map widgetData;

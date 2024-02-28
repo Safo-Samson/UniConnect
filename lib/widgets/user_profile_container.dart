@@ -1,8 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:uniconnect/utils/brand_colours.dart';
-import 'package:uniconnect/utils/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+
 import 'package:uniconnect/widgets/user_profile.dart';
 
 
@@ -29,10 +30,17 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
         ),
       ),
       child: ListTile(
-        leading: const CircleAvatar(
-          // You can set the user's profile picture here
-          child: Text('U'), // Example: Display the first letter of the username
-        ),
+        leading: widget.user.imageUrl != null
+            ? CircleAvatar(
+                backgroundImage: NetworkImage(widget.user.imageUrl!),
+              )
+            : CircleAvatar(
+                backgroundColor: const Color.fromARGB(179, 158, 158, 158),
+                child: Text(
+                  widget.user.username.substring(0, 1).toUpperCase(),
+                  style: const TextStyle(color: Colors.white, fontSize: 20.0),
+                ),
+              ),
 
         title: Text(widget.user.username),
 

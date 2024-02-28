@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/spaces.dart';
 
-import 'package:uniconnect/utils/brand_fonts.dart';
-import 'package:uniconnect/utils/spaces.dart';
 // import 'dart:developer' as devtols show log;
 
 class GetStarted extends StatefulWidget {

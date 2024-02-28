@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
-import 'package:uniconnect/utils/brand_colours.dart';
-import 'package:uniconnect/utils/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/error_dialog.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
-import 'package:uniconnect/utils/spaces.dart';
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

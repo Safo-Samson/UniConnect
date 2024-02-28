@@ -3,12 +3,12 @@ import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/services/cloud_crud/get_users.dart';
 import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
-import 'package:uniconnect/utils/brand_fonts.dart';
-import 'package:uniconnect/utils/spaces.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
-import 'dart:developer' as devtols show log;
+// import 'dart:developer' as devtols show log;
 
 class FriendSuggestions extends StatefulWidget {
   const FriendSuggestions({super.key});

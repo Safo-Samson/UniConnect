@@ -7,10 +7,11 @@ import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/firestore_functions/add_initial_user_to_users.dart';
 import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
-import 'package:uniconnect/utils/brand_colours.dart';
-import 'package:uniconnect/utils/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
-import 'package:uniconnect/utils/spaces.dart';
+
 import 'dart:developer' as devtols show log;
 
 class MoreSignUpInfo extends StatefulWidget {

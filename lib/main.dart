@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
-import 'package:uniconnect/utils/brand_colours.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/views/get_started.dart';
 import 'package:uniconnect/views/homepage_views/friend_suggestions.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';

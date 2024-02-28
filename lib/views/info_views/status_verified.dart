@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
-import 'package:uniconnect/utils/brand_fonts.dart';
-import 'package:uniconnect/utils/spaces.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/Brand/spaces.dart';
+
 
 class StudentVerified extends StatelessWidget {
   const StudentVerified({super.key});
