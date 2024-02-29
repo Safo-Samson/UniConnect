@@ -186,22 +186,28 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                     ? () async {
                         final currentUser = AuthService.firebase().currentUser;
                         final userId = currentUser?.uid;
+                        List<String> flagAndCountry =
+                            selectedCountryController.text.split(' ');
+
+                        String flag = flagAndCountry[0];
+
+                        String country = flagAndCountry.sublist(1).join(' ');
+
 
                         Map<String, dynamic> dataToUpdate = {
                           'year': selectedYearController.text,
                           'dob': dobController.text,
                           'course': selectedCourseController.text,
-                          'nationality':
-                              selectedCountryController.text.split(' ')[1],
+                          'nationality': country, // remove the flag
                           'residence': selectedResidentController.text,
-                          'flag': selectedCountryController.text.split(' ')[0],
+                          'flag': flag, // get the flag
                         };
 
                         if (userId != null) {
                           showLoadingDialog(
                               context: context, text: 'saving data....');
                           await addUserToNationalitySubcollection(
-                              userId, selectedCountryController.text);
+                              userId, country);
                           await addUserToResidenceSubcollection(
                               userId, selectedResidentController.text);
                           await addUserToCoursesSubcollection(

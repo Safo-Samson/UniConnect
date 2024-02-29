@@ -97,6 +97,21 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               verticalSpace(20.0),
+               
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, why2EmailsRoute);
+                },
+                child: Text(
+                  'wondering why 2 emails?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: BrandColor.infoLinks,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              verticalSpace(20.0),
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress, // Show email keyboard
@@ -140,20 +155,7 @@ class _SignUpState extends State<SignUp> {
                     style: TextStyle(color: BrandColor.error),
                   ),
                 ),
-              verticalSpace(20.0),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, why2EmailsRoute);
-                },
-                child: Text(
-                  'wondering why 2 emails?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: BrandColor.infoLinks,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
+             
               verticalSpace(25.0),
               ElevatedButton(
                 onPressed: _isEmailValid && _passwordsMatch
