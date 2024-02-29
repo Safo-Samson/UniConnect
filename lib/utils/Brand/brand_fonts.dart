@@ -6,6 +6,8 @@ class BrandFonts {
 
   static const double h1 = 18;
 
+  static const double h2 = 16;
+
   static const double regularText = 15;
 
   static const double textButtonSize = 15;

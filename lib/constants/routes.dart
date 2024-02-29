@@ -14,3 +14,4 @@ const loginRoute = '/login';
 const friendSuggestionsRoute = '/friend-suggestions';
 const chatMessagesRoute = '/chat-messages';
 const feedRoute = '/feed';
+const applyFiltersRoute = '/apply-filters';

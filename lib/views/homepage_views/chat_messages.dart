@@ -23,6 +23,7 @@ class ChatMessagePageState extends State<ChatMessagePage> {
           style: TextStyle(
             color: Colors.black,
             fontFamily: BrandFonts.fontFamily,
+              fontSize: BrandFonts.h2
           ),
         ),
         flexibleSpace: Container(

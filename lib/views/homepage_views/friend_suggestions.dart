@@ -8,10 +8,11 @@ import 'package:uniconnect/services/cloud_crud/get_users.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
+import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
-import 'dart:developer' as devtols show log;
+// import 'dart:developer' as devtols show log;
 
 class FriendSuggestions extends StatefulWidget {
   const FriendSuggestions({super.key});
@@ -32,15 +33,15 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
     currentUserNationality =
         await AuthService.firebase().getUserNationality(user.uid);
 
-    devtols.log(currentUserNationality);
     setState(() {
-      // Call setState to rebuild the widget tree with the fetched nationality
+      currentUserNationality = currentUserNationality;
     });
   }
 
   @override
   void initState() {
     initializeData();
+
     super.initState();
   }
 
@@ -62,6 +63,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
           style: TextStyle(
             color: Colors.black,
             fontFamily: BrandFonts.fontFamily,
+            fontSize: BrandFonts.h2,
           ),
         ),
         flexibleSpace: Container(
@@ -93,7 +95,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                         size: BrandFonts.iconSize,
                       ),
                       onPressed: () {
-                        // Handle filter button press
+                        Navigator.pushNamed(context, applyFiltersRoute);
                       },
                     ),
                     Expanded(
@@ -126,7 +128,8 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               size: BrandFonts.iconSize,
             ),
             onPressed: () {
-              // Handle button press
+              showNothingDialog(context,
+                  'This feature is not available yet. I am working on it.');
             },
           ),
         ],
@@ -136,10 +139,10 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color.fromARGB(250, 138, 29, 189),
+                color: Color.fromARGB(192, 156, 50, 206),
               ),
               child: Text(
-                'Uniconnect',
+                'UniConnect',
                 style: TextStyle(
                   fontSize: BrandFonts.h1,
                   fontFamily: BrandFonts.fontFamily,
@@ -153,7 +156,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               },
             ),
             ListTile(
-              title: const Text('Friends'),
+              title: const Text('Notifications'),
               onTap: () {
                 // Handle button press
               },
@@ -196,7 +199,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
 
                 if (snapshot.hasData) {
                   final users = snapshot.data as Iterable<UserProfile>;
-                  
+
                   if (users.isEmpty) {
                     return Padding(
                       padding: const EdgeInsets.all(16.0),

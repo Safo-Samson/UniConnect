@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 import 'dart:developer' as devtols show log;
 
-// Function to generate a random number between 1000 and 9999
+// Function to generate a random number between 10 and 99
 int generateRandomNumber() {
   final random = Random();
-  return random.nextInt(9000) + 1000;
+  return random.nextInt(90) + 10;
 }
 
 // Get reference to Firestore collection

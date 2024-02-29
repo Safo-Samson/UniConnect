@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+
+ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:uniconnect/constants/countries_with_flag.dart';
 import 'package:uniconnect/constants/course_list.dart';
 import 'package:uniconnect/constants/residents.dart';
 import 'package:uniconnect/constants/routes.dart';
@@ -11,8 +11,12 @@ import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
-
+import 'package:uniconnect/widgets/country_dropdown.dart';
+import 'package:uniconnect/widgets/date_form_widget.dart';
 import 'dart:developer' as devtols show log;
+import 'package:uniconnect/widgets/drop_down_widget.dart';
+import 'package:uniconnect/widgets/submit_button.dart';
+
 
 class MoreSignUpInfo extends StatefulWidget {
   const MoreSignUpInfo({super.key});
@@ -88,81 +92,41 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 ),
               ),
               verticalSpace(20.0),
-              // TextField(
-              //   onChanged: (value) {
-              //     setState(() {});
-              //   },
-              //   controller: usernameController,
-              //   decoration: const InputDecoration(
-              //     hintText: 'username',
-              //     border: OutlineInputBorder(),
-              //     labelText: 'username',
-              //   ),
-              // ),
-              verticalSpace(20.0),
-              DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  hintText: 'Select Course',
-                  border: OutlineInputBorder(),
-                  labelText: 'Select Course',
-                ),
-                items: courseList.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              DropdownFormField(
+                label: 'Select Course',
+                items: courseList,
+                controller: selectedCourseController,
                 onChanged: (String? value) {
                   selectedCourseController.text = value ?? '';
                   setState(() {});
                 },
               ),
-
               verticalSpace(20.0),
-              DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  hintText: 'Select Hall or N/A if not applicable',
-                  border: OutlineInputBorder(),
-                  labelText: 'Select Hall ',
-                ),
-                items: allResidents.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              DropdownFormField(
+                label: 'Select Hall or N/A if not applicable',
+                items: allResidents,
+                controller: selectedResidentController,
                 onChanged: (String? value) {
                   selectedResidentController.text = value ?? '';
                   setState(() {});
                 },
               ),
-
               verticalSpace(20.0),
-              DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  hintText: 'Select Year',
-                  border: OutlineInputBorder(),
-                  labelText: 'Select Year',
-                ),
-                items: <String>['1st Year', '2nd Year', '3rd Year']
-                    .map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              DropdownFormField(
+                label: 'Select Year',
+                items: const ['1st Year', '2nd Year', '3rd Year'],
+                controller: selectedYearController,
                 onChanged: (String? value) {
                   selectedYearController.text = value ?? '';
                   setState(() {});
                 },
               ),
               verticalSpace(20.0),
-              TextField(
-                onChanged: (value) {
+              DateField(
+                controller: dobController,
+                onChanged: () {
                   setState(() {});
                 },
-                readOnly: true,
-                controller: dobController,
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
                     context: context,
@@ -178,11 +142,6 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                     });
                   }
                 },
-                decoration: const InputDecoration(
-                  hintText: '12/07/2002',
-                  border: OutlineInputBorder(),
-                  labelText: 'Date of Birth',
-                ),
               ),
               verticalSpace(20.0),
               Row(
@@ -214,30 +173,17 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
               ),
               verticalSpace(10.0),
 
-              DropdownButtonFormField<String>(
-                isExpanded: true,
-                decoration: const InputDecoration(
-                  hintText: 'Select a Country',
-                  border: OutlineInputBorder(),
-                  labelText: 'Select a Country',
-                ),
-                items: allCountriesWithFlags.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              CountryDropdown(
+                controller: selectedCountryController,
                 onChanged: (String? value) {
                   selectedCountryController.text = value ?? '';
                   setState(() {});
                 },
               ),
               verticalSpace(20.0),
-              ElevatedButton(
+              SubmitButton(
                 onPressed: isSubmitButtonEnabled()
                     ? () async {
-                        // Handle button press
-
                         final currentUser = AuthService.firebase().currentUser;
                         final userId = currentUser?.uid;
 
@@ -261,7 +207,6 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                           await addUserToCoursesSubcollection(
                               userId, selectedCourseController.text);
                           await updateUserWithYear(userId, dataToUpdate);
-                        
 
                           devtols
                               .log('User succesfully added to all collections');
@@ -274,8 +219,6 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                             context, locationInfoRoute, (route) => false);
                       }
                     : null,
-                child: const Text('Submit',
-                    style: TextStyle(fontSize: BrandFonts.textButtonSize)),
               ),
               verticalSpace(20.0),
             ],
