@@ -26,6 +26,7 @@ class _SignUpState extends State<SignUp> {
   late final TextEditingController _confirmPasswordController;
   bool _isEmailValid = false;
   bool _passwordsMatch = true;
+  bool _showPassword = false; // New variable to toggle password visibility
 
   @override
   void initState() {
@@ -97,7 +98,6 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               verticalSpace(20.0),
-               
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, why2EmailsRoute);
@@ -124,27 +124,47 @@ class _SignUpState extends State<SignUp> {
               verticalSpace(20.0),
               TextField(
                 controller: _passwordController,
-                obscureText: true,
+                obscureText: !_showPassword,
                 autocorrect: false,
                 enableSuggestions: false,
                 onChanged: (_) => _validatePassword(),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   labelText: 'password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    },
+                    icon: Icon(
+                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  ),
                 ),
               ),
               verticalSpace(20.0),
               TextField(
                 controller: _confirmPasswordController,
-                obscureText: true,
+                obscureText: !_showPassword,
                 autocorrect: false,
                 enableSuggestions: false,
                 onChanged: (_) => _validatePassword(),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'confirm password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   labelText: 'confirm password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    },
+                    icon: Icon(
+                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  ),
                 ),
               ),
               if (!_passwordsMatch)
@@ -155,7 +175,6 @@ class _SignUpState extends State<SignUp> {
                     style: TextStyle(color: BrandColor.error),
                   ),
                 ),
-             
               verticalSpace(25.0),
               ElevatedButton(
                 onPressed: _isEmailValid && _passwordsMatch

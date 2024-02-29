@@ -7,6 +7,7 @@ import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/views/get_started.dart';
 import 'package:uniconnect/views/homepage_views/apply_filters.dart';
 import 'package:uniconnect/views/homepage_views/chat_messages.dart';
+import 'package:uniconnect/views/homepage_views/filtered_results.dart';
 import 'package:uniconnect/views/homepage_views/friend_suggestions.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
 import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.dart';
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
       home: const GetStarted(),
-      // home: const MoreSignUpInfo(),
+      // home: const FilteredResult(),
 
       routes: {
         signupRoute: (context) => const SignUp(),
@@ -63,6 +64,11 @@ class HomePage extends StatelessWidget {
         friendSuggestionsRoute: (context) => const FriendSuggestions(),
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
+        filteredResultsRoute: (context) {
+          final selectedNationalities =
+              ModalRoute.of(context)!.settings.arguments as List<String>;
+          return FilteredResult(selectedNationalities: selectedNationalities);
+        },
 
         
       },

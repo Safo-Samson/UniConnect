@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
@@ -10,9 +10,8 @@ import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/error_dialog.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
 
-
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -22,6 +21,7 @@ class _LoginViewState extends State<LoginView> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   bool _isEmailValid = false;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -35,7 +35,6 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-
     super.dispose();
   }
 
@@ -78,17 +77,26 @@ class _LoginViewState extends State<LoginView> {
                 decoration: const InputDecoration(
                   hintText: 'example@gmail.com',
                   border: OutlineInputBorder(),
-                  labelText: 'email',
+                  labelText: 'Email',
                 ),
               ),
               verticalSpace(20.0),
               TextField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'password',
-                  border: OutlineInputBorder(),
-                  labelText: 'password',
+                obscureText: _isObscure,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  border: const OutlineInputBorder(),
+                  labelText: 'Password',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ),
                 ),
               ),
               verticalSpace(20.0),
@@ -104,9 +112,6 @@ class _LoginViewState extends State<LoginView> {
                             email: enteredEmail,
                             password: enteredPassword,
                           );
-                          
-                        
-                         
 
                           showLoadingDialog(
                               context: context, text: 'Logging in...');
@@ -136,7 +141,7 @@ class _LoginViewState extends State<LoginView> {
                   Navigator.pushReplacementNamed(context, studentVerifyRoute);
                 },
                 child: Text(
-                  'Have no account? create one',
+                  'Have no account? Create one',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: BrandColor.infoLinks,

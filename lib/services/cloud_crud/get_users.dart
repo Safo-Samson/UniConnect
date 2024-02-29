@@ -45,21 +45,27 @@ class FirebaseCloud {
     }
   }
 
+  Future<List<UserProfile>> getUsersWithNationalities(
+      List<String> nationalities) async {
+    try {
+      List<UserProfile> allUsers = [];
+
+      for (String nationality in nationalities) {
+        Iterable<UserProfile> users =
+            await getUsersWithNationality(nationality);
+        allUsers.addAll(users);
+      }
+
+      return allUsers;
+     
+    } catch (e) {
+      throw CouldNotGetAllNationalityException();
+    }
+  }
+
+
   void getUsersWithCourse(String course) async {}
 
   void getUsersWithResidence(String residence) async {}
-
-  Future<String> getUserNationality(String userId) async {
-    try {
-      String userNationality = await allUsers
-          .doc(userId)
-          .get()
-          .then((value) => value.data()!['nationality']);
-
-      return userNationality;
-    } catch (e) {
-      throw CouldNotGetUser();
-    }
-  }
 
 }

@@ -7,6 +7,7 @@ class DropdownWithChip extends StatefulWidget {
   final List<String> selectedValues;
   final List<String> items;
   final Function(String?) onChanged;
+  final Function(String?) onItemRemoved; // New callback for item removal
 
   const DropdownWithChip({
     Key? key,
@@ -14,6 +15,7 @@ class DropdownWithChip extends StatefulWidget {
     required this.selectedValues,
     required this.items,
     required this.onChanged,
+    required this.onItemRemoved, // Pass the callback from the parent widget
   }) : super(key: key);
 
   @override
@@ -60,6 +62,7 @@ class DropdownWithChipState extends State<DropdownWithChip> {
                       onDeleted: () {
                         setState(() {
                           _selectedValues.remove(value);
+                          widget.onItemRemoved(value); // Call the callback
                         });
                       },
                     );
