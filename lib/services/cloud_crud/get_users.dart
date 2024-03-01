@@ -62,7 +62,7 @@ Future<List<UserProfile>> getFilteredResults(
           courses.isEmpty &&
           years.isEmpty) {
         throw Exception(
-            "No filters selected. Please select at least one filter.");
+            "No filters selected.. Please select at least one filter.");
       }
 
       // Fetch all users if no filters other than nationalities are selected
