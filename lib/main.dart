@@ -42,8 +42,8 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
       ),
-      home: const GetStarted(),
-      // home: const FilteredResult(),
+      // home: const GetStarted(),
+      home: const FriendSuggestions(),
 
       routes: {
         signupRoute: (context) => const SignUp(),
@@ -65,9 +65,19 @@ class HomePage extends StatelessWidget {
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
         filteredResultsRoute: (context) {
-          final selectedNationalities =
-              ModalRoute.of(context)!.settings.arguments as List<String>;
-          return FilteredResult(selectedNationalities: selectedNationalities);
+          final List<dynamic> args =
+              ModalRoute.of(context)!.settings.arguments as List<dynamic>;
+          final List<String> selectedNationalities = args[0] as List<String>;
+          final List<String> selectedResidents = args[1] as List<String>;
+          final List<String> selectedCourses = args[2] as List<String>;
+          final List<String> selectedYears = args[3] as List<String>;
+
+          return FilteredResult(
+            selectedNationalities: selectedNationalities,
+            selectedResidents: selectedResidents,
+            selectedCourses: selectedCourses,
+            selectedYears: selectedYears,
+          );
         },
 
         

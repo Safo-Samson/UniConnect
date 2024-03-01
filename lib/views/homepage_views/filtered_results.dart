@@ -11,8 +11,17 @@ import 'package:uniconnect/widgets/user_profile_container.dart';
 
 class FilteredResult extends StatefulWidget {
   final List<String> selectedNationalities;
+  final List<String> selectedCourses;
+  final List<String> selectedYears;
+  final List<String> selectedResidents;
 
-  const FilteredResult({Key? key, required this.selectedNationalities})
+
+  const FilteredResult(
+      {Key? key,
+      required this.selectedNationalities,
+      required this.selectedCourses,
+      required this.selectedYears,
+      required this.selectedResidents})
       : super(key: key);
 
   @override
@@ -59,7 +68,11 @@ class _FilteredResultState extends State<FilteredResult> {
           Expanded(
             child: FutureBuilder(
               future: _cloud
-                  .getUsersWithNationalities(widget.selectedNationalities),
+                  .getFilteredResults(
+                  widget.selectedNationalities,
+                  widget.selectedResidents,
+                  widget.selectedCourses,
+                  widget.selectedYears),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -68,7 +81,8 @@ class _FilteredResultState extends State<FilteredResult> {
                 }
                 if (snapshot.hasError) {
                   return const Center(
-                    child: Text('Error fetching users'),
+                    child: Text(
+                        'Please use at least one filter to search for users.'),
                   );
                 }
 

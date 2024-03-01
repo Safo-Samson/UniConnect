@@ -167,8 +167,12 @@ class _ApplyFiltersState extends State<ApplyFilters> {
                   Navigator.pushNamed(
                     context,
                     filteredResultsRoute,
-                    arguments:
-                        selectedNationalities, // Pass the list of selected nationalities
+                    arguments: [
+                      selectedNationalities,
+                      selectedResidents,
+                      selectedCourses,
+                      selectedYears,
+                    ],
                   );
 
 

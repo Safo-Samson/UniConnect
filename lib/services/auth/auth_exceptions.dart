@@ -14,4 +14,6 @@ class GenericAuthException implements Exception {}
 
 class UserNotLoggedInAuthException implements Exception {}
 
-class CouldNotGetUserNationalityException {}
+class CouldNotGetUserNationalityException implements Exception {}
+
+class AllFiltersEmptyException implements Exception {}

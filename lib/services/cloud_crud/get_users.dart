@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/cloud_crud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
@@ -45,27 +46,77 @@ class FirebaseCloud {
     }
   }
 
-  Future<List<UserProfile>> getUsersWithNationalities(
-      List<String> nationalities) async {
-    try {
-      List<UserProfile> allUsers = [];
 
-      for (String nationality in nationalities) {
-        Iterable<UserProfile> users =
-            await getUsersWithNationality(nationality);
-        allUsers.addAll(users);
+Future<List<UserProfile>> getFilteredResults(
+    List<String> nationalities,
+    List<String> residents,
+    List<String> courses,
+    List<String> years,
+  ) async {
+    try {
+      List<UserProfile> filteredUsers = [];
+
+      // Check if any filters are selected
+      if (nationalities.isEmpty &&
+          residents.isEmpty &&
+          courses.isEmpty &&
+          years.isEmpty) {
+        throw Exception(
+            "No filters selected. Please select at least one filter.");
       }
 
-      return allUsers;
-     
+      // Fetch all users if no filters other than nationalities are selected
+      if (nationalities.isEmpty) {
+        QuerySnapshot<Map<String, dynamic>> allUsersSnapshot =
+            await allUsers.get();
+
+        // Apply additional filters based on selected residents, courses, and years
+        filteredUsers = allUsersSnapshot.docs
+            .map((userDoc) {
+              UserProfile user = UserProfile.fromSnapshot(userDoc);
+              bool passResidentFilter =
+                  residents.isEmpty || residents.contains(user.residence);
+              bool passCourseFilter =
+                  courses.isEmpty || courses.contains(user.course);
+              bool passYearFilter = years.isEmpty || years.contains(user.year);
+
+              return passResidentFilter && passCourseFilter && passYearFilter
+                  ? user
+                  : null;
+            })
+            .where((user) => user != null)
+            .toList()
+            .cast<UserProfile>();
+      } else {
+        // Iterate through selected nationalities
+        for (String nationality in nationalities) {
+          Iterable<UserProfile> users =
+              await getUsersWithNationality(nationality);
+
+          // Apply additional filters based on selected residents, courses, and years
+          users = users.where((user) {
+            bool passResidentFilter =
+                residents.isEmpty || residents.contains(user.residence);
+            bool passCourseFilter =
+                courses.isEmpty || courses.contains(user.course);
+            bool passYearFilter = years.isEmpty || years.contains(user.year);
+
+            return passResidentFilter && passCourseFilter && passYearFilter;
+          });
+
+          // Add filtered users to the list
+          filteredUsers.addAll(users);
+        }
+      }
+
+      return filteredUsers;
     } catch (e) {
       throw CouldNotGetAllNationalityException();
     }
   }
 
 
-  void getUsersWithCourse(String course) async {}
 
-  void getUsersWithResidence(String residence) async {}
+
 
 }
