@@ -79,7 +79,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20.0),
@@ -88,7 +88,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: BrandFonts.regularText,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20.0),
@@ -151,7 +151,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                     'Nationality',
                     style: TextStyle(
                       fontSize: BrandFonts.regularText,
-                      fontFamily: BrandFonts.fontFamily,
+                     
                     ),
                   ),
                   InkWell(
@@ -164,7 +164,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                       style: TextStyle(
                         color: BrandColor.infoLinks,
                         decoration: TextDecoration.underline,
-                        fontFamily: BrandFonts.fontFamily,
+                        
                         fontSize: BrandFonts.regularText,
                       ),
                     ),

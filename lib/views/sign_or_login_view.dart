@@ -38,7 +38,7 @@ class _LoginOrSignUpViewState extends State<LoginOrSignUpView> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                 
                 ),
               ),
               verticalSpace(20),
@@ -49,7 +49,7 @@ class _LoginOrSignUpViewState extends State<LoginOrSignUpView> {
                 },
                 child: const Text('Login',
                     style: TextStyle(
-                      fontFamily: BrandFonts.fontFamily,
+                      
                       fontSize: BrandFonts.textButtonSize,
                     )),
               ),
@@ -60,7 +60,7 @@ class _LoginOrSignUpViewState extends State<LoginOrSignUpView> {
                 },
                 child: const Text('Sign Up',
                     style: TextStyle(
-                      fontFamily: BrandFonts.fontFamily,
+                      
                       fontSize: BrandFonts.textButtonSize,
                     )),
               ),

@@ -58,7 +58,7 @@ class _StudentVerifyState extends State<StudentVerify> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: BrandFonts.h1,
-                fontFamily: BrandFonts.fontFamily,
+                
               ),
             ),
             verticalSpace(20),
@@ -67,7 +67,7 @@ class _StudentVerifyState extends State<StudentVerify> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: BrandFonts.regularText,
-                fontFamily: BrandFonts.fontFamily,
+                
               ),
             ),
             verticalSpace(20),

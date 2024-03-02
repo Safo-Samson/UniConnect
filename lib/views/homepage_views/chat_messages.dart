@@ -22,7 +22,7 @@ class ChatMessagePageState extends State<ChatMessagePage> {
           'Messages',
           style: TextStyle(
             color: Colors.black,
-            fontFamily: BrandFonts.fontFamily,
+            
               fontSize: BrandFonts.h2
           ),
         ),

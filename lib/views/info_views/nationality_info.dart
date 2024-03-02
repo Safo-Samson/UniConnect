@@ -25,7 +25,7 @@ class WhyNationalityInfo extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                 
                 ),
               ),
               verticalSpace(20),
@@ -35,7 +35,7 @@ class WhyNationalityInfo extends StatelessWidget {
                 style: TextStyle(
                   height: 1.5, // Adjust the line spacing here
                   fontSize: BrandFonts.regularText,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20),
@@ -46,7 +46,7 @@ class WhyNationalityInfo extends StatelessWidget {
                 },
                 child: const Text('Okay, got it!',
                     style: TextStyle(
-                      fontFamily: BrandFonts.fontFamily,
+                      
                       fontSize: BrandFonts.textButtonSize,
                     )),
               ),

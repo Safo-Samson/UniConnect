@@ -1,9 +1,11 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
+import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/views/get_started.dart';
 import 'package:uniconnect/views/homepage_views/apply_filters.dart';
 import 'package:uniconnect/views/homepage_views/chat_messages.dart';
@@ -21,6 +23,8 @@ import 'package:uniconnect/views/sign_up.dart';
 import 'package:uniconnect/views/info_views/status_verified.dart';
 import 'package:uniconnect/views/student_verify.dart';
 import 'package:uniconnect/views/info_views/why_2_emails.dart';
+import 'package:uniconnect/widgets/user_profile.dart';
+import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
 
 void main() async {
@@ -30,10 +34,20 @@ void main() async {
   runApp(const HomePage());
 }
 
-
+UserProfile user1 = UserProfile(
+  username: 'John Doe',
+  course: 'Computer Science',
+  year: '1st Year',
+  residence: 'Kilifi',
+  country: 'Kenya',
+  flag: '🇰🇪',
+  imageUrl: 'https://safosamson.me/assets/img/star%20of%20the%20week.jpg',
+  bio: 'I am a Computer Science student at Pwani University',
+);
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +55,7 @@ class HomePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
+        fontFamily: BrandFonts.fontFamily,
       ),
       // home: const GetStarted(),
       home: const FriendSuggestions(),
@@ -64,6 +79,7 @@ class HomePage extends StatelessWidget {
         friendSuggestionsRoute: (context) => const FriendSuggestions(),
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
+      
         filteredResultsRoute: (context) {
           final List<dynamic> args =
               ModalRoute.of(context)!.settings.arguments as List<dynamic>;
@@ -78,6 +94,12 @@ class HomePage extends StatelessWidget {
             selectedCourses: selectedCourses,
             selectedYears: selectedYears,
           );
+        },
+      
+        viewProfileRoute: (context) {
+          final UserProfile user =
+              ModalRoute.of(context)!.settings.arguments as UserProfile;
+          return UserProfilePage(user: user);
         },
 
         

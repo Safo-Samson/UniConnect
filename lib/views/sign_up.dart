@@ -85,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                 
                 ),
               ),
               verticalSpace(20.0),
@@ -94,7 +94,7 @@ class _SignUpState extends State<SignUp> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: BrandFonts.regularText,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20.0),

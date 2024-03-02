@@ -58,7 +58,7 @@ class _GetStartedState extends State<GetStarted> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20),
@@ -72,7 +72,7 @@ class _GetStartedState extends State<GetStarted> {
                   },
                   child: const Text('Get Started',
                       style: TextStyle(
-                        fontFamily: BrandFonts.fontFamily,
+                        
                         fontSize: BrandFonts.textButtonSize,
                       )),
                 ),

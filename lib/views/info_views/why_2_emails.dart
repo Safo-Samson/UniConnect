@@ -25,7 +25,7 @@ class WhyTwoEmails extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20),
@@ -35,7 +35,7 @@ class WhyTwoEmails extends StatelessWidget {
                   style: TextStyle(
                     height: 1.5, // Adjust the line spacing here
                     fontSize: BrandFonts.regularText,
-                    fontFamily: BrandFonts.fontFamily,
+                    
                     color: Colors.black,
                   ),
                   children: [
@@ -62,7 +62,7 @@ class WhyTwoEmails extends StatelessWidget {
                 },
                 child: const Text('Got it, continue',
                     style: TextStyle(
-                      fontFamily: BrandFonts.fontFamily,
+                      
                       fontSize: BrandFonts.textButtonSize,
                     )),
               ),

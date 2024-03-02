@@ -33,7 +33,7 @@ class _CarouselTemplateState extends State<CarouselTemplate> {
                     style: const TextStyle(
                         fontSize: BrandFonts.h1,
                         fontWeight: FontWeight.bold,
-                        fontFamily: BrandFonts.fontFamily),
+                    ),
                   ),
                   verticalSpace(20),
                   Image.asset(widget.widgetData['image'],
@@ -42,7 +42,7 @@ class _CarouselTemplateState extends State<CarouselTemplate> {
                   Text(widget.widgetData['description'],
                       style: const TextStyle(
                           fontSize: BrandFonts.regularText,
-                          fontFamily: BrandFonts.fontFamily)),
+                      )),
                   verticalSpace(20),
                 ],
               ),

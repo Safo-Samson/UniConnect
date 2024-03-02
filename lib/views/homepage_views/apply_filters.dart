@@ -56,7 +56,7 @@ class _ApplyFiltersState extends State<ApplyFilters> {
           'Filters',
           style: TextStyle(
             color: Colors.black,
-            fontFamily: BrandFonts.fontFamily,
+            
             fontSize: BrandFonts.h2,
           ),
         ),
@@ -77,7 +77,7 @@ class _ApplyFiltersState extends State<ApplyFilters> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: BrandFonts.regularText,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20.0),

@@ -53,7 +53,7 @@ class _FilteredResultState extends State<FilteredResult> {
           'Filters',
           style: TextStyle(
             color: Colors.black,
-            fontFamily: BrandFonts.fontFamily,
+            
             fontSize: BrandFonts.h2,
           ),
         ),

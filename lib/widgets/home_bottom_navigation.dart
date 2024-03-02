@@ -31,7 +31,8 @@ class HomeBottomNavigation extends StatelessWidget {
           IconButton(
           
             onPressed: () {
-              Navigator.pushNamed(context, friendSuggestionsRoute);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, friendSuggestionsRoute, (route) => false);
             },
             icon: const Icon(Icons.person, size: BrandFonts.iconSize),
           ),
@@ -45,7 +46,8 @@ class HomeBottomNavigation extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, chatMessagesRoute);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, chatMessagesRoute, (route) => false);
             },
             icon: const Icon(Icons.message, size: BrandFonts.iconSize),
           ),

@@ -62,7 +62,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
           'Friend Suggestions',
           style: TextStyle(
             color: Colors.black,
-            fontFamily: BrandFonts.fontFamily,
+            
             fontSize: BrandFonts.h2,
           ),
         ),
@@ -82,7 +82,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                 const Text(
                   'Based on your profile, you may like to connect with these students',
                   style: TextStyle(
-                    fontFamily: BrandFonts.fontFamily,
+                    
                   ),
                 ),
                 verticalSpace(10),
@@ -145,7 +145,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                 'UniConnect',
                 style: TextStyle(
                   fontSize: BrandFonts.h1,
-                  fontFamily: BrandFonts.fontFamily,
+                 
                 ),
               ),
             ),

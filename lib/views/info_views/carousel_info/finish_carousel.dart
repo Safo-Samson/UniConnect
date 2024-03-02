@@ -27,7 +27,7 @@ class FinishCarousel extends StatelessWidget {
                     style: TextStyle(
                       fontSize: BrandFonts.h1,
                       fontWeight: FontWeight.bold,
-                      fontFamily: BrandFonts.fontFamily,
+                      
                     ),
                   ),
                   verticalSpace(20),
@@ -41,7 +41,7 @@ class FinishCarousel extends StatelessWidget {
                     'Time to be apart of the students’ world, and interact with anyone, no room for loneliness !!',
                     style: TextStyle(
                       fontSize: BrandFonts.regularText,
-                      fontFamily: BrandFonts.fontFamily,
+                     
                     ),
                   ),
                   verticalSpace(20),

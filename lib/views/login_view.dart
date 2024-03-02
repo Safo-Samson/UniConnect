@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: BrandFonts.regularText,
-                  fontFamily: BrandFonts.fontFamily,
+                 
                 ),
               ),
               verticalSpace(20.0),

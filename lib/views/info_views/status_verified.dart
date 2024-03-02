@@ -27,7 +27,7 @@ class StudentVerified extends StatelessWidget {
                 ),
                 child: const Text('Student Status Verified',
                     style: TextStyle(
-                      fontFamily: BrandFonts.fontFamily,
+                     
                       fontSize: BrandFonts.textButtonSize,
                       color: Colors.white,
                     )),
@@ -39,7 +39,7 @@ class StudentVerified extends StatelessWidget {
                 style: TextStyle(
                   height: 1.5, // Adjust the line spacing here
                   fontSize: BrandFonts.regularText,
-                  fontFamily: BrandFonts.fontFamily,
+                  
                 ),
               ),
               verticalSpace(20),
@@ -50,7 +50,7 @@ class StudentVerified extends StatelessWidget {
                 },
                 child: const Text('Got it, continue',
                     style: TextStyle(
-                      fontFamily: BrandFonts.fontFamily,
+                      
                       fontSize: BrandFonts.textButtonSize,
                     )),
               ),

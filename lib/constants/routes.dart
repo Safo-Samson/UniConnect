@@ -16,3 +16,4 @@ const chatMessagesRoute = '/chat-messages';
 const feedRoute = '/feed';
 const applyFiltersRoute = '/apply-filters';
 const filteredResultsRoute = '/filtered_results';
+const viewProfileRoute = '/view-profile';

@@ -40,7 +40,7 @@ class DropdownWithChipState extends State<DropdownWithChip> {
           widget.label,
           style: const TextStyle(
             fontSize: BrandFonts.regularText,
-            fontFamily: BrandFonts.fontFamily,
+           
           ),
         ),
         verticalSpace(10.0),

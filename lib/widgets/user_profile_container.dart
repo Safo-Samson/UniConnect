@@ -5,6 +5,7 @@ import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 
 import 'package:uniconnect/widgets/user_profile.dart';
+import 'package:uniconnect/widgets/user_profile_page.dart';
 
 
 class UserProfileContainer extends StatefulWidget {
@@ -31,43 +32,81 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
       ),
       child: ListTile(
         leading: widget.user.imageUrl != null
-            ? CircleAvatar(
-                backgroundImage: NetworkImage(widget.user.imageUrl!),
+            ? GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserProfilePage(user: widget.user),
+                    ),
+                  );
+                },
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(widget.user.imageUrl!),
+                ),
               )
-            : CircleAvatar(
-                backgroundColor: const Color.fromARGB(179, 158, 158, 158),
-                child: Text(
-                  widget.user.username.substring(0, 1).toUpperCase(),
-                  style: const TextStyle(color: Colors.white, fontSize: 20.0),
+            : GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserProfilePage(user: widget.user),
+                    ),
+                  );
+                },
+                child: CircleAvatar(
+                  backgroundColor: const Color.fromARGB(179, 158, 158, 158),
+                  child: Text(
+                    widget.user.username.substring(0, 1).toUpperCase(),
+                    style: const TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
                 ),
               ),
 
-        title: Text(widget.user.username),
+        title: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UserProfilePage(user: widget.user),
+                ),
+              );
+            },
+            child: Text(widget.user.username)),
 
         subtitle:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.user.course),
-              Text(widget.user.year),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(widget.user.flag,
-                  style: const TextStyle(
-                      fontSize: BrandFonts.flagSize, color: Colors.black)),
-              Text(
-                widget.user.country.substring(0, 3),
-                style: const TextStyle(color: Colors.black),
-                
+            GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UserProfilePage(user: widget.user),
               ),
-            ],
-          ),
-      
-        ]),
+            );
+          },
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.user.course),
+                Text(widget.user.year),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(widget.user.flag,
+                    style: const TextStyle(
+                        fontSize: BrandFonts.flagSize, color: Colors.black)),
+                Text(
+                  widget.user.country.substring(0, 3),
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ]),
+        ),
         
 
         trailing: const Column(
@@ -86,6 +125,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
         ),
         onTap: () {},
       ),
+      
     );
   }
 }
