@@ -37,7 +37,7 @@ class FirebaseCloud {
 
       // Step 3: Convert query snapshot to list of UserProfile objects
       Iterable<UserProfile> users = usersSnapshot.docs.map((userDoc) {
-        return UserProfile.fromSnapshot(userDoc);
+        return UserProfile.fromQuerySnapshot(userDoc);
       });
 
       return users;
@@ -73,7 +73,7 @@ Future<List<UserProfile>> getFilteredResults(
         // Apply additional filters based on selected residents, courses, and years
         filteredUsers = allUsersSnapshot.docs
             .map((userDoc) {
-              UserProfile user = UserProfile.fromSnapshot(userDoc);
+              UserProfile user = UserProfile.fromQuerySnapshot(userDoc);
               bool passResidentFilter =
                   residents.isEmpty || residents.contains(user.residence);
               bool passCourseFilter =

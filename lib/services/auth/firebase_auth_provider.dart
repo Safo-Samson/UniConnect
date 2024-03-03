@@ -1,9 +1,11 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:uniconnect/firebase_options.dart';
 import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_provider.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
+// import 'package:uniconnect/widgets/user_profile.dart';
 
 class FirebaseAuthProvider implements MyAuthProvider {
 
@@ -88,6 +90,7 @@ class FirebaseAuthProvider implements MyAuthProvider {
       throw GenericAuthException();
     }
   }
+
   
   @override
   Future<void> initialize() async {

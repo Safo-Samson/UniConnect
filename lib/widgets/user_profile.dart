@@ -21,15 +21,33 @@ class UserProfile {
     this.bio,
   });
 
+  // Constructor for QueryDocumentSnapshot
+  factory UserProfile.fromQuerySnapshot(
+      QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
+    return UserProfile(
+      username: snapshot.data()['username'] ?? '',
+      course: snapshot.data()['course'] ?? '',
+      year: snapshot.data()['year'] ?? '',
+      residence: snapshot.data()['residence'] ?? '',
+      country: snapshot.data()['nationality'] ?? '',
+      flag: snapshot.data()['flag'] ?? '',
+      imageUrl: snapshot.data()['imageUrl'],
+      bio: snapshot.data()['bio'],
+    );
+  }
 
-  UserProfile.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
-      : username = snapshot.data()['username'] ?? '',
-        course = snapshot.data()['course'] ?? '',
-        year = snapshot.data()['year'] ?? '',
-        residence = snapshot.data()['residence'] ?? '',
-        country = snapshot.data()['nationality'] ?? '',
-        flag = snapshot.data()['flag'] ?? '',
-        imageUrl = snapshot.data()['imageUrl'],
-        bio = snapshot.data()['bio'];
-
+  // Constructor for DocumentSnapshot
+  factory UserProfile.fromDocumentSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    return UserProfile(
+      username: snapshot.data()?['username'] ?? '',
+      course: snapshot.data()?['course'] ?? '',
+      year: snapshot.data()?['year'] ?? '',
+      residence: snapshot.data()?['residence'] ?? '',
+      country: snapshot.data()?['nationality'] ?? '',
+      flag: snapshot.data()?['flag'] ?? '',
+      imageUrl: snapshot.data()?['imageUrl'],
+      bio: snapshot.data()?['bio'],
+    );
+  }
 }

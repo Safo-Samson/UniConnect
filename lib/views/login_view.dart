@@ -39,10 +39,12 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void _validateEmail() {
+    final email = _emailController.text.trim(); // Trim off empty spaces
     setState(() {
-      _isEmailValid = isValidEmail(_emailController.text);
+      _isEmailValid = isValidEmail(email);
     });
   }
+
 
   // Function to validate an email address
   bool isValidEmail(String email) {

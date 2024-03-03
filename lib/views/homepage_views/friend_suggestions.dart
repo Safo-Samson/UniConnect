@@ -12,6 +12,7 @@ import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
+import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
 
 class FriendSuggestions extends StatefulWidget {
@@ -62,7 +63,6 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
           'Friend Suggestions',
           style: TextStyle(
             color: Colors.black,
-            
             fontSize: BrandFonts.h2,
           ),
         ),
@@ -81,9 +81,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               children: [
                 const Text(
                   'Based on your profile, you may like to connect with these students',
-                  style: TextStyle(
-                    
-                  ),
+                  style: TextStyle(),
                 ),
                 verticalSpace(10),
                 Row(
@@ -145,14 +143,20 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                 'UniConnect',
                 style: TextStyle(
                   fontSize: BrandFonts.h1,
-                 
                 ),
               ),
             ),
             ListTile(
               title: const Text('Profile'),
-              onTap: () {
-                // Handle button press
+              onTap: () async {
+                final userProfile =
+                    await AuthService.firebase().getCurrentUserProfile();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserProfilePage(user: userProfile),
+                  ),
+                );
               },
             ),
             ListTile(

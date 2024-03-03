@@ -3,6 +3,7 @@ import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_provider.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/services/auth/firebase_auth_provider.dart';
+import 'package:uniconnect/widgets/user_profile.dart';
 
 class AuthService implements MyAuthProvider {
   final MyAuthProvider provider;
@@ -11,7 +12,6 @@ class AuthService implements MyAuthProvider {
 
 // to create a firebaseauth instance, because now its the only provider we have
   factory AuthService.firebase() => AuthService(FirebaseAuthProvider());
- 
 
   @override
   Future<AuthUser> createUser(
@@ -36,7 +36,7 @@ class AuthService implements MyAuthProvider {
   Future<void> signOut() {
     return provider.signOut();
   }
-  
+
   @override
   Future<void> initialize() async {
     return provider.initialize();
@@ -56,6 +56,16 @@ class AuthService implements MyAuthProvider {
       throw CouldNotGetUserNationalityException();
     }
   }
+
+  Future<UserProfile> getCurrentUserProfile() async {
+    final currentUser = FirebaseAuthProvider().currentUser;
+
+    
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .get();
+
+    return UserProfile.fromDocumentSnapshot(userData);
+  }
 }
-
-
