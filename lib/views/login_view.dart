@@ -11,7 +11,7 @@ import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/error_dialog.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
 import 'package:uniconnect/widgets/password_widget.dart';
-import 'dart:developer' as devtols show log;
+// import 'dart:developer' as devtols show log;
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 

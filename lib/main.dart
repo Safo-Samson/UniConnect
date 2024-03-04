@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
         fontFamily: BrandFonts.fontFamily,
-          scaffoldBackgroundColor: BrandColor.white
+        scaffoldBackgroundColor: BrandColor.white,
       ),
       home: const GetStarted(),
       // home: const FriendSuggestions(),
@@ -85,7 +85,6 @@ class HomePage extends StatelessWidget {
             ),
         finishCarouselRoute: (context) => const FinishCarousel(),
        
-        // friendSuggestionsRoute: (context) => const FriendSuggestions(),
         friendSuggestionsRoute: (context) {
           final currentUserNationality =
               ModalRoute.of(context)!.settings.arguments as String;

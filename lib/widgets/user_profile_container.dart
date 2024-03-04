@@ -1,16 +1,20 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:uniconnect/constants/ice_breaker_messages.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
-
+import 'package:uniconnect/utils/dialogs/connect_diaglog.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';
 
-
 class UserProfileContainer extends StatefulWidget {
   UserProfile user;
-  UserProfileContainer({super.key, required this.user});
+  String iceBreakerMessage;
+  // final IceBreakerGenerator iceBreakerGenerator = IceBreakerGenerator();
+  UserProfileContainer(
+      {super.key, required this.user, this.iceBreakerMessage = ""});
 
   @override
   State<UserProfileContainer> createState() => _UserProfileContainerState();
@@ -62,7 +66,6 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                   ),
                 ),
               ),
-
         title: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -73,9 +76,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
               );
             },
             child: Text(widget.user.username)),
-
-        subtitle:
-            GestureDetector(
+        subtitle: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
@@ -107,8 +108,6 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
             ),
           ]),
         ),
-        
-
         trailing: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -117,15 +116,24 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
               color: Colors.black,
               size: 30,
             ),
-            // SizedBox(height: 2),
-            Text('Connect',
-                style:
-                    TextStyle(fontSize: 12)), // Adjust the font size as needed
+            Text('Connect', style: TextStyle(fontSize: 12)),
           ],
         ),
-        onTap: () {},
+        onTap: () async {
+          UserProfile currentUserProfile =
+              await AuthService.firebase().getCurrentUserProfile();
+
+          String iceBreakerMessage =
+              IceBreakerGenerator.generateIceBreakerMessage(
+                  currentUserProfile, widget.user);
+          showConnectDialog(
+            context,
+            iceBreakerMessage,
+            currentUserProfile,
+            widget.user,
+          );
+        },
       ),
-      
     );
   }
 }

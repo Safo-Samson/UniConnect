@@ -33,22 +33,9 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
 
   final AuthUser user = AuthService.firebase().currentUser!;
 
-  // Future<void> initializeData() async {
-  //   _cloud = FirebaseCloud();
-  //   // Retrieve user's nationality and assign it to currentUserNationality
-  //   currentUserNationality =
-  //       await AuthService.firebase().getUserNationality(user.uid);
-
-  //   setState(() {
-  //     currentUserNationality = currentUserNationality;
-  //   });
-  // }
-
   @override
   void initState() {
-    // initializeData();
     _cloud = FirebaseCloud();
-
     super.initState();
   }
 
