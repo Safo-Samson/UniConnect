@@ -147,7 +147,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               ),
             ),
             ListTile(
-              title: const Text('Profile'),
+              title: const Text('My Profile'),
               onTap: () async {
                 final userProfile =
                     await AuthService.firebase().getCurrentUserProfile();

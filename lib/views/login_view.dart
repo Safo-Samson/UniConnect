@@ -106,7 +106,7 @@ class _LoginViewState extends State<LoginView> {
               ElevatedButton(
                 onPressed: _isEmailValid
                     ? () async {
-                        final enteredEmail = _emailController.text;
+                        final enteredEmail = _emailController.text.trim();
                         final enteredPassword = _passwordController.text;
 
                         try {
