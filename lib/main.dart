@@ -85,7 +85,13 @@ class HomePage extends StatelessWidget {
             ),
         finishCarouselRoute: (context) => const FinishCarousel(),
        
-        friendSuggestionsRoute: (context) => const FriendSuggestions(),
+        // friendSuggestionsRoute: (context) => const FriendSuggestions(),
+        friendSuggestionsRoute: (context) {
+          final currentUserNationality =
+              ModalRoute.of(context)!.settings.arguments as String;
+          return FriendSuggestions(
+              currentUserNationality: currentUserNationality);
+        },
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
       

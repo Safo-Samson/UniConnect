@@ -1,5 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 
@@ -54,9 +58,17 @@ class FinishCarousel extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                final AuthUser user = AuthService.firebase().currentUser!;
+                final currentUserNationality =
+                    await AuthService.firebase().getUserNationality(user.uid);
                 Navigator.pushNamedAndRemoveUntil(
-                    context, friendSuggestionsRoute, (route) => false);
+                  context,
+                  friendSuggestionsRoute,
+                  (route) => false,
+                  arguments: currentUserNationality,
+                );
+
               },
               child: const Text(
                 "Let's Explore!",

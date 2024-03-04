@@ -1,10 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
+import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 
-class HomeBottomNavigation extends StatelessWidget {
+class HomeBottomNavigation extends StatefulWidget {
   const HomeBottomNavigation({super.key});
+
+  @override
+  State<HomeBottomNavigation> createState() => _HomeBottomNavigationState();
+}
+
+class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
+  late String currentUserNationality;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +40,17 @@ class HomeBottomNavigation extends StatelessWidget {
             icon: const Icon(Icons.home, size: BrandFonts.iconSize),
           ),
           IconButton(
-          
-            onPressed: () {
+            onPressed: () async {
+              final AuthUser user = AuthService.firebase().currentUser!;
+              currentUserNationality =
+                  await AuthService.firebase().getUserNationality(user.uid);
               Navigator.pushNamedAndRemoveUntil(
-                  context, friendSuggestionsRoute, (route) => false);
+                context,
+                friendSuggestionsRoute,
+                (route) => false,
+                arguments: currentUserNationality,
+              );
+
             },
             icon: const Icon(Icons.person, size: BrandFonts.iconSize),
           ),

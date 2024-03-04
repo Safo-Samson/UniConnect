@@ -18,7 +18,10 @@ import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
 
 class FriendSuggestions extends StatefulWidget {
-  const FriendSuggestions({super.key});
+  final String currentUserNationality;
+
+  const FriendSuggestions({Key? key, required this.currentUserNationality})
+      : super(key: key);
 
   @override
   State<FriendSuggestions> createState() => _FriendSuggestionsState();
@@ -26,24 +29,25 @@ class FriendSuggestions extends StatefulWidget {
 
 class _FriendSuggestionsState extends State<FriendSuggestions> {
   late final FirebaseCloud _cloud;
-  late String currentUserNationality;
+  late String currentUserNationality = widget.currentUserNationality;
 
   final AuthUser user = AuthService.firebase().currentUser!;
 
-  Future<void> initializeData() async {
-    _cloud = FirebaseCloud();
-    // Retrieve user's nationality and assign it to currentUserNationality
-    currentUserNationality =
-        await AuthService.firebase().getUserNationality(user.uid);
+  // Future<void> initializeData() async {
+  //   _cloud = FirebaseCloud();
+  //   // Retrieve user's nationality and assign it to currentUserNationality
+  //   currentUserNationality =
+  //       await AuthService.firebase().getUserNationality(user.uid);
 
-    setState(() {
-      currentUserNationality = currentUserNationality;
-    });
-  }
+  //   setState(() {
+  //     currentUserNationality = currentUserNationality;
+  //   });
+  // }
 
   @override
   void initState() {
-    initializeData();
+    // initializeData();
+    _cloud = FirebaseCloud();
 
     super.initState();
   }

@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/error_dialog.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
 import 'package:uniconnect/widgets/password_widget.dart';
-
+import 'dart:developer' as devtols show log;
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
@@ -102,10 +103,22 @@ class _LoginViewState extends State<LoginView> {
                             password: enteredPassword,
                           );
 
+                          // Retrieve user's nationality and assign it to currentUserNationality
+                          final AuthUser user =
+                              AuthService.firebase().currentUser!;
+                          final currentUserNationality =
+                              await AuthService.firebase()
+                                  .getUserNationality(user.uid);
+
                           showLoadingDialog(
                               context: context, text: 'Logging in...');
-                          Navigator.pushNamedAndRemoveUntil(context,
-                              friendSuggestionsRoute, (route) => false);
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            friendSuggestionsRoute,
+                            (route) => false,
+                            arguments: currentUserNationality,
+                          );
+
                         } on UserNotFoundAuthException {
                           await showErrorDialog(
                               context, 'No user found for that credentials.');
