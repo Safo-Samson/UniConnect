@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/services/cloud_crud/get_users.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
@@ -143,10 +145,12 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                 'UniConnect',
                 style: TextStyle(
                   fontSize: BrandFonts.h1,
+                  color: Colors.white,
                 ),
               ),
             ),
             ListTile(
+              leading: const Icon(Icons.person), // Icon for My Profile
               title: const Text('My Profile'),
               onTap: () async {
                 final userProfile =
@@ -160,18 +164,24 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               },
             ),
             ListTile(
+              leading:
+                  const Icon(Icons.notifications), // Icon for Notifications
               title: const Text('Notifications'),
               onTap: () {
-                // Handle button press
+                showNothingDialog(context,
+                    'This feature is not available yet. I am working on it.');
               },
             ),
             ListTile(
+              leading: const Icon(Icons.settings), // Icon for Settings
               title: const Text('Settings'),
               onTap: () {
-                // Handle button press
+                showNothingDialog(context,
+                    'This feature is not available yet. I am working on it.');
               },
             ),
             ListTile(
+              leading: const Icon(Icons.logout), // Icon for Log Out
               title: const Text('Log Out'),
               onTap: () async {
                 final result = await showLogoutDialog(context);
@@ -184,6 +194,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
           ],
         ),
       ),
+
       body: Column(
         children: [
           Expanded(
@@ -191,8 +202,11 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               future: _cloud.getUsersWithNationality(currentUserNationality),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Center(
+                    child: SpinKitCircle(
+                      color: BrandColor.primary,
+                      size: 50,
+                    ),
                   );
                 }
                 if (snapshot.hasError) {

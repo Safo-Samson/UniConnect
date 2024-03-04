@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/services/cloud_crud/get_users.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
@@ -53,7 +55,7 @@ class _FilteredResultState extends State<FilteredResult> {
           'Filters',
           style: TextStyle(
             color: Colors.black,
-            
+            fontFamily: BrandFonts.fontFamily,
             fontSize: BrandFonts.h2,
           ),
         ),
@@ -75,8 +77,11 @@ class _FilteredResultState extends State<FilteredResult> {
                   widget.selectedYears),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Center(
+                    child: SpinKitCircle(
+                      color: BrandColor.primary,
+                      size: 50,
+                    ),
                   );
                 }
                 if (snapshot.hasError) {

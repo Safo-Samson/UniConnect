@@ -46,7 +46,6 @@ class FirebaseCloud {
     }
   }
 
-
 Future<List<UserProfile>> getFilteredResults(
     List<String> nationalities,
     List<String> residents,
@@ -117,6 +116,46 @@ Future<List<UserProfile>> getFilteredResults(
 
 
 
+// Stream methods for real-time updates but not used in this project cah messes up the UI and the filters
+  Stream<List<UserProfile>> getUsersWithNationalityStream(String nationality) {
+    try {
+      return allNationalities
+          .doc(nationality.toLowerCase()) // Convert nationality to lowercase
+          .collection('users')
+          .snapshots()
+          .map((snapshot) => snapshot.docs
+              .map((doc) => UserProfile.fromQuerySnapshot(doc))
+              .toList());
+    } catch (e) {
+      throw CouldNotGetAllNationalityException();
+    }
+  }
+
+  Stream<List<UserProfile>> getFilteredResultsStream(
+    List<String> nationalities,
+    List<String> residents,
+    List<String> courses,
+    List<String> years,
+  ) {
+    try {
+      Stream<QuerySnapshot<Map<String, dynamic>>> usersStream =
+          allUsers.snapshots();
+
+      return usersStream.map((snapshot) => snapshot.docs
+              .map((doc) => UserProfile.fromQuerySnapshot(doc))
+              .where((user) {
+            bool passResidentFilter =
+                residents.isEmpty || residents.contains(user.residence);
+            bool passCourseFilter =
+                courses.isEmpty || courses.contains(user.course);
+            bool passYearFilter = years.isEmpty || years.contains(user.year);
+
+            return passResidentFilter && passCourseFilter && passYearFilter;
+          }).toList());
+    } catch (e) {
+      throw CouldNotGetAllNationalityException();
+    }
+  }
 
 
 }
