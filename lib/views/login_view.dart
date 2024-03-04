@@ -9,6 +9,7 @@ import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/error_dialog.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
+import 'package:uniconnect/widgets/password_widget.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -21,7 +22,6 @@ class _LoginViewState extends State<LoginView> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   bool _isEmailValid = false;
-  bool _isObscure = true;
 
   @override
   void initState() {
@@ -44,7 +44,6 @@ class _LoginViewState extends State<LoginView> {
       _isEmailValid = isValidEmail(email);
     });
   }
-
 
   // Function to validate an email address
   bool isValidEmail(String email) {
@@ -70,7 +69,6 @@ class _LoginViewState extends State<LoginView> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: BrandFonts.regularText,
-                 
                 ),
               ),
               verticalSpace(20.0),
@@ -82,25 +80,14 @@ class _LoginViewState extends State<LoginView> {
                   labelText: 'Email',
                 ),
               ),
+          
               verticalSpace(20.0),
-              TextField(
-                controller: _passwordController,
-                obscureText: _isObscure,
-                decoration: InputDecoration(
+              PasswordTextField(
+                  controller: _passwordController,
                   hintText: 'Password',
-                  border: const OutlineInputBorder(),
                   labelText: 'Password',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        _isObscure ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
-                  ),
-                ),
-              ),
+                  isConfirmPassword: false,
+                  onChanged: ((_) {})),
               verticalSpace(20.0),
               verticalSpace(25.0),
               ElevatedButton(

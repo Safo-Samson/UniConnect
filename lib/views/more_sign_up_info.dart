@@ -190,7 +190,6 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                             selectedCountryController.text.split(' ');
 
                         String flag = flagAndCountry[0];
-
                         String country = flagAndCountry.sublist(1).join(' ');
 
 

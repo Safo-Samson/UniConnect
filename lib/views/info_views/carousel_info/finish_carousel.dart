@@ -23,18 +23,20 @@ class FinishCarousel extends StatelessWidget {
               child: ListView(
                 children: [
                   const Text(
-                    'You are all set!',
+                    'You are all set, Welcome to Uniconnect!',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: BrandFonts.h1,
                       fontWeight: FontWeight.bold,
+                      
                       
                     ),
                   ),
                   verticalSpace(20),
                   Image.asset(
-                    'assets/img/lauch-space.jpg',
-                    width: 250,
-                    height: 190,
+                    'assets/img/launch into space.jpg',
+                    height: 390,
+                    repeat: ImageRepeat.repeatY,
                   ),
                   verticalSpace(20),
                   const Text(

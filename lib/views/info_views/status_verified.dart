@@ -42,7 +42,7 @@ class StudentVerified extends StatelessWidget {
                   
                 ),
               ),
-              verticalSpace(20),
+              verticalSpace(50),
               ElevatedButton(
                 onPressed: () {
                   // Handle button press

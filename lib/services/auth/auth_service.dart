@@ -37,11 +37,6 @@ class AuthService implements MyAuthProvider {
     return provider.signOut();
   }
 
-  @override
-  Future<void> initialize() async {
-    return provider.initialize();
-  }
-
   // Function to get user's nationality
   Future<String> getUserNationality(String userId) async {
     try {
@@ -60,12 +55,16 @@ class AuthService implements MyAuthProvider {
   Future<UserProfile> getCurrentUserProfile() async {
     final currentUser = FirebaseAuthProvider().currentUser;
 
-    
     final userData = await FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser!.uid)
         .get();
 
     return UserProfile.fromDocumentSnapshot(userData);
+  }
+
+  @override
+  Future<void> initialize() async {
+    return provider.initialize();
   }
 }

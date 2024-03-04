@@ -10,6 +10,7 @@ import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/error_dialog.dart';
 import 'package:uniconnect/utils/dialogs/loading_dialog.dart';
+import 'package:uniconnect/widgets/password_widget.dart';
 
 // import 'dart:developer' as devtols show log;
 
@@ -26,7 +27,6 @@ class _SignUpState extends State<SignUp> {
   late final TextEditingController _confirmPasswordController;
   bool _isEmailValid = false;
   bool _passwordsMatch = true;
-  bool _showPassword = false; // New variable to toggle password visibility
 
   @override
   void initState() {
@@ -56,7 +56,8 @@ class _SignUpState extends State<SignUp> {
   void _validatePassword() {
     setState(() {
       _passwordsMatch =
-          _passwordController.text == _confirmPasswordController.text &&
+          _passwordController.text.trim() ==
+              _confirmPasswordController.text.trim() &&
               _passwordController.text.isNotEmpty &&
               _confirmPasswordController.text.isNotEmpty;
     });
@@ -122,51 +123,22 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               verticalSpace(20.0),
-              TextField(
+              PasswordTextField(
                 controller: _passwordController,
-                obscureText: !_showPassword,
-                autocorrect: false,
-                enableSuggestions: false,
+                hintText: 'password',
+                labelText: 'Password',
+                isConfirmPassword: false,
                 onChanged: (_) => _validatePassword(),
-                decoration: InputDecoration(
-                  hintText: 'password',
-                  border: const OutlineInputBorder(),
-                  labelText: 'password',
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      _showPassword ? Icons.visibility : Icons.visibility_off,
-                    ),
-                  ),
-                ),
               ),
               verticalSpace(20.0),
-              TextField(
+              PasswordTextField(
                 controller: _confirmPasswordController,
-                obscureText: !_showPassword,
-                autocorrect: false,
-                enableSuggestions: false,
+                hintText: 'confirm password',
+                labelText: 'Confirm Password',
+                isConfirmPassword: true,
                 onChanged: (_) => _validatePassword(),
-                decoration: InputDecoration(
-                  hintText: 'confirm password',
-                  border: const OutlineInputBorder(),
-                  labelText: 'confirm password',
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      _showPassword ? Icons.visibility : Icons.visibility_off,
-                    ),
-                  ),
-                ),
               ),
+
               if (!_passwordsMatch)
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -180,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                 onPressed: _isEmailValid && _passwordsMatch
                     ? () async {
                         try {
-                          final enteredEmail = _emailController.text;
+                          final enteredEmail = _emailController.text.trim();
                           final enteredPassword = _passwordController.text;
 
                           await AuthService.firebase().createUser(

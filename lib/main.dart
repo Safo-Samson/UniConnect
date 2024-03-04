@@ -56,6 +56,7 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
         fontFamily: BrandFonts.fontFamily,
+          scaffoldBackgroundColor: BrandColor.white
       ),
       home: const GetStarted(),
       // home: const FriendSuggestions(),
@@ -70,12 +71,20 @@ class HomePage extends StatelessWidget {
         whyNationalityRoute: (context) => const WhyNationalityInfo(),
         moreInfoSignUpRoute: (context) => const MoreSignUpInfo(),
         localConnectRoute: (context) =>
-            LocalConnect(widgetData: localConnectData),
+            LocalConnect(
+              widgetData: localConnectData,
+              showLocationToggle: false,
+            ),
         globalConnectRoute: (context) =>
-            GlobalConnect(widgetData: globalConnectData),
+            GlobalConnect(
+            widgetData: globalConnectData, showLocationToggle: false),
         locationInfoRoute: (context) =>
-            const LocationInfo(widgetData: locationData),
+            const LocationInfo(
+              widgetData: locationData,
+              showLocationToggle: true,
+            ),
         finishCarouselRoute: (context) => const FinishCarousel(),
+       
         friendSuggestionsRoute: (context) => const FriendSuggestions(),
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
@@ -101,8 +110,6 @@ class HomePage extends StatelessWidget {
               ModalRoute.of(context)!.settings.arguments as UserProfile;
           return UserProfilePage(user: user);
         },
-
-        
       },
     );
   }

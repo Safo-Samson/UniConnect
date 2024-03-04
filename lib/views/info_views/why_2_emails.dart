@@ -42,19 +42,23 @@ class WhyTwoEmails extends StatelessWidget {
                     TextSpan(
                       text:
                           'University email is to prevent imposters and ensure the app is filled with university students like yourself ',
+                      style: TextStyle(fontFamily: BrandFonts.fontFamily),
                     ),
                     TextSpan(
-                      text: '(uni email is for verification)\n\n',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      text: '(uni email is for student verification)\n\n',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: BrandFonts.fontFamily),
                     ),
                     TextSpan(
                       text:
                           'Personal email is to avoid losing access to your account after your university ID expires',
+                      style: TextStyle(fontFamily: BrandFonts.fontFamily),
                     ),
                   ],
                 ),
               ),
-              verticalSpace(20),
+              verticalSpace(50),
               ElevatedButton(
                 onPressed: () {
                   // Handle button press

@@ -4,7 +4,7 @@ const Map locationData = {
   'title': 'Grant access to your location for personalized content.',
   'image': 'assets/img/location.png',
   'description':
-      'Enabling location enhances your overall experience and provides valuable benefits. By allowing your location to be turned on, you can receive personalized content tailored specifically to your geographic location. This enables the app to deliver relevant information, such as friends recommendation, trends, and more.',
+      'By allowing your location to be turned on, you can receive personalized content tailored specifically to your geographic location. This enables the app to deliver relevant information, such as friends recommendation, trends, and more which enhances your overall experience.',
   'buttonText': 'Next',
   'buttonRoute': localConnectRoute,
 };
@@ -26,6 +26,9 @@ final Map globalConnectData = {
   'buttonText': 'Finish',
   'buttonRoute': finishCarouselRoute,
 };
+
+
+// not used because of the Navigator.pushNamedAndRemoveUntil
 
 // final Map finishCarouselData = {
 //   'title': 'You are all set!',

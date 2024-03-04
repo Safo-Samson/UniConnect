@@ -28,7 +28,7 @@ class _StudentVerifyState extends State<StudentVerify> {
   }
 
   bool isValidEmail(String email) {
-    // You can use a regex or any other method to validate the email
+    // I could use a regex or any other method to validate the email
     // For simplicity, I'm using a basic check here
     return email.isNotEmpty && email.contains('@');
   }
@@ -42,6 +42,7 @@ class _StudentVerifyState extends State<StudentVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0, // No shadow
@@ -63,7 +64,7 @@ class _StudentVerifyState extends State<StudentVerify> {
             ),
             verticalSpace(20),
             const Text(
-              'Enter your email to verify your student status',
+              'Enter your student email to verify your student status',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: BrandFonts.regularText,
@@ -76,7 +77,7 @@ class _StudentVerifyState extends State<StudentVerify> {
               decoration: const InputDecoration(
                 hintText: 'example@lsbu.ac.uk',
                 border: OutlineInputBorder(),
-                labelText: 'email',
+                labelText: 'student email',
               ),
             ),
             verticalSpace(20),
@@ -116,3 +117,4 @@ class _StudentVerifyState extends State<StudentVerify> {
     );
   }
 }
+
