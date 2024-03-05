@@ -75,13 +75,20 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  'Based on your profile, you may like to connect with these students',
+                  'Based on your profile, you may like to connect with these students.',
                   style: TextStyle(),
                 ),
                 verticalSpace(10),
+                Divider(
+                  color: BrandColor.grey,
+                  thickness: 1,
+                ),
+                // verticalSpace(4),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    const Text('Filter and personalize your search ',
+                        style: TextStyle(fontSize: BrandFonts.regularText)),
                     IconButton(
                       icon: const Icon(
                         Icons.filter_alt_sharp,
@@ -91,23 +98,24 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                         Navigator.pushNamed(context, applyFiltersRoute);
                       },
                     ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'find friends...',
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            size: BrandFonts.iconSize,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        onChanged: (value) {
-                          // Handle search input change
-                        },
-                      ),
-                    ),
+
+                    // Expanded(
+                    //   child: TextField(
+                    //     decoration: InputDecoration(
+                    //       hintText: 'find friends...',
+                    //       prefixIcon: const Icon(
+                    //         Icons.search,
+                    //         size: BrandFonts.iconSize,
+                    //       ),
+                    //       border: OutlineInputBorder(
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //     ),
+                    //     onChanged: (value) {
+                    //       // Handle search input change
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
