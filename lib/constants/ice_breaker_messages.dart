@@ -33,7 +33,7 @@ class IceBreakerGenerator {
     if (commonProfiles.isEmpty) {
       // If no common profiles found, generate a generic message
       iceBreakerMessage +=
-          "I noticed we have different backgrounds, but I feel we'd make great friends. Instincts 😂 you know? '${moreInterestingTopics[Random().nextInt(moreInterestingTopics.length)]}'";
+          "I noticed we have different backgrounds, but I feel we'd make great friends. Instincts you know😂? '${moreInterestingTopics[Random().nextInt(moreInterestingTopics.length)]}'";
     } else {
       // If common profiles found, generate a personalized message
       iceBreakerMessage += "I noticed we have ";
