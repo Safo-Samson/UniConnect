@@ -119,8 +119,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               size: BrandFonts.iconSize,
             ),
             onPressed: () {
-              showNothingDialog(context,
-                  'This feature is not available yet. I am working on it.');
+              Navigator.pushNamed(context, notificationRoute);
             },
           ),
         ],
@@ -159,8 +158,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                   const Icon(Icons.notifications), // Icon for Notifications
               title: const Text('Notifications'),
               onTap: () {
-                showNothingDialog(context,
-                    'This feature is not available yet. I am working on it.');
+                Navigator.pushNamed(context, notificationRoute);
               },
             ),
             ListTile(

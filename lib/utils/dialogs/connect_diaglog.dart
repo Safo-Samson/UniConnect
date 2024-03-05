@@ -124,7 +124,7 @@ class _ConnectDialogState extends State<ConnectDialog> {
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(
-                  10), // Add padding to create space between border and content
+                  10), 
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey, // Set border color

@@ -11,6 +11,7 @@ import 'package:uniconnect/views/homepage_views/apply_filters.dart';
 import 'package:uniconnect/views/homepage_views/chat_messages.dart';
 import 'package:uniconnect/views/homepage_views/filtered_results.dart';
 import 'package:uniconnect/views/homepage_views/friend_suggestions.dart';
+import 'package:uniconnect/views/homepage_views/notifications.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
 import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.dart';
 import 'package:uniconnect/views/info_views/carousel_info/local_connect_info.dart';
@@ -59,7 +60,7 @@ class HomePage extends StatelessWidget {
         scaffoldBackgroundColor: BrandColor.white,
       ),
       home: const GetStarted(),
-      // home: const FriendSuggestions(),
+      // home: const NotificationPage(),
 
       routes: {
         signupRoute: (context) => const SignUp(),
@@ -70,6 +71,7 @@ class HomePage extends StatelessWidget {
         statusVerifiedRoute: (context) => const StudentVerified(),
         whyNationalityRoute: (context) => const WhyNationalityInfo(),
         moreInfoSignUpRoute: (context) => const MoreSignUpInfo(),
+        notificationRoute: (context) => const NotificationPage(),
         localConnectRoute: (context) =>
             LocalConnect(
               widgetData: localConnectData,
