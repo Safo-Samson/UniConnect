@@ -9,19 +9,17 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  final List<NotificationItem> notifications = [
-    // NotificationItem(
-    //   message: "You may know Ebenexer, he studies computer science.",
-    //   watched: false,
-    // ),
-    // NotificationItem(
-    //   message: "Pierre sent you a connection request with an ice breaker.",
-    //   watched: true,
-    // ),
-  ];
+  final List<NotificationItem> notifications = [];
 
   @override
   Widget build(BuildContext context) {
+    final List<NotificationItem> notifications = [];
+    // final message = ModalRoute.of(context)!.settings.arguments;
+
+    // notifications.add(
+    //   NotificationItem(message: message as String, watched: false),
+    // );
+
     int unwatchedCount = notifications.where((item) => !item.watched).length;
 
     return Scaffold(
@@ -92,3 +90,5 @@ class _NotificationPageState extends State<NotificationPage> {
     );
   }
 }
+
+

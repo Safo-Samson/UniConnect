@@ -18,3 +18,4 @@ const applyFiltersRoute = '/apply-filters';
 const filteredResultsRoute = '/filtered_results';
 const viewProfileRoute = '/view-profile';
 const notificationRoute = '/notification';
+const notificationRouteFromTap = '/notification-from-tap';

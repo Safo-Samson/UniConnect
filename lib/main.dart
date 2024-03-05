@@ -1,9 +1,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/notifications/notification_api.dart';
+import 'package:uniconnect/services/notifications/notification_from_tap.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/views/get_started.dart';
@@ -28,23 +31,18 @@ import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
 
+
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
   await AuthService.firebase().initialize(); // Initialize the firebase app
+  await NotificationApi()
+      .initializeNotifications(); // Initialize the notifications
   runApp(const HomePage());
 }
 
-UserProfile user1 = UserProfile(
-  username: 'John Doe',
-  course: 'Computer Science',
-  year: '1st Year',
-  residence: 'Kilifi',
-  country: 'Kenya',
-  flag: '🇰🇪',
-  imageUrl: 'https://safosamson.me/assets/img/star%20of%20the%20week.jpg',
-  bio: 'I am a Computer Science student at Pwani University',
-);
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -53,6 +51,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey, // Set the navigator key to the global key
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: BrandColor.primary as MaterialColor,
@@ -71,7 +70,7 @@ class HomePage extends StatelessWidget {
         statusVerifiedRoute: (context) => const StudentVerified(),
         whyNationalityRoute: (context) => const WhyNationalityInfo(),
         moreInfoSignUpRoute: (context) => const MoreSignUpInfo(),
-        notificationRoute: (context) => const NotificationPage(),
+        
         localConnectRoute: (context) =>
             LocalConnect(
               widgetData: localConnectData,
@@ -86,7 +85,12 @@ class HomePage extends StatelessWidget {
               showLocationToggle: true,
             ),
         finishCarouselRoute: (context) => const FinishCarousel(),
-       
+        notificationRoute: (context) => const NotificationPage(),
+        notificationRouteFromTap: (context) {
+          final message = ModalRoute.of(context)!.settings.arguments;
+          return NotificationPageFromTap(message: message as RemoteMessage);
+        },
+        
         friendSuggestionsRoute: (context) {
           final currentUserNationality =
               ModalRoute.of(context)!.settings.arguments as String;

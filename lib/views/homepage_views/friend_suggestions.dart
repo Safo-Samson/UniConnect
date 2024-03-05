@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
@@ -119,7 +121,11 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               size: BrandFonts.iconSize,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, notificationRoute);
+             
+              Navigator.pushNamed(
+                context,
+                notificationRoute,
+              );
             },
           ),
         ],
