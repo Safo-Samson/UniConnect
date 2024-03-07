@@ -3,7 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
+import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
@@ -34,6 +36,7 @@ class _ConnectDialogState extends State<ConnectDialog>
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool _isSending = false;
+  bool _isGeneratingMessage = false;
 
   @override
   void initState() {
@@ -64,10 +67,25 @@ class _ConnectDialogState extends State<ConnectDialog>
     });
   }
 
-  // Method to generate a new ice breaker message
-  String generateIceBreakerMessage() {
-    return IceBreakerGenerator.generateIceBreakerMessage(
+  // Method to generate a new ice breaker message with a delay
+  Future<void> _generateIceBreakerMessageWithDelay() async {
+    setState(() {
+      _isGeneratingMessage =
+          true; // Set flag to indicate message generation in progress
+    });
+
+    // Simulate a delay of 2 seconds
+    await Future.delayed(const Duration(seconds: 1));
+
+    String newIceBreakerMessage = IceBreakerGenerator.generateIceBreakerMessage(
+        // Generate a new ice breaker message
         widget.currentUser, widget.otherUser);
+    setState(() {
+      _textEditingController.text = newIceBreakerMessage;
+      _charCount = newIceBreakerMessage.length;
+      _isGeneratingMessage =
+          false; // Reset flag after message generation is complete
+    });
   }
 
   // Method to handle sending message animation
@@ -131,16 +149,10 @@ class _ConnectDialogState extends State<ConnectDialog>
                 Column(
                   children: [
                     IconButton(
-                      onPressed: _isEditing
+                      onPressed: _isEditing || _isGeneratingMessage
                           ? null
                           : () {
-                              String newIceBreakerMessage =
-                                  generateIceBreakerMessage();
-                              setState(() {
-                                _textEditingController.text =
-                                    newIceBreakerMessage;
-                                _charCount = newIceBreakerMessage.length;
-                              });
+                              _generateIceBreakerMessageWithDelay();
                             },
                       icon: const Icon(Icons.sync_outlined),
                       tooltip: 'Generate Ice Breaker',
@@ -164,7 +176,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                 child: Column(
                   children: [
                     Icon(Icons.done_all_sharp,
-                        color: BrandColor.green, size: 50),
+                        color: BrandColor.green, size: 40),
                     Text('Request Sent',
                         style:
                             TextStyle(color: BrandColor.green, fontSize: 20)),
@@ -172,71 +184,83 @@ class _ConnectDialogState extends State<ConnectDialog>
                 ),
               )
             else
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Connect Using...',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: BrandFonts.h2,
-                        fontWeight: FontWeight.bold,
+              _isGeneratingMessage
+                  ? SpinKitWave(
+                      color: BrandColor.primary,
+                      size: 30,
+                    ) // Show progress indicator while generating message
+                  : Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Connect Using...',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: BrandFonts.h2,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          verticalSpace(10),
+                          Divider(
+                            color: BrandColor.grey,
+                            thickness: 1,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.send),
+                                    tooltip: 'Connect with Ice Breaker',
+                                    disabledColor: BrandColor.grey,
+                                    onPressed: _textEditingController
+                                                .text.isEmpty ||
+                                            _isEditing ||
+                                            _charCount > maxCharCount
+                                        ? null
+                                        : () {
+                                            // Handle sending the message
+                                            _startSendingAnimation();
+                                            MyAwesomeNotification
+                                                .sendConfirmationNotificationOnConnect(
+                                                    widget.otherUser.username);
+                                          },
+                                  ),
+                                  const Text('Ice Breaker'),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      // Handle connecting without ice breaker
+                                      _startSendingAnimation();
+                                      MyAwesomeNotification
+                                          .sendConfirmationNotificationOnConnect(
+                                              widget.otherUser.username);
+                                    },
+                                    icon: const Icon(
+                                        Icons.cancel_schedule_send_rounded),
+                                    tooltip: 'Connect without Ice Breaker',
+                                  ),
+                                  const Text('No Ice Breaker'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    verticalSpace(10),
-                    Divider(
-                      color: BrandColor.grey,
-                      thickness: 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.send),
-                              tooltip: 'Connect with Ice Breaker',
-                              disabledColor: BrandColor.grey,
-                              onPressed: _textEditingController.text.isEmpty ||
-                                      _isEditing ||
-                                      _charCount > maxCharCount
-                                  ? null
-                                  : () {
-                                      // Handle sending the message
-                                      _startSendingAnimation();
-                                    },
-                            ),
-                            const Text('Ice Breaker'),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                // Handle connecting without ice breaker
-                                _startSendingAnimation();
-                              },
-                              icon: const Icon(
-                                  Icons.cancel_schedule_send_rounded),
-                              tooltip: 'Connect without Ice Breaker',
-                            ),
-                            const Text('No Ice Breaker'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
           ],
         ),
       ),

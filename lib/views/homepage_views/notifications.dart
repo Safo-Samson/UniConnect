@@ -1,5 +1,8 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:uniconnect/widgets/notification_item.dart';
+import 'package:uniconnect/constants/notification_list.dart';
+import 'package:uniconnect/utils/Brand/brand_colours.dart';
+
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -9,16 +12,52 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  final List<NotificationItem> notifications = [];
+  
+
+  @override
+  void initState() {
+    super.initState();
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Notifications are disabled'),
+              content: const Text(
+                  'Please enable notifications to receive updates and important information.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    AwesomeNotifications()
+                        .requestPermissionToSendNotifications()
+                        .then((_) => Navigator.pop(context));
+                  },
+                  child: Text(
+                    'Allow',
+                    style: TextStyle(
+                        color: BrandColor.primary, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Don't Allow",
+                      style: TextStyle(color: BrandColor.grey),
+                    )),
+              ],
+            );
+          },
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<NotificationItem> notifications = [];
-    // final message = ModalRoute.of(context)!.settings.arguments;
 
-    // notifications.add(
-    //   NotificationItem(message: message as String, watched: false),
-    // );
 
     int unwatchedCount = notifications.where((item) => !item.watched).length;
 
@@ -90,5 +129,3 @@ class _NotificationPageState extends State<NotificationPage> {
     );
   }
 }
-
-

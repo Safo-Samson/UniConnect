@@ -1,10 +1,11 @@
-
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
+import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
 import 'package:uniconnect/services/notifications/notification_api.dart';
 import 'package:uniconnect/services/notifications/notification_from_tap.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
@@ -31,22 +32,20 @@ import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
 
-
 final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
   await AuthService.firebase().initialize(); // Initialize the firebase app
-  await NotificationApi()
-      .initializeNotifications(); // Initialize the notifications
+
+  MyAwesomeNotification
+      .initializeAwesomeNotifications(); // Initialize the awesome notifications
   runApp(const HomePage());
 }
 
-
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -64,23 +63,19 @@ class HomePage extends StatelessWidget {
       routes: {
         signupRoute: (context) => const SignUp(),
         loginRoute: (context) => const LoginView(),
-        loginOrSignUpRoute: (context) => const LoginOrSignUpView(), 
+        loginOrSignUpRoute: (context) => const LoginOrSignUpView(),
         studentVerifyRoute: (context) => const StudentVerify(),
         why2EmailsRoute: (context) => const WhyTwoEmails(),
         statusVerifiedRoute: (context) => const StudentVerified(),
         whyNationalityRoute: (context) => const WhyNationalityInfo(),
         moreInfoSignUpRoute: (context) => const MoreSignUpInfo(),
-        
-        localConnectRoute: (context) =>
-            LocalConnect(
+        localConnectRoute: (context) => LocalConnect(
               widgetData: localConnectData,
               showLocationToggle: false,
             ),
-        globalConnectRoute: (context) =>
-            GlobalConnect(
+        globalConnectRoute: (context) => GlobalConnect(
             widgetData: globalConnectData, showLocationToggle: false),
-        locationInfoRoute: (context) =>
-            const LocationInfo(
+        locationInfoRoute: (context) => const LocationInfo(
               widgetData: locationData,
               showLocationToggle: true,
             ),
@@ -90,7 +85,6 @@ class HomePage extends StatelessWidget {
           final message = ModalRoute.of(context)!.settings.arguments;
           return NotificationPageFromTap(message: message as RemoteMessage);
         },
-        
         friendSuggestionsRoute: (context) {
           final currentUserNationality =
               ModalRoute.of(context)!.settings.arguments as String;
@@ -99,7 +93,6 @@ class HomePage extends StatelessWidget {
         },
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
-      
         filteredResultsRoute: (context) {
           final List<dynamic> args =
               ModalRoute.of(context)!.settings.arguments as List<dynamic>;
@@ -115,7 +108,6 @@ class HomePage extends StatelessWidget {
             selectedYears: selectedYears,
           );
         },
-      
         viewProfileRoute: (context) {
           final UserProfile user =
               ModalRoute.of(context)!.settings.arguments as UserProfile;
@@ -125,4 +117,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

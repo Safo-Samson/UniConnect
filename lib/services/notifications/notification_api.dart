@@ -9,6 +9,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/main.dart';
 
+
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   devtols.log('Handling a background message ${message.messageId}');
   print(message.notification?.title);
@@ -69,6 +70,7 @@ class NotificationApi {
   }
 
   Future initPushNotification() async {
+
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,
@@ -105,4 +107,5 @@ class NotificationApi {
       );
     });
   }
+
 }
