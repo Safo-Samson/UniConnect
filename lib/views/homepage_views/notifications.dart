@@ -115,8 +115,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         ),
                       ),
                       onTap: () {
-                        // Handle tapping on the notification
-                        // You can mark the notification as watched here
+                        setState(() {
+                          notification.watched = true;
+                        });
                       },
                     ),
                     const Divider(

@@ -232,8 +232,10 @@ class _ConnectDialogState extends State<ConnectDialog>
                                             // Handle sending the message
                                             _startSendingAnimation();
                                             MyAwesomeNotification
-                                                .sendConfirmationNotificationOnConnect(
-                                                    widget.otherUser.username);
+                                                .sendConfirmationNotificationOnConnectWithBreaker(
+                                                    widget.otherUser.username,
+                                                    _textEditingController
+                                                        .text);
                                           },
                                   ),
                                   const Text('Ice Breaker'),

@@ -1,6 +1,6 @@
 class NotificationItem {
   final String message;
-  final bool watched;
+  bool watched;
 
   NotificationItem({required this.message, required this.watched});
 }

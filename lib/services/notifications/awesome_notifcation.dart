@@ -34,31 +34,49 @@ class MyAwesomeNotification {
         id: createUniqueID(),
         channelKey: 'basic_channel',
         title: 'Request Sent',
-        body: 'You have sent a connection request to the $user',
+        body: 'You have sent a connection request to $user',
       ),
     );
 
     addNotification('You have sent a connection request to the $user');
   }
 
+
+static Future<void> sendConfirmationNotificationOnConnectWithBreaker(
+      String user, String breakerMessage) async {
+    // Truncate the breakerMessage to a maximum number of words
+    String truncatedMessage = truncateMessage(
+        breakerMessage, 9); // Change 20 to your desired maximum number of words
+
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: createUniqueID(),
+        channelKey: 'basic_channel',
+        title: 'Request Sent',
+        body:
+            'You have sent a connection request to $user with the message: $truncatedMessage',
+      ),
+    );
+
+    addNotification(
+        'You have sent a connection request to $user with the message: $truncatedMessage');
+  }
+
+// Function to truncate a message to a maximum number of words
+  static String truncateMessage(String message, int maxWords) {
+    List<String> words = message.split(' ');
+    if (words.length <= maxWords) {
+      return message;
+    } else {
+      return '${words.sublist(0, maxWords).join(' ')}...';
+    }
+  }
   static void addNotification(String message) {
     notifications.insert(0, NotificationItem(message: message, watched: false));
     devtols.log('Notification added to list ');
   }
 
-  /// Use this method to detect when the user taps on a notification or action button
-  @pragma("vm:entry-point")
-  static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {
-    // Your code goes here
 
-    // Navigate into pages, avoiding to open the notification details page over another details page already opened
-    navigatorKey.currentState?.pushNamedAndRemoveUntil(
-        '/notification-page',
-        (route) =>
-            (route.settings.name != '/notification-page') || route.isFirst,
-        arguments: receivedAction);
-  }
 
 // does not work
   // @pragma('vm:entry-point')
