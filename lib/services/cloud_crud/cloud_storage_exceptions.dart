@@ -16,7 +16,7 @@ class CouldNotGetAllCoursesException extends CloudStorageException {}
 class CouldNotGetUser extends CloudStorageException {}
 
 // this is U in crud
-
+class CouldNotUpdateUserRecordException extends CloudStorageException {}
 
 // this is D in crud
 

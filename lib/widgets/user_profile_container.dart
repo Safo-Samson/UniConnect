@@ -151,7 +151,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.check_circle,
+                            Icons.check,
                             color: BrandColor.black,
                             size: 22,
                           ),

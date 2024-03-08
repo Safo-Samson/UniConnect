@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
+import 'package:uniconnect/services/cloud_crud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
@@ -81,7 +82,8 @@ class _ConnectDialogState extends State<ConnectDialog>
 
     String newIceBreakerMessage = IceBreakerGenerator.generateIceBreakerMessage(
         // Generate a new ice breaker message
-        widget.currentUser, widget.otherUser);
+        widget.currentUser,
+        widget.otherUser);
     setState(() {
       _textEditingController.text = newIceBreakerMessage;
       _charCount = newIceBreakerMessage.length;
@@ -91,7 +93,7 @@ class _ConnectDialogState extends State<ConnectDialog>
   }
 
   // Method to handle sending message animation
-void _startSendingAnimation() async {
+  void _startSendingAnimation() async {
     setState(() {
       _isSending = true;
     });
@@ -105,9 +107,8 @@ void _startSendingAnimation() async {
       // Get the user document
       final userDocSnapshot = await userDocRef.get();
       if (userDocSnapshot.exists) {
-        // Check if the requestedUsers field exists in the document
+        // Check if the requestedUsers field exists in the document and update it
         if (userDocSnapshot.data()!['requestedUsers'] != null) {
-          // If the field exists, update it
           await userDocRef.update({
             'requestedUsers': FieldValue.arrayUnion([widget.otherUser.userId])
           });
@@ -133,7 +134,7 @@ void _startSendingAnimation() async {
           );
         }
 
-        // Start the animation
+        // Start the sent animation  and dismiss the dialog after 1 second
         _animationController.forward().then((_) {
           Timer(const Duration(seconds: 1), () {
             Navigator.of(context)
@@ -141,15 +142,13 @@ void _startSendingAnimation() async {
           });
         });
       } else {
-        devtols.log('User document not found');
-        // Handle case where user document doesn't exist
+        devtols.log('This user does not exist');
+        CouldNotGetUser();
       }
     } catch (e) {
-      devtols.log('Error updating user document: $e');
-      // Handle error updating user document
+      CouldNotUpdateUserRecordException();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
