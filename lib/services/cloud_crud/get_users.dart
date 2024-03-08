@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/cloud_crud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
