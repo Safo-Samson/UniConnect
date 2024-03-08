@@ -281,11 +281,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                                         : () {
                                             // Handle sending the message
                                             _startSendingAnimation();
-                                            MyAwesomeNotification
-                                                .sendConfirmationNotificationOnConnectWithBreaker(
-                                                    widget.otherUser.username,
-                                                    _textEditingController
-                                                        .text);
+                                              
                                           },
                                   ),
                                   const Text('Ice Breaker'),
@@ -297,9 +293,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                                     onPressed: () {
                                       // Handle connecting without ice breaker
                                       _startSendingAnimation();
-                                      MyAwesomeNotification
-                                          .sendConfirmationNotificationOnConnect(
-                                              widget.otherUser.username);
+                                     
                                     },
                                     icon: const Icon(
                                         Icons.cancel_schedule_send_rounded),
