@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProfile {
+  String userId;
   String username;
   String course;
   String? imageUrl;
@@ -9,8 +10,12 @@ class UserProfile {
   String year;
   String country;
   String flag;
+  List<dynamic> requestedUsers; 
+
 
   UserProfile({
+    required this.requestedUsers,
+    required this.userId,
     required this.username,
     required this.course,
     required this.year,
@@ -25,6 +30,7 @@ class UserProfile {
   factory UserProfile.fromQuerySnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
     return UserProfile(
+      userId: snapshot.data()['userId'] ?? ' No user ID',
       username: snapshot.data()['username'] ?? '',
       course: snapshot.data()['course'] ?? '',
       year: snapshot.data()['year'] ?? '',
@@ -33,6 +39,7 @@ class UserProfile {
       flag: snapshot.data()['flag'] ?? '',
       imageUrl: snapshot.data()['imageUrl'],
       bio: snapshot.data()['bio'],
+      requestedUsers: snapshot.data()['requestedUsers'] ?? [],
     );
   }
 
@@ -40,6 +47,7 @@ class UserProfile {
   factory UserProfile.fromDocumentSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return UserProfile(
+      userId: snapshot.data()?['userId'] ?? 'No user ID',
       username: snapshot.data()?['username'] ?? '',
       course: snapshot.data()?['course'] ?? '',
       year: snapshot.data()?['year'] ?? '',
@@ -48,6 +56,7 @@ class UserProfile {
       flag: snapshot.data()?['flag'] ?? '',
       imageUrl: snapshot.data()?['imageUrl'],
       bio: snapshot.data()?['bio'],
+      requestedUsers: snapshot.data()?['requestedUsers'] ?? [],
     );
   }
 }

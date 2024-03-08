@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
@@ -10,6 +11,7 @@ import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
+import 'dart:developer' as devtols show log;
 
 class ConnectDialog extends StatefulWidget {
   final String iceBreakerMessage;
@@ -74,7 +76,7 @@ class _ConnectDialogState extends State<ConnectDialog>
           true; // Set flag to indicate message generation in progress
     });
 
-    // Simulate a delay of 2 seconds
+    // Simulate a delay of 1 second
     await Future.delayed(const Duration(seconds: 1));
 
     String newIceBreakerMessage = IceBreakerGenerator.generateIceBreakerMessage(
@@ -89,17 +91,65 @@ class _ConnectDialogState extends State<ConnectDialog>
   }
 
   // Method to handle sending message animation
-  void _startSendingAnimation() {
+void _startSendingAnimation() async {
     setState(() {
       _isSending = true;
     });
 
-    _animationController.forward().then((_) {
-      Timer(const Duration(seconds: 1), () {
-        Navigator.of(context).pop(); // Dismiss dialog after animation completes
-      });
-    });
+    // Update the requestedUsers field in Firestore
+    final firestore = FirebaseFirestore.instance;
+    final userDocRef =
+        firestore.collection('users').doc(widget.currentUser.userId);
+
+    try {
+      // Get the user document
+      final userDocSnapshot = await userDocRef.get();
+      if (userDocSnapshot.exists) {
+        // Check if the requestedUsers field exists in the document
+        if (userDocSnapshot.data()!['requestedUsers'] != null) {
+          // If the field exists, update it
+          await userDocRef.update({
+            'requestedUsers': FieldValue.arrayUnion([widget.otherUser.userId])
+          });
+        } else {
+          // If the field doesn't exist, create it and set its value
+          await userDocRef.set({
+            'requestedUsers': [widget.otherUser.userId]
+          }, SetOptions(merge: true));
+        }
+
+        // Send the confirmation notification
+        if (_textEditingController.text.isNotEmpty &&
+            !_isEditing &&
+            _charCount <= maxCharCount) {
+          MyAwesomeNotification
+              .sendConfirmationNotificationOnConnectWithBreaker(
+            widget.otherUser.username,
+            _textEditingController.text,
+          );
+        } else {
+          MyAwesomeNotification.sendConfirmationNotificationOnConnect(
+            widget.otherUser.username,
+          );
+        }
+
+        // Start the animation
+        _animationController.forward().then((_) {
+          Timer(const Duration(seconds: 1), () {
+            Navigator.of(context)
+                .pop(); // Dismiss dialog after animation completes
+          });
+        });
+      } else {
+        devtols.log('User document not found');
+        // Handle case where user document doesn't exist
+      }
+    } catch (e) {
+      devtols.log('Error updating user document: $e');
+      // Handle error updating user document
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {

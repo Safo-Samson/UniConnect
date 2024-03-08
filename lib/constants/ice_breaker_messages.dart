@@ -3,9 +3,6 @@ import 'dart:math';
 import 'package:uniconnect/widgets/user_profile.dart';
 
 
-
-
-
 class IceBreakerGenerator {
   static String generateIceBreakerMessage(
       UserProfile currentUser, UserProfile otherUser) {
@@ -58,7 +55,24 @@ class IceBreakerGenerator {
         '\nWhere you born in ${otherUser.country} or just came to the UK for University? 🌍',
         '\nWhat is your favorite thing about ${otherUser.course}? 🤔',
         "\nHow's life in ${otherUser.year}? 🎓",
+        '\nWhat\'s your favorite cuisine? 🍲',
+        '\nDo you enjoy any sports or physical activities? ⚽️🏀',
+        '\nWhat do you like to do in your free time? 🕰️',
+        '\nWhat\'s the most memorable concert or live event you have attended? 🎤',
+        '\nIf you could travel anywhere in the world, where would you go? 🌎',
+        '\nWhat\'s the best piece of advice you have ever received? 💬',
+        '\nDo you have any pets? 🐾',
+        '\nWhat\'s your favorite season in the UK? 🌸🍂❄️☀️',
+        '\nHave you ever tried any extreme sports or activities? 🏄‍♂️🪂',
+        '\nWhat\'s the most interesting class or subject you have taken so far? 📝',
+        '\nDo you have any favorite quotes or mottos? 💭',
+        '\nWhat languages do you speak, or are interested in learning? 🗣️',
+        '\nDo you have any hidden talents or unique skills? 🎭',
+        '\nWhat are your favorite apps or websites for staying organized or productive? 📱💻',
+        '\nWhat\'s the most adventurous thing you have ever eaten? 🍽️',
+        '\nWhat are your thoughts on the latest trends or developments in technology? 💡',
       ];
+
 
       iceBreakerMessage +=
           interestingTopics[Random().nextInt(interestingTopics.length)];
@@ -75,4 +89,20 @@ List<String> moreInterestingTopics = [
   '\nWhat are your career aspirations after graduation? 💼',
   '\nDo you have any favorite books or movies? 📖🎥',
   '\nWhat is the most exciting thing you have ever done? 🚀',
+  '\nWhat\'s your favorite cuisine? 🍲',
+  '\nDo you enjoy any sports or physical activities? ⚽️🏀',
+  '\nWhat do you like to do in your free time? 🕰️',
+  '\nWhat\'s the most memorable concert or live event you have attended? 🎤',
+  '\nIf you could travel anywhere in the world, where would you go? 🌎',
+  '\nWhat\'s the best piece of advice you have ever received? 💬',
+  '\nDo you have any pets? 🐾',
+  '\nWhat\'s your favorite season in the UK? 🌸🍂❄️☀️',
+  '\nHave you ever tried any extreme sports or activities? 🏄‍♂️🪂',
+  '\nWhat\'s the most interesting class or subject you have taken so far? 📝',
+  '\nDo you have any favorite quotes or mottos? 💭',
+  '\nWhat languages do you speak, or are interested in learning? 🗣️',
+  '\nDo you have any hidden talents or unique skills? 🎭',
+  '\nWhat are your favorite apps or websites for staying organized or productive? 📱💻',
+  '\nWhat\'s the most adventurous thing you have ever eaten? 🍽️',
+  '\nWhat are your thoughts on the latest trends or developments in technology? 💡',
 ];
