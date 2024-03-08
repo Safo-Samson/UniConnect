@@ -138,7 +138,8 @@ class _ConnectDialogState extends State<ConnectDialog>
         _animationController.forward().then((_) {
           Timer(const Duration(seconds: 1), () {
             Navigator.of(context)
-                .pop(); // Dismiss dialog after animation completes
+                .pop();
+            // Dismiss dialog after animation completes
           });
         });
       } else {

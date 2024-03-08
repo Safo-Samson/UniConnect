@@ -1,16 +1,13 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
-import 'package:uniconnect/services/notifications/notification_api.dart';
 import 'package:uniconnect/services/notifications/notification_from_tap.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
-import 'package:uniconnect/views/get_started.dart';
 import 'package:uniconnect/views/homepage_views/apply_filters.dart';
 import 'package:uniconnect/views/homepage_views/chat_messages.dart';
 import 'package:uniconnect/views/homepage_views/filtered_results.dart';
@@ -21,13 +18,14 @@ import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.da
 import 'package:uniconnect/views/info_views/carousel_info/local_connect_info.dart';
 import 'package:uniconnect/views/info_views/carousel_info/location_info.dart';
 import 'package:uniconnect/views/info_views/nationality_info.dart';
-import 'package:uniconnect/views/login_view.dart';
-import 'package:uniconnect/views/more_sign_up_info.dart';
-import 'package:uniconnect/views/sign_or_login_view.dart';
-import 'package:uniconnect/views/sign_up.dart';
 import 'package:uniconnect/views/info_views/status_verified.dart';
-import 'package:uniconnect/views/student_verify.dart';
 import 'package:uniconnect/views/info_views/why_2_emails.dart';
+import 'package:uniconnect/views/signing_views/get_started.dart';
+import 'package:uniconnect/views/signing_views/login_view.dart';
+import 'package:uniconnect/views/signing_views/more_sign_up_info.dart';
+import 'package:uniconnect/views/signing_views/sign_or_login_view.dart';
+import 'package:uniconnect/views/signing_views/sign_up.dart';
+import 'package:uniconnect/views/signing_views/student_verify.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
