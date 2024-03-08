@@ -160,31 +160,34 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                         ],
                       ),
                     )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: BrandColor.black,
-                          size: 30,
-                        ),
-                        const Text('Connect   ',
-                            style: TextStyle(fontSize: 12)),
-                      ],
+                  : GestureDetector(
+                      onTap: () async {
+                        UserProfile currentUserProfile =
+                            currentUser; // Use currentUser directly
+                        String iceBreakerMessage =
+                            IceBreakerGenerator.generateIceBreakerMessage(
+                                currentUserProfile, widget.user);
+                        showConnectDialog(
+                          context,
+                          iceBreakerMessage,
+                          currentUserProfile,
+                          widget.user,
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: BrandColor.black,
+                            size: 30,
+                          ),
+                          const Text('Connect   ',
+                              style: TextStyle(fontSize: 12)),
+                        ],
+                      ),
                     ),
-              onTap: () async {
-                UserProfile currentUserProfile =
-                    currentUser; // Use currentUser directly
-                String iceBreakerMessage =
-                    IceBreakerGenerator.generateIceBreakerMessage(
-                        currentUserProfile, widget.user);
-                showConnectDialog(
-                  context,
-                  iceBreakerMessage,
-                  currentUserProfile,
-                  widget.user,
-                );
-              },
+              
             ),
           );
         }
