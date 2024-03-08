@@ -2,9 +2,7 @@
 
 
 import 'package:flutter/material.dart';
-
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import 'package:uniconnect/constants/notification_list.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
@@ -16,7 +14,6 @@ import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
 import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
-
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';

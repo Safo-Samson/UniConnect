@@ -115,6 +115,10 @@ Future<List<UserProfile>> getFilteredResults(
 
 
 
+
+
+
+
 // Stream methods for real-time updates but not used in this project cah messes up the UI and the filters
   Stream<List<UserProfile>> getUsersWithNationalityStream(String nationality) {
     try {
