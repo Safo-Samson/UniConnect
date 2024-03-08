@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
@@ -10,7 +12,6 @@ class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key, required this.user}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _UserProfilePageState createState() => _UserProfilePageState();
 }
 
@@ -143,22 +144,52 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 child: Text(widget.user.bio!),
               ),
             // Divider
-            const Divider(),
-            // Additional Sections (Posts, Followers, Following, etc.)
-            // You can customize this section based on the specific requirements
-            // For simplicity, let's just display a text for now
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'This is where you can display additional sections like Posts, Followers, Following, etc.',
-                style: TextStyle(
-                  fontSize: BrandFonts.regularText,
+            const Divider(
+              height: 40,
+              thickness: 1,
+              indent: 16,
+              endIndent: 16,
+            ),
+
+            // Check if the user has any posts
+            if (hasPosts()) ...[
+              // If the user has posts, display them here
+              // TODO: Add code to display posts
+            ] else
+              // If the user has no posts, display a message
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.no_photography_rounded,
+                      size: 58,
+                      color: BrandColor.grey,
+                    ),
+                    verticalSpace(10),
+                    Text(
+                      'Currently no posts from ${widget.user.username}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: BrandFonts.regularText,
+                        fontStyle: FontStyle.italic,
+                        color: BrandColor.grey,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
           ],
         ),
       ),
     );
+  }
+
+  // Function to check if the user has any posts
+  bool hasPosts() {
+    // TODO: Implement logic to check if the user has any posts
+
+    return false;
   }
 }
