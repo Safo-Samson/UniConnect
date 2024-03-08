@@ -152,8 +152,8 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                         children: [
                           Icon(
                             Icons.check,
-                            color: BrandColor.black,
-                            size: 22,
+                            color: BrandColor.green,
+                            size: 25,
                           ),
                           const Text('Requested',
                               style: TextStyle(fontSize: 12)),
