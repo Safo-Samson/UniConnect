@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
+import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/cloud_crud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
@@ -119,26 +120,12 @@ class _ConnectDialogState extends State<ConnectDialog>
           }, SetOptions(merge: true));
         }
 
-        // Send the confirmation notification
-        if (_textEditingController.text.isNotEmpty &&
-            !_isEditing &&
-            _charCount <= maxCharCount) {
-          MyAwesomeNotification
-              .sendConfirmationNotificationOnConnectWithBreaker(
-            widget.otherUser.username,
-            _textEditingController.text,
-          );
-        } else {
-          MyAwesomeNotification.sendConfirmationNotificationOnConnect(
-            widget.otherUser.username,
-          );
-        }
-
         // Start the sent animation  and dismiss the dialog after 1 second
         _animationController.forward().then((_) {
           Timer(const Duration(seconds: 1), () {
             Navigator.of(context)
                 .pop();
+          
             // Dismiss dialog after animation completes
           });
         });
@@ -281,6 +268,18 @@ class _ConnectDialogState extends State<ConnectDialog>
                                         : () {
                                             // Handle sending the message
                                             _startSendingAnimation();
+                                            MyAwesomeNotification
+                                                .sendConfirmationNotificationOnConnectWithBreaker(
+                                              widget.otherUser.username,
+                                              _textEditingController.text,
+                                            );
+                                            Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              friendSuggestionsRoute,
+                                              (route) => false,
+                                              arguments:
+                                                  widget.currentUser.country,
+                                            );
                                               
                                           },
                                   ),
@@ -293,6 +292,16 @@ class _ConnectDialogState extends State<ConnectDialog>
                                     onPressed: () {
                                       // Handle connecting without ice breaker
                                       _startSendingAnimation();
+                                      MyAwesomeNotification
+                                          .sendConfirmationNotificationOnConnect(
+                                        widget.otherUser.username,
+                                      );
+                                      Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        friendSuggestionsRoute,
+                                        (route) => false,
+                                        arguments: widget.currentUser.country,
+                                      );
                                      
                                     },
                                     icon: const Icon(
