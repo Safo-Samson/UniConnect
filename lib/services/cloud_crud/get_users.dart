@@ -116,7 +116,7 @@ Future<List<UserProfile>> getFilteredResults(
 
 
 
-
+// https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html
 
 
 // Stream methods for real-time updates but not used in this project cah messes up the UI and the filters

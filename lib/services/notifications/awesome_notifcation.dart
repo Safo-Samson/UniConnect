@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/notification_list.dart';
@@ -38,8 +40,7 @@ class MyAwesomeNotification {
     addNotification('You have sent a connection request to the $user');
   }
 
-
-static Future<void> sendConfirmationNotificationOnConnectWithBreaker(
+  static Future<void> sendConfirmationNotificationOnConnectWithBreaker(
       String user, String breakerMessage) async {
     // Truncate the breakerMessage to a maximum number of words
     String truncatedMessage = truncateMessage(
@@ -68,12 +69,11 @@ static Future<void> sendConfirmationNotificationOnConnectWithBreaker(
       return '${words.sublist(0, maxWords).join(' ')}...';
     }
   }
+
   static void addNotification(String message) {
     notifications.insert(0, NotificationItem(message: message, watched: false));
     devtols.log('Notification added to list ');
   }
-
-
 
 // does not work
   // @pragma('vm:entry-point')
@@ -85,3 +85,31 @@ static Future<void> sendConfirmationNotificationOnConnectWithBreaker(
   //   ));
   // }
 }
+
+// class SendNotification {
+//   final NotificationSender _notificationSender;
+
+//   SendNotification(this._notificationSender);
+
+//   Future<void> sendNotification(String title, String body) async {
+//     await _notificationSender.sendNotification(title, body);
+//   }
+// }
+
+// abstract class NotificationSender {
+//   Future<void> sendNotification(String title, String body);
+// }
+
+// class FirebaseNotificationSender implements NotificationSender {
+//   @override
+//   Future<void> sendNotification(String title, String body) async {
+    
+//   }
+// }
+
+// class MockNotificationSender implements NotificationSender {
+//   @override
+//   Future<void> sendNotification(String title, String body) async {
+//     log(1, 'Mock notification sent: $title, $body');
+//   }
+// }
