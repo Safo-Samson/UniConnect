@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
-import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
 import 'package:uniconnect/services/notifications/notification_from_tap.dart';
+import 'package:uniconnect/services/notifications/notification_sender_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/views/homepage_views/apply_filters.dart';
@@ -36,9 +36,8 @@ void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
   await AuthService.firebase().initialize(); // Initialize the firebase app
-
-  MyAwesomeNotification
-      .initializeAwesomeNotifications(); // Initialize the awesome notifications
+  await NotificationSenderService.awesomeNotification()
+      .initialize(); // Initialize the awesome notifications
   runApp(const HomePage());
 }
 

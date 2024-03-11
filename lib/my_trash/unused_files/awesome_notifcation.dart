@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/notification_list.dart';
@@ -85,31 +83,3 @@ class MyAwesomeNotification {
   //   ));
   // }
 }
-
-// class SendNotification {
-//   final NotificationSender _notificationSender;
-
-//   SendNotification(this._notificationSender);
-
-//   Future<void> sendNotification(String title, String body) async {
-//     await _notificationSender.sendNotification(title, body);
-//   }
-// }
-
-// abstract class NotificationSender {
-//   Future<void> sendNotification(String title, String body);
-// }
-
-// class FirebaseNotificationSender implements NotificationSender {
-//   @override
-//   Future<void> sendNotification(String title, String body) async {
-    
-//   }
-// }
-
-// class MockNotificationSender implements NotificationSender {
-//   @override
-//   Future<void> sendNotification(String title, String body) async {
-//     log(1, 'Mock notification sent: $title, $body');
-//   }
-// }

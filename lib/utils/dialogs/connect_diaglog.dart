@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/cloud_crud/cloud_storage_exceptions.dart';
-import 'package:uniconnect/services/notifications/awesome_notifcation.dart';
+import 'package:uniconnect/services/notifications/notification_sender_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
@@ -268,7 +268,8 @@ class _ConnectDialogState extends State<ConnectDialog>
                                         : () {
                                             // Handle sending the message
                                             _startSendingAnimation();
-                                            MyAwesomeNotification
+                                            NotificationSenderService
+                                                    .awesomeNotification()
                                                 .sendConfirmationNotificationOnConnectWithBreaker(
                                               widget.otherUser.username,
                                               _textEditingController.text,
@@ -292,7 +293,8 @@ class _ConnectDialogState extends State<ConnectDialog>
                                     onPressed: () {
                                       // Handle connecting without ice breaker
                                       _startSendingAnimation();
-                                      MyAwesomeNotification
+                                      NotificationSenderService
+                                              .awesomeNotification()
                                           .sendConfirmationNotificationOnConnect(
                                         widget.otherUser.username,
                                       );
