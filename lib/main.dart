@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/carousel_info_constants.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
-import 'package:uniconnect/services/notifications/notification_from_tap.dart';
+import 'package:uniconnect/my_trash/unused_files/notification_from_tap.dart';
 import 'package:uniconnect/services/notifications/notification_sender_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
