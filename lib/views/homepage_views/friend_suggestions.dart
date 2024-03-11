@@ -29,6 +29,7 @@ class FriendSuggestions extends StatefulWidget {
   State<FriendSuggestions> createState() => _FriendSuggestionsState();
 }
 
+
 class _FriendSuggestionsState extends State<FriendSuggestions> {
 
   late String currentUserNationality = widget.currentUserNationality;
@@ -89,7 +90,6 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                         Navigator.pushNamed(context, applyFiltersRoute);
                       },
                     ),
-
                     // Expanded(
                     //   child: TextField(
                     //     decoration: InputDecoration(
