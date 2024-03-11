@@ -1,4 +1,5 @@
 import 'package:uniconnect/services/auth/auth_user.dart';
+import 'package:uniconnect/widgets/user_profile.dart';
 
 // this class helps to decouple the firebase auth from the rest of the app,
 // so that I can easily switch to another auth provider in the future
@@ -22,4 +23,9 @@ abstract class MyAuthProvider {
   Future<void> signOut();
 
   Future<void> sendEmailVerification();
+
+  Future<String> getUserNationality(String userId);
+
+  Future<UserProfile> getCurrentUserProfile();
+  
 }

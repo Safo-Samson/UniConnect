@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:developer' as devtols show log;
-import 'package:uniconnect/utils/TestData/test_data.dart';
+import 'package:uniconnect/my_trash/TestData/test_data.dart';
 
 // not used in the app
 Future<void> main() async {

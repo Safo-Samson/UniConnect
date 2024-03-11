@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uniconnect/services/auth/auth_exceptions.dart';
+
 import 'package:uniconnect/services/auth/auth_provider.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/services/auth/firebase_auth_provider.dart';
@@ -37,30 +36,14 @@ class AuthService implements MyAuthProvider {
     return provider.signOut();
   }
 
-  // Function to get user's nationality
+  @override
   Future<String> getUserNationality(String userId) async {
-    try {
-      String userNationality = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userId)
-          .get()
-          .then((value) => value.data()!['nationality']);
-
-      return userNationality;
-    } catch (e) {
-      throw CouldNotGetUserNationalityException();
-    }
+    return provider.getUserNationality(userId);
   }
 
+  @override
   Future<UserProfile> getCurrentUserProfile() async {
-    final currentUser = FirebaseAuthProvider().currentUser;
-
-    final userData = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser!.uid)
-        .get();
-
-    return UserProfile.fromDocumentSnapshot(userData);
+    return provider.getCurrentUserProfile();
   }
 
   @override
