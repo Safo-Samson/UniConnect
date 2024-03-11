@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:uniconnect/services/cloud_crud/get_users.dart';
+import 'package:uniconnect/services/database_cloud/database_provider.dart';
+import 'package:uniconnect/services/database_cloud/database_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 
@@ -31,11 +32,11 @@ class FilteredResult extends StatefulWidget {
 }
 
 class _FilteredResultState extends State<FilteredResult> {
-  late final FirebaseCloud _cloud;
+  late final DatabaseProvider _cloud;
 
   @override
   void initState() {
-    _cloud = FirebaseCloud();
+    _cloud = DatabaseService.firebasefirestore();
     super.initState();
   }
 

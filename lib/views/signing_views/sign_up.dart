@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_exceptions.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
-import 'package:uniconnect/services/firestore_functions/add_initial_user_to_users.dart';
+import 'package:uniconnect/my_trash/firestore_functions/add_initial_user_to_users.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';

@@ -7,7 +7,8 @@ import 'package:uniconnect/constants/notification_list.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
-import 'package:uniconnect/services/cloud_crud/get_users.dart';
+import 'package:uniconnect/services/database_cloud/database_provider.dart';
+import 'package:uniconnect/services/database_cloud/database_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
@@ -30,14 +31,14 @@ class FriendSuggestions extends StatefulWidget {
 }
 
 class _FriendSuggestionsState extends State<FriendSuggestions> {
-  late final FirebaseCloud _cloud;
+  late final DatabaseProvider _cloud;
   late String currentUserNationality = widget.currentUserNationality;
 
   final AuthUser user = AuthService.firebase().currentUser!;
 
   @override
   void initState() {
-    _cloud = FirebaseCloud();
+    _cloud = DatabaseService.firebasefirestore();
     super.initState();
   }
 

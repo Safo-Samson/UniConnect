@@ -5,8 +5,8 @@ import 'package:uniconnect/constants/course_list.dart';
 import 'package:uniconnect/constants/residents.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
-import 'package:uniconnect/services/firestore_functions/add_initial_user_to_users.dart';
-import 'package:uniconnect/services/firestore_functions/add_user_to_collection.dart';
+import 'package:uniconnect/my_trash/firestore_functions/add_initial_user_to_users.dart';
+import 'package:uniconnect/my_trash/firestore_functions/add_user_to_collection.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
@@ -211,7 +211,7 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
                               userId, selectedResidentController.text);
                           await addUserToCoursesSubcollection(
                               userId, selectedCourseController.text);
-                          await updateUserWithYear(userId, dataToUpdate);
+                          await updateUserInfo(userId, dataToUpdate);
 
                           devtols
                               .log('User succesfully added to all collections');
