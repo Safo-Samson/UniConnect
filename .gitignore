@@ -46,3 +46,4 @@ app.*.map.json
 # my folders and files to ignore
 
 /lib/my_trash/
+.my_trash/
