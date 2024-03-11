@@ -71,6 +71,15 @@ flutter_launcher_icons:
   image_path: "assets/img/logo ss.png"
   adaptive_icon_background: "assets/img/location.png"
   adaptive_icon_foreground: "assets/img/small_confetti.png"
+  web:
+    generate: true
+    image_path: "assets/img/logo ss.png"
+    background_color: "#8411C3"
+    theme_color: "#8411C3"
+  windows:
+    generate: true
+    image_path: "assets/img/logo ss.png"
+    icon_size: 48 # min:48, max:256, default: 48
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
