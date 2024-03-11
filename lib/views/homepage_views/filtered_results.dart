@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:uniconnect/services/database_cloud/database_provider.dart';
 import 'package:uniconnect/services/database_cloud/database_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
-
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
@@ -32,18 +30,7 @@ class FilteredResult extends StatefulWidget {
 }
 
 class _FilteredResultState extends State<FilteredResult> {
-  late final DatabaseProvider _cloud;
 
-  @override
-  void initState() {
-    _cloud = DatabaseService.firebasefirestore();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +57,7 @@ class _FilteredResultState extends State<FilteredResult> {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: _cloud
+              future: DatabaseService.firebasefirestore()
                   .getFilteredResults(
                   widget.selectedNationalities,
                   widget.selectedResidents,
