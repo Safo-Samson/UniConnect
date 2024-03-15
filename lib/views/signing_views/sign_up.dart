@@ -155,13 +155,13 @@ class _SignUpState extends State<SignUp> {
                           final enteredEmail = _emailController.text.trim();
                           final enteredPassword = _passwordController.text;
 
-                          await AuthService.firebase().createUser(
+                          await AuthService.currentAuthService().createUser(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
 
                           final currentUser =
-                              AuthService.firebase().currentUser;
+                              AuthService.currentAuthService().currentUser;
                           final userId = currentUser?.uid;
 
                           // Store initial user data in Firestore after successful signup

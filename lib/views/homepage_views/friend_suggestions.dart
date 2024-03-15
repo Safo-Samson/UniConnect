@@ -34,7 +34,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
 
   late String currentUserNationality = widget.currentUserNationality;
 
-  final AuthUser user = AuthService.firebase().currentUser!;
+  final AuthUser user = AuthService.currentAuthService().currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +152,8 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               title: const Text('My Profile'),
               onTap: () async {
                 final userProfile =
-                    await AuthService.firebase().getCurrentUserProfile();
+                    await AuthService.currentAuthService()
+                    .getCurrentUserProfile();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -183,7 +184,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
               onTap: () async {
                 final result = await showLogoutDialog(context);
                 if (result) {
-                  AuthService.firebase().signOut();
+                  AuthService.currentAuthService().signOut();
                   Navigator.pushReplacementNamed(context, loginRoute);
                 }
               },

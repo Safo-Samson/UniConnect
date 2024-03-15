@@ -35,7 +35,8 @@ final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
-  await AuthService.firebase().initialize(); // Initialize the firebase app
+  await AuthService.currentAuthService()
+      .initialize(); // Initialize the firebase app
   await NotificationSenderService.awesomeNotification()
       .initialize(); // Initialize the awesome notifications
   runApp(const HomePage());

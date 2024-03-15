@@ -98,16 +98,16 @@ class _LoginViewState extends State<LoginView> {
                         final enteredPassword = _passwordController.text;
 
                         try {
-                          await AuthService.firebase().login(
+                          await AuthService.currentAuthService().login(
                             email: enteredEmail,
                             password: enteredPassword,
                           );
 
                           // Retrieve user's nationality and assign it to currentUserNationality
                           final AuthUser user =
-                              AuthService.firebase().currentUser!;
+                              AuthService.currentAuthService().currentUser!;
                           final currentUserNationality =
-                              await AuthService.firebase()
+                              await AuthService.currentAuthService()
                                   .getUserNationality(user.uid);
 
                           showLoadingDialog(

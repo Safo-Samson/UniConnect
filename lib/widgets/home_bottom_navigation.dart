@@ -41,9 +41,11 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
           ),
           IconButton(
             onPressed: () async {
-              final AuthUser user = AuthService.firebase().currentUser!;
+              final AuthUser user =
+                  AuthService.currentAuthService().currentUser!;
               currentUserNationality =
-                  await AuthService.firebase().getUserNationality(user.uid);
+                  await AuthService.currentAuthService()
+                  .getUserNationality(user.uid);
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 friendSuggestionsRoute,

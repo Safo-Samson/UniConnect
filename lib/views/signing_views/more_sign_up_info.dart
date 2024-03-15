@@ -184,7 +184,8 @@ class _MoreSignUpInfoState extends State<MoreSignUpInfo> {
               SubmitButton(
                 onPressed: isSubmitButtonEnabled()
                     ? () async {
-                        final currentUser = AuthService.firebase().currentUser;
+                        final currentUser =
+                            AuthService.currentAuthService().currentUser;
                         final userId = currentUser?.uid;
                         List<String> flagAndCountry =
                             selectedCountryController.text.split(' ');

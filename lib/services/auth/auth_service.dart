@@ -10,7 +10,8 @@ class AuthService implements MyAuthProvider {
   const AuthService(this.provider);
 
 // to create a firebaseauth instance, because now its the only provider we have
-  factory AuthService.firebase() => AuthService(FirebaseAuthProvider());
+  factory AuthService.currentAuthService() =>
+      AuthService(FirebaseAuthProvider());
 
   @override
   Future<AuthUser> createUser(

@@ -14,7 +14,7 @@ class FirebaseCloudService implements DatabaseProvider {
   final allNationalities =
       FirebaseFirestore.instance.collection('nationalities');
   final allresidences = FirebaseFirestore.instance.collection('residences');
-  String currentUserId = AuthService.firebase().currentUser!.uid;
+  String currentUserId = AuthService.currentAuthService().currentUser!.uid;
 
   @override
   Future<void> updateRequestedUsers(String userId) async {

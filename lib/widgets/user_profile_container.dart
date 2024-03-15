@@ -197,7 +197,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
 
   Future<UserProfile> retrieveCurrentUser() async {
     UserProfile currentUser =
-        await AuthService.firebase().getCurrentUserProfile();
+        await AuthService.currentAuthService().getCurrentUserProfile();
     return currentUser;
   }
 }

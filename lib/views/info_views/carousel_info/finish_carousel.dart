@@ -59,9 +59,11 @@ class FinishCarousel extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
               onPressed: () async {
-                final AuthUser user = AuthService.firebase().currentUser!;
+                final AuthUser user =
+                    AuthService.currentAuthService().currentUser!;
                 final currentUserNationality =
-                    await AuthService.firebase().getUserNationality(user.uid);
+                    await AuthService.currentAuthService()
+                        .getUserNationality(user.uid);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   friendSuggestionsRoute,
