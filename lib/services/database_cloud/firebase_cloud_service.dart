@@ -1,6 +1,6 @@
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uniconnect/my_trash/firestore_functions/add_initial_user_to_users.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/database_cloud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/services/database_cloud/database_provider.dart';
@@ -14,11 +14,7 @@ class FirebaseCloudService implements DatabaseProvider {
       FirebaseFirestore.instance.collection('nationalities');
   final allresidences = FirebaseFirestore.instance.collection('residences');
   String currentUserId = AuthService.firebase().currentUser!.uid;
-  // Function to generate a random number between 10 and 99
-  int generateRandomNumber() {
-    final random = Random();
-    return random.nextInt(90) + 10;
-  }
+
 
   @override
   Future<void> addUser(String userID, String email) {
