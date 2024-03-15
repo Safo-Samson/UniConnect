@@ -8,6 +8,7 @@ import 'package:uniconnect/widgets/user_profile.dart';
 import 'dart:developer' as devtols show log;
 
 class FirebaseCloudService implements DatabaseProvider {
+
   final allcourses = FirebaseFirestore.instance.collection('courses');
   final allUsers = FirebaseFirestore.instance.collection('users');
   final allNationalities =
@@ -15,6 +16,33 @@ class FirebaseCloudService implements DatabaseProvider {
   final allresidences = FirebaseFirestore.instance.collection('residences');
   String currentUserId = AuthService.firebase().currentUser!.uid;
 
+  @override
+  Future<void> updateRequestedUsers(String userId) async {
+    final userDocRef = allUsers.doc(userId);
+    try {
+      // Get the user document
+      final userDocSnapshot = await userDocRef.get();
+      if (userDocSnapshot.exists) {
+        // Check if the requestedUsers field exists in the document and update it
+        if (userDocSnapshot.data()!['requestedUsers'] != null) {
+          await userDocRef.update({
+            'requestedUsers': FieldValue.arrayUnion([userId])
+          });
+        } else {
+          // If the field doesn't exist, create it and set its value
+          await userDocRef.set({
+            'requestedUsers': [userId]
+          }, SetOptions(merge: true));
+        }
+      } else {
+        devtols.log('This user does not exist');
+        CouldNotGetUser();
+      }
+    } catch (e) {
+      CouldNotUpdateUserRecordException();
+    }
+  }
+  
 
   @override
   Future<void> addUser(String userID, String email) {

@@ -25,4 +25,6 @@ abstract class DatabaseProvider {
     String userId,
     String course,
   );
+
+  Future<void> updateRequestedUsers(String userId);
 }

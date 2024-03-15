@@ -2,18 +2,17 @@
 
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
 import 'package:uniconnect/constants/routes.dart';
-import 'package:uniconnect/services/database_cloud/cloud_storage_exceptions.dart';
+import 'package:uniconnect/services/database_cloud/database_service.dart';
 import 'package:uniconnect/services/notifications/notification_sender_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
-import 'dart:developer' as devtols show log;
+// import 'dart:developer' as devtols show log;
 
 class ConnectDialog extends StatefulWidget {
   final String iceBreakerMessage;
@@ -99,43 +98,19 @@ class _ConnectDialogState extends State<ConnectDialog>
       _isSending = true;
     });
 
-    // Update the requestedUsers field in Firestore
-    final firestore = FirebaseFirestore.instance;
-    final userDocRef =
-        firestore.collection('users').doc(widget.currentUser.userId);
 
-    try {
-      // Get the user document
-      final userDocSnapshot = await userDocRef.get();
-      if (userDocSnapshot.exists) {
-        // Check if the requestedUsers field exists in the document and update it
-        if (userDocSnapshot.data()!['requestedUsers'] != null) {
-          await userDocRef.update({
-            'requestedUsers': FieldValue.arrayUnion([widget.otherUser.userId])
-          });
-        } else {
-          // If the field doesn't exist, create it and set its value
-          await userDocRef.set({
-            'requestedUsers': [widget.otherUser.userId]
-          }, SetOptions(merge: true));
-        }
+    DatabaseService.currentDatabaseService().updateRequestedUsers(
+      widget.otherUser.userId,
+    );
 
-        // Start the sent animation  and dismiss the dialog after 1 second
-        _animationController.forward().then((_) {
-          Timer(const Duration(seconds: 1), () {
-            Navigator.of(context)
-                .pop();
-          
-            // Dismiss dialog after animation completes
-          });
-        });
-      } else {
-        devtols.log('This user does not exist');
-        CouldNotGetUser();
-      }
-    } catch (e) {
-      CouldNotUpdateUserRecordException();
-    }
+    // Start the sent animation  and dismiss the dialog after 1 second
+    _animationController.forward().then((_) {
+      Timer(const Duration(seconds: 1), () {
+        Navigator.of(context).pop();
+
+        // Dismiss dialog after animation completes
+      });
+    });
   }
 
   @override

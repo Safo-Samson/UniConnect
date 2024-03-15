@@ -196,7 +196,7 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: DatabaseService.firebasefirestore()
+              future: DatabaseService.currentDatabaseService()
                   .getUsersWithNationality(currentUserNationality),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

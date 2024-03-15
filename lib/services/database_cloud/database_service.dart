@@ -7,7 +7,7 @@ class DatabaseService implements DatabaseProvider {
 
   const DatabaseService(this._datbaseProvider);
 
-  factory DatabaseService.firebasefirestore() =>
+  factory DatabaseService.currentDatabaseService() =>
       DatabaseService(FirebaseCloudService());
 
   @override
@@ -48,5 +48,10 @@ class DatabaseService implements DatabaseProvider {
   Future<void> updateUserInfo(
       String userId, Map<String, dynamic> dataToUpdate) {
     return _datbaseProvider.updateUserInfo(userId, dataToUpdate);
+  }
+  
+  @override
+  Future<void> updateRequestedUsers(String userId) {
+    return _datbaseProvider.updateRequestedUsers(userId);
   }
 }

@@ -57,7 +57,7 @@ class _FilteredResultState extends State<FilteredResult> {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: DatabaseService.firebasefirestore()
+              future: DatabaseService.currentDatabaseService()
                   .getFilteredResults(
                   widget.selectedNationalities,
                   widget.selectedResidents,
