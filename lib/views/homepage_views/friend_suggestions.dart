@@ -12,7 +12,6 @@ import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
-import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
@@ -170,14 +169,14 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                 Navigator.pushNamed(context, notificationRoute);
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.settings), // Icon for Settings
-              title: const Text('Settings'),
-              onTap: () {
-                showNothingDialog(context,
-                    'This feature is not available yet. I am working on it.');
-              },
-            ),
+            // ListTile(
+            //   leading: const Icon(Icons.settings), // Icon for Settings
+            //   title: const Text('Settings'),
+            //   onTap: () {
+            //     showNothingDialog(context,
+            //         'This feature is not available yet. I am working on it.');
+            //   },
+            // ),
             ListTile(
               leading: const Icon(Icons.logout), // Icon for Log Out
               title: const Text('Log Out'),

@@ -32,13 +32,13 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
         height: 80,
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          IconButton(
-            onPressed: () {
-              showNothingDialog(context,
-                  '''This functionality is not available yet. The idea of the home page is to show the user a feed of posts or discussions from other students. Will be implemented soon''');
-            },
-            icon: const Icon(Icons.home, size: BrandFonts.iconSize),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     showNothingDialog(context,
+          //         '''This functionality is not available yet. The idea of the home page is to show the user a feed of posts or discussions from other students. Will be implemented soon''');
+          //   },
+          //   icon: const Icon(Icons.home, size: BrandFonts.iconSize),
+          // ),
           IconButton(
             onPressed: () async {
               final AuthUser user =
