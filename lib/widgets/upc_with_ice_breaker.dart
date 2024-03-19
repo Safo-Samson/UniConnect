@@ -196,9 +196,10 @@ class _UserProfileContainerWithIceBreakerState
                           ),
                         ),
                 ),
-                buildConnectionSuggestion(currentUser, widget.user),
+                buildConnectionSuggestion(
+                    currentUser, widget.user, isConnectionRequested),
               ],
-            ),
+            ),  
           );
         }
       },
@@ -212,9 +213,12 @@ class _UserProfileContainerWithIceBreakerState
   }
 
   Widget _buildIceBreakerButton(
-      UserProfile currentUser, UserProfile otherUser) {
+      UserProfile currentUser, UserProfile otherUser,
+      bool isConnectionRequested) {
     return ElevatedButton(
-      onPressed: () async {
+      onPressed: isConnectionRequested
+          ? null
+          : () async {
         UserProfile currentUserProfile =
             currentUser; // Use currentUser directly
         String iceBreakerMessage =
@@ -232,7 +236,8 @@ class _UserProfileContainerWithIceBreakerState
   }
 
   Widget buildTextForConnection(
-      UserProfile currentUser, UserProfile otherUser, String suggestionText) {
+      UserProfile currentUser, UserProfile otherUser,
+      bool isConnectionRequested, String suggestionText) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -245,14 +250,15 @@ class _UserProfileContainerWithIceBreakerState
             ),
           ),
           const SizedBox(height: 10),
-          _buildIceBreakerButton(currentUser, otherUser),
+          _buildIceBreakerButton(currentUser, otherUser, isConnectionRequested),
         ],
       ),
     );
   }
 
   Widget buildConnectionSuggestion(
-      UserProfile currentUser, UserProfile otherUser) {
+      UserProfile currentUser,
+      UserProfile otherUser, bool isConnectionRequested) {
     if (currentUser.country == otherUser.country &&
         currentUser.year == otherUser.year &&
         currentUser.course == otherUser.course) {
@@ -260,6 +266,10 @@ class _UserProfileContainerWithIceBreakerState
       return buildTextForConnection(
         currentUser,
         otherUser,
+        isConnectionRequested,
+        isConnectionRequested
+            ? "Connection has been sent to ${otherUser.username}, no further action required at the moment."
+            :
         "Wow, a perfect match, ${otherUser.username} is from ${otherUser.country}, in ${otherUser.year}, studying ${otherUser.course}. You should definitely connect!",
       );
     } else if (currentUser.country == otherUser.country &&
@@ -268,6 +278,10 @@ class _UserProfileContainerWithIceBreakerState
       return buildTextForConnection(
         currentUser,
         otherUser,
+        isConnectionRequested,
+        isConnectionRequested
+            ? "You have already sent a connection request to ${otherUser.username}, waiting for a response."
+            :
         "You have a good match with ${otherUser.username}, who is from ${otherUser.country}, and in ${otherUser.year}. Hit the ice breaker to connect with some exciting questions!",
       );
     } else if (currentUser.country == otherUser.country &&
@@ -276,6 +290,10 @@ class _UserProfileContainerWithIceBreakerState
       return buildTextForConnection(
         currentUser,
         otherUser,
+        isConnectionRequested,
+        isConnectionRequested
+            ? "Your request was sent to ${otherUser.username}, nothing else is required from you"
+            :
         "${otherUser.username} is from ${otherUser.country}, and studying ${otherUser.course}. I sense a great start of friendship, connect with an ice breaker!",
       );
     } else if (currentUser.country == otherUser.country &&
@@ -285,6 +303,10 @@ class _UserProfileContainerWithIceBreakerState
       return buildTextForConnection(
         currentUser,
         otherUser,
+        isConnectionRequested,
+        isConnectionRequested
+            ? "${otherUser.username} has already received your connection request. Please wait for a response."
+            :
         "${otherUser.username} is from ${otherUser.country}, and in the same accomodation,  ${otherUser.residence}. Good vibes in the hall don't you think? Connect with an ice breaker!",
       );
     } else if (currentUser.country == otherUser.country &&
@@ -294,6 +316,10 @@ class _UserProfileContainerWithIceBreakerState
       return buildTextForConnection(
         currentUser,
         otherUser,
+        isConnectionRequested,
+        isConnectionRequested
+            ? "You have already sent a connection request to ${otherUser.username}."
+            :
         "${otherUser.username} is from ${otherUser.country}, and doesn't live in any student accommodation, just like you. Start your friendship from there with an ice breaker!",
       );
     } else {
