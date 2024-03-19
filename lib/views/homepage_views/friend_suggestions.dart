@@ -13,6 +13,7 @@ import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
 import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
+import 'package:uniconnect/widgets/upc_with_ice_breaker.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'package:uniconnect/widgets/user_profile_container.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';
@@ -264,7 +265,10 @@ class _FriendSuggestionsState extends State<FriendSuggestions> {
                           itemBuilder: (BuildContext context, int index) {
                             final user = users.elementAt(index);
 
-                            return UserProfileContainer(user: user);
+                            // return UserProfileContainer(user: user);
+                            return UserProfileContainerWithIceBreaker(
+                              user: user,
+                            );
                           },
                         ),
                       ),
