@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uniconnect/my_trash/firestore_functions/add_initial_user_to_users.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
@@ -8,12 +7,11 @@ import 'package:uniconnect/widgets/user_profile.dart';
 import 'dart:developer' as devtols show log;
 
 class FirebaseCloudService implements DatabaseProvider {
-
   final allcourses = FirebaseFirestore.instance.collection('courses');
   final allUsers = FirebaseFirestore.instance.collection('users');
   final allNationalities =
       FirebaseFirestore.instance.collection('nationalities');
-  final allresidences = FirebaseFirestore.instance.collection('residences');
+  final allresidences = FirebaseFirestore.instance.collection('residence');
   String currentUserId = AuthService.currentAuthService().currentUser!.uid;
 
   @override
@@ -42,7 +40,6 @@ class FirebaseCloudService implements DatabaseProvider {
       CouldNotUpdateUserRecordException();
     }
   }
-  
 
   @override
   Future<void> addUser(String userID, String email) {
@@ -211,6 +208,64 @@ class FirebaseCloudService implements DatabaseProvider {
       return users;
     } catch (e) {
       throw CouldNotGetAllNationalityException();
+    }
+  }
+
+  @override
+  Future<Iterable<UserProfile>> getUsersWithCourse(String course) async {
+    try {
+      // Step 1: Fetch user IDs from the specified course collection
+      QuerySnapshot<Map<String, dynamic>> allUsersWithCourse = await allcourses
+          .doc(course) // Convert course to lowercase
+          .collection('users')
+          .get();
+
+      List<String> userIds = allUsersWithCourse.docs
+          .map((doc) => doc.id)
+          .where((id) =>
+              id != currentUserId) // Exclude current user's ID // Get user IDs
+          .toList();
+
+      // Step 2: Fetch user details from the users collection using the user IDs
+      QuerySnapshot<Map<String, dynamic>> usersSnapshot =
+          await allUsers.where(FieldPath.documentId, whereIn: userIds).get();
+
+      // Step 3: Convert query snapshot to list of UserProfile objects
+      Iterable<UserProfile> users = usersSnapshot.docs.map((userDoc) {
+        return UserProfile.fromQuerySnapshot(userDoc);
+      });
+
+      return users;
+    } catch (e) {
+      throw CouldNotGetAllCoursesException();
+    }
+  }
+
+  @override
+  Future<Iterable<UserProfile>> getUsersWithResidence(String residence) async {
+    try {
+      // Step 1: Fetch user IDs from the specified residence collection
+      QuerySnapshot<Map<String, dynamic>> allUsersWithResidence =
+          await allresidences.doc(residence).collection('users').get();
+
+      List<String> userIds = allUsersWithResidence.docs
+          .map((doc) => doc.id)
+          .where((id) =>
+              id != currentUserId) // Exclude current user's ID // Get user IDs
+          .toList();
+
+      // Step 2: Fetch user details from the users collection using the user IDs
+      QuerySnapshot<Map<String, dynamic>> usersSnapshot =
+          await allUsers.where(FieldPath.documentId, whereIn: userIds).get();
+
+      // Step 3: Convert query snapshot to list of UserProfile objects
+      Iterable<UserProfile> users = usersSnapshot.docs.map((userDoc) {
+        return UserProfile.fromQuerySnapshot(userDoc);
+      });
+
+      return users;
+    } catch (e) {
+      throw CouldNotGetAllResidenceException();
     }
   }
 

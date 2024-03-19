@@ -12,6 +12,7 @@ import 'package:uniconnect/views/homepage_views/apply_filters.dart';
 import 'package:uniconnect/views/homepage_views/chat_messages.dart';
 import 'package:uniconnect/views/homepage_views/filtered_results.dart';
 import 'package:uniconnect/views/homepage_views/friend_suggestions.dart';
+import 'package:uniconnect/views/homepage_views/groups.dart';
 import 'package:uniconnect/views/homepage_views/notifications.dart';
 import 'package:uniconnect/views/info_views/carousel_info/finish_carousel.dart';
 import 'package:uniconnect/views/info_views/carousel_info/global_connect_info.dart';
@@ -67,6 +68,7 @@ class HomePage extends StatelessWidget {
         statusVerifiedRoute: (context) => const StudentVerified(),
         whyNationalityRoute: (context) => const WhyNationalityInfo(),
         moreInfoSignUpRoute: (context) => const MoreSignUpInfo(),
+        
         localConnectRoute: (context) => LocalConnect(
               widgetData: localConnectData,
               showLocationToggle: false,
@@ -89,6 +91,23 @@ class HomePage extends StatelessWidget {
           return FriendSuggestions(
               currentUserNationality: currentUserNationality);
         },
+        groupsRoute: (context) {
+          final Map<String, dynamic> arguments = ModalRoute.of(context)!
+              .settings
+              .arguments as Map<String, dynamic>;
+          final String currentUserNationality =
+              arguments['currentUserNationality'];
+          final String currentUserResidence = arguments['currentUserResidence'];
+          final String currentUserCourse = arguments['currentUserCourse'];
+
+          return Groups(
+            currentUserNationality: currentUserNationality,
+            currentUserResidence: currentUserResidence,
+            currentUserCourse: currentUserCourse,
+          );
+        },
+
+
         chatMessagesRoute: (context) => const ChatMessagePage(),
         applyFiltersRoute: (context) => const ApplyFilters(),
         filteredResultsRoute: (context) {

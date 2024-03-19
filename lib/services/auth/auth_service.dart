@@ -43,6 +43,16 @@ class AuthService implements MyAuthProvider {
   }
 
   @override
+  Future<String> getUserCourse(String userId) {
+    return provider.getUserCourse(userId);
+  }
+
+  @override
+  Future<String> getUserResidence(String userId) {
+    return provider.getUserResidence(userId);
+  }
+
+  @override
   Future<UserProfile> getCurrentUserProfile() async {
     return provider.getCurrentUserProfile();
   }
@@ -51,4 +61,6 @@ class AuthService implements MyAuthProvider {
   Future<void> initialize() async {
     return provider.initialize();
   }
+  
+
 }

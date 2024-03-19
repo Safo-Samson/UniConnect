@@ -16,4 +16,8 @@ class UserNotLoggedInAuthException implements Exception {}
 
 class CouldNotGetUserNationalityException implements Exception {}
 
+class CouldNotGetUserCourseException implements Exception {}
+
+class CouldNotGetUserResidenceException implements Exception {}
+
 class AllFiltersEmptyException implements Exception {}

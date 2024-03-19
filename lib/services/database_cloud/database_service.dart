@@ -54,4 +54,14 @@ class DatabaseService implements DatabaseProvider {
   Future<void> updateRequestedUsers(String userId) {
     return _datbaseProvider.updateRequestedUsers(userId);
   }
+  
+  @override
+  Future<Iterable<UserProfile>> getUsersWithCourse(String course) {
+    return _datbaseProvider.getUsersWithCourse(course);
+  }
+
+  @override
+  Future<Iterable<UserProfile>> getUsersWithResidence(String residence) {
+    return _datbaseProvider.getUsersWithResidence(residence);
+  }
 }

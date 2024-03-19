@@ -5,7 +5,6 @@ import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/auth/auth_user.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
-import 'package:uniconnect/utils/dialogs/show_nothing.dart';
 
 class HomeBottomNavigation extends StatefulWidget {
   const HomeBottomNavigation({super.key});
@@ -16,6 +15,8 @@ class HomeBottomNavigation extends StatefulWidget {
 
 class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
   late String currentUserNationality;
+  late String currentUserResidence;
+  late String currentUserCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +58,23 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
             icon: const Icon(Icons.person, size: BrandFonts.iconSize),
           ),
           IconButton(
-            onPressed: () {
-              showNothingDialog(context,
-                  'This functionality is where students can join groups of students with similar interests. Will be implemented soon');
+            onPressed: () async {
+              final AuthUser user =
+                  AuthService.currentAuthService().currentUser!;
+              currentUserNationality = await AuthService.currentAuthService()
+                  .getUserNationality(user.uid);
+              currentUserCourse = await AuthService.currentAuthService()
+                  .getUserCourse(user.uid);
+              currentUserResidence = await AuthService.currentAuthService()
+                  .getUserResidence(user.uid);
+
+              Navigator.pushNamedAndRemoveUntil(
+                  context, groupsRoute, (route) => false,
+                  arguments: {
+                    'currentUserNationality': currentUserNationality,
+                    'currentUserResidence': currentUserResidence,
+                    'currentUserCourse': currentUserCourse
+                  });
             },
             icon:
                 const Icon(Icons.home_work_rounded, size: BrandFonts.iconSize),

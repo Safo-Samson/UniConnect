@@ -114,6 +114,35 @@ class FirebaseAuthProvider implements MyAuthProvider {
       throw CouldNotGetUserNationalityException();
     }
   }
+  @override
+  Future<String> getUserCourse(String userId) async {
+    try {
+      String userCourse = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get()
+          .then((value) => value.data()!['course']);
+
+      return userCourse;
+    } catch (e) {
+      throw CouldNotGetUserCourseException();
+    }
+  }
+
+  @override
+  Future<String> getUserResidence(String userId) async {
+    try {
+      String userResidence = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get()
+          .then((value) => value.data()!['residence']);
+
+      return userResidence;
+    } catch (e) {
+      throw CouldNotGetUserResidenceException();
+    }
+  }
 
   @override
   Future<UserProfile> getCurrentUserProfile() async {
@@ -126,5 +155,7 @@ class FirebaseAuthProvider implements MyAuthProvider {
 
     return UserProfile.fromDocumentSnapshot(userData);
   }
+  
+
 
 }

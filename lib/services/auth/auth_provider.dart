@@ -26,6 +26,10 @@ abstract class MyAuthProvider {
 
   Future<String> getUserNationality(String userId);
 
+  Future<String> getUserResidence(String userId);
+
+  Future<String> getUserCourse(String userId);
+
   Future<UserProfile> getCurrentUserProfile();
   
 }
