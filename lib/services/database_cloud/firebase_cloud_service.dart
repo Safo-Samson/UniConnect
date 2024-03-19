@@ -151,7 +151,7 @@ class FirebaseCloudService implements DatabaseProvider {
                   ? user
                   : null;
             })
-            .where((user) => user != null)
+            .where((user) => user != null && user.userId != currentUserId)
             .toList()
             .cast<UserProfile>();
       } else {

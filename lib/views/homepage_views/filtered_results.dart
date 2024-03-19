@@ -6,8 +6,9 @@ import 'package:uniconnect/services/database_cloud/database_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
+import 'package:uniconnect/widgets/upc_with_ice_breaker.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
-import 'package:uniconnect/widgets/user_profile_container.dart';
+// import 'package:uniconnect/widgets/user_profile_container.dart';
 // import 'dart:developer' as devtols show log;
 
 class FilteredResult extends StatefulWidget {
@@ -108,7 +109,8 @@ class _FilteredResultState extends State<FilteredResult> {
                           itemBuilder: (BuildContext context, int index) {
                             final user = users[index];
 
-                            return UserProfileContainer(user: user);
+                            return UserProfileContainerWithIceBreaker(
+                                user: user);
                           },
                         ),
                       ),

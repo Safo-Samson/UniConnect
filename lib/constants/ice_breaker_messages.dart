@@ -71,6 +71,10 @@ class IceBreakerGenerator {
         '\nWhat are your favorite apps or websites for staying organized or productive? 📱💻',
         '\nWhat\'s the most adventurous thing you have ever eaten? 🍽️',
         '\nWhat are your thoughts on the latest trends or developments in technology? 💡',
+        '\nWhat do you think about the LSBU hub? 🏢',
+        '\nWhat do you think about the LSBU library? 📚',
+        '\nWhat is your take the LSBU meal deal?  🍔🍟🥤',
+
       ];
 
 
@@ -105,4 +109,7 @@ List<String> moreInterestingTopics = [
   '\nWhat are your favorite apps or websites for staying organized or productive? 📱💻',
   '\nWhat\'s the most adventurous thing you have ever eaten? 🍽️',
   '\nWhat are your thoughts on the latest trends or developments in technology? 💡',
+  '\nWhat do you think about the LSBU hub? 🏢',
+  '\nWhat do you think about the LSBU library? 📚',
+  '\nWhat is your take the LSBU meal deal?  🍔🍟🥤',
 ];

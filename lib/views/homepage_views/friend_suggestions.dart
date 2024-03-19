@@ -15,7 +15,7 @@ import 'package:uniconnect/utils/dialogs/logout_dialog.dart';
 import 'package:uniconnect/widgets/home_bottom_navigation.dart';
 import 'package:uniconnect/widgets/upc_with_ice_breaker.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
-import 'package:uniconnect/widgets/user_profile_container.dart';
+// import 'package:uniconnect/widgets/user_profile_container.dart';
 import 'package:uniconnect/widgets/user_profile_page.dart';
 // import 'dart:developer' as devtols show log;
 
