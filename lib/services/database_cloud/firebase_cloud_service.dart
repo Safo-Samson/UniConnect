@@ -18,7 +18,7 @@ class FirebaseCloudService implements DatabaseProvider {
 
   @override
   Future<void> updateRequestedUsers(String userId) async {
-    final userDocRef = allUsers.doc(userId);
+    final userDocRef = allUsers.doc(currentUserId);
     try {
       // Get the user document
       final userDocSnapshot = await userDocRef.get();

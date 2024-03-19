@@ -5,7 +5,7 @@ import 'package:uniconnect/services/notifications/notification_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/unamed_utilities/unique_id.dart';
 import 'package:uniconnect/widgets/notification_item.dart';
-import 'dart:developer' as devtols show log;
+// import 'dart:developer' as devtols show log;
 
 class AwesomeNotificationSender implements NotificationSender {
   @override
@@ -65,7 +65,7 @@ class AwesomeNotificationSender implements NotificationSender {
   @override
   void addNotificationToList(String message) {
     notifications.insert(0, NotificationItem(message: message, watched: false));
-    devtols.log('Notification added to list ');
+    // devtols.log('Notification added to list ');
   }
 
   @override
