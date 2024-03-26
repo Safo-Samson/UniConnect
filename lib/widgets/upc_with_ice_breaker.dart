@@ -270,7 +270,7 @@ class _UserProfileContainerWithIceBreakerState
         isConnectionRequested
             ? "Connection has been sent to ${otherUser.username}, no further action required at the moment."
             :
-        "Wow, a perfect match, ${otherUser.username} is from ${otherUser.country}, in ${otherUser.year}, studying ${otherUser.course}. You should definitely connect!",
+        "Wow, a perfect match !!!, ${otherUser.username} is from ${otherUser.country}, in ${otherUser.year}, studying ${otherUser.course}. You should definitely connect!",
       );
     } else if (currentUser.country == otherUser.country &&
         currentUser.year == otherUser.year) {

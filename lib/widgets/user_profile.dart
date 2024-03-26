@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProfile {
+  
   String userId;
   String username;
   String course;
