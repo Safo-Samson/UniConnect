@@ -36,9 +36,9 @@ class ActiveConnectionNotifications {
     // You can query based on attributes like course, year, residence, etc.
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('users')
-        .where('course', isEqualTo: currentUserProfile.course)
-        .where('year', isEqualTo: currentUserProfile.year)
-        .where('residence', isEqualTo: currentUserProfile.residence)
+        .where('course', isEqualTo: currentUserProfile.getCourse)
+        .where('year', isEqualTo: currentUserProfile.getYear)
+        .where('residence', isEqualTo: currentUserProfile.getResidence)
         .get();
     List<UserProfile> similarUsers = [];
     for (var doc in querySnapshot.docs) {
@@ -51,7 +51,7 @@ class ActiveConnectionNotifications {
   bool isConnected(UserProfile user1, UserProfile user2) {
     // Implement logic to check if user1 is already connected with user2
     // You can check if user2 is present in user1's list of requested connections
-    return user1.requestedUsers.contains(user2.userId);
+    return user1.getRequestedUsers.contains(user2.getUserId);
   }
 
   Future<void> sendNotificationWithIceBreaker(
@@ -64,7 +64,7 @@ class ActiveConnectionNotifications {
     // Implement notification sending mechanism
     // You can use email, push notifications, or any other communication channel
     String notificationMessage =
-        "Connect with ${user.username} to make new friends!";
+        "Connect with ${user.getUsername} to make new friends!";
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'your channel id',

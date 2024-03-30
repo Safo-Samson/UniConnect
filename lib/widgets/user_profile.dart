@@ -1,33 +1,52 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProfile {
-  
-  String userId;
-  String username;
-  String course;
-  String? imageUrl;
-  String residence;
-  String? bio;
-  String year;
-  String country;
-  String flag;
-  List<dynamic> requestedUsers; 
-
+  late String _userId;
+  late String _username;
+  late String _course;
+  late String _year;
+  late String _residence;
+  late String _country;
+  late String _flag;
+  late String? _imageUrl;
+  late String? _bio;
+  late List<dynamic> _requestedUsers;
 
   UserProfile({
-    required this.requestedUsers,
-    required this.userId,
-    required this.username,
-    required this.course,
-    required this.year,
-    required this.residence,
-    required this.country,
-    required this.flag,
-    this.imageUrl,
-    this.bio,
-  });
+    required List<dynamic> requestedUsers,
+    required String userId,
+    required String username,
+    required String course,
+    required String year,
+    required String residence,
+    required String country,
+    required String flag,
+    String? imageUrl,
+    String? bio,
+  })  : _requestedUsers = requestedUsers,
+        _userId = userId,
+        _username = username,
+        _course = course,
+        _year = year,
+        _residence = residence,
+        _country = country,
+        _flag = flag,
+        _imageUrl = imageUrl,
+        _bio = bio;
 
-  // Constructor for QueryDocumentSnapshot
+  // Getters for private fields
+  String get getUserId => _userId;
+  String get getUsername => _username;
+  String get getCourse => _course;
+  String get getYear => _year;
+  String get getResidence => _residence;
+  String get getCountry => _country;
+  String get getFlag => _flag;
+  String? get getImageUrl => _imageUrl;
+  String? get getBio => _bio;
+  List<dynamic> get getRequestedUsers => _requestedUsers;
+
+  // Factory constructor for QueryDocumentSnapshot
   factory UserProfile.fromQuerySnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
     return UserProfile(
@@ -44,7 +63,7 @@ class UserProfile {
     );
   }
 
-  // Constructor for DocumentSnapshot
+  // Factory constructor for DocumentSnapshot
   factory UserProfile.fromDocumentSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return UserProfile(

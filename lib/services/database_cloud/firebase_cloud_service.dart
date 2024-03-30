@@ -139,16 +139,17 @@ class FirebaseCloudService implements DatabaseProvider {
             .map((userDoc) {
               UserProfile user = UserProfile.fromQuerySnapshot(userDoc);
               bool passResidentFilter =
-                  residents.isEmpty || residents.contains(user.residence);
+                  residents.isEmpty || residents.contains(user.getResidence);
               bool passCourseFilter =
-                  courses.isEmpty || courses.contains(user.course);
-              bool passYearFilter = years.isEmpty || years.contains(user.year);
+                  courses.isEmpty || courses.contains(user.getCourse);
+              bool passYearFilter =
+                  years.isEmpty || years.contains(user.getYear);
 
               return passResidentFilter && passCourseFilter && passYearFilter
                   ? user
                   : null;
             })
-            .where((user) => user != null && user.userId != currentUserId)
+            .where((user) => user != null && user.getUserId != currentUserId)
             .toList()
             .cast<UserProfile>();
       } else {
@@ -160,10 +161,10 @@ class FirebaseCloudService implements DatabaseProvider {
           // Apply additional filters based on selected residents, courses, and years
           users = users.where((user) {
             bool passResidentFilter =
-                residents.isEmpty || residents.contains(user.residence);
+                residents.isEmpty || residents.contains(user.getResidence);
             bool passCourseFilter =
-                courses.isEmpty || courses.contains(user.course);
-            bool passYearFilter = years.isEmpty || years.contains(user.year);
+                courses.isEmpty || courses.contains(user.getCourse);
+            bool passYearFilter = years.isEmpty || years.contains(user.getYear);
 
             return passResidentFilter && passCourseFilter && passYearFilter;
           });

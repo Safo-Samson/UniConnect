@@ -47,7 +47,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
         } else {
           final currentUser = snapshot.data!;
           bool isConnectionRequested =
-              currentUser.requestedUsers.contains(widget.user.userId);
+              currentUser.getRequestedUsers.contains(widget.user.getUserId);
 
           return Container(
             margin: const EdgeInsets.all(10.0),
@@ -61,7 +61,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
               ),
             ),
             child: ListTile(
-              leading: widget.user.imageUrl != null
+              leading: widget.user.getImageUrl != null
                   ? GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -73,7 +73,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                         );
                       },
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(widget.user.imageUrl!),
+                        backgroundImage: NetworkImage(widget.user.getImageUrl!),
                       ),
                     )
                   : GestureDetector(
@@ -90,7 +90,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                         backgroundColor:
                             const Color.fromARGB(179, 158, 158, 158),
                         child: Text(
-                          widget.user.username.substring(0, 1).toUpperCase(),
+                          widget.user.getUsername.substring(0, 1).toUpperCase(),
                           style: const TextStyle(
                               color: Colors.white, fontSize: 20.0),
                         ),
@@ -106,7 +106,7 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                       ),
                     );
                   },
-                  child: Text(widget.user.username)),
+                  child: Text(widget.user.getUsername)),
               subtitle: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -122,19 +122,19 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.user.course),
-                          Text(widget.user.year),
+                          Text(widget.user.getCourse),
+                          Text(widget.user.getYear),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(widget.user.flag,
+                          Text(widget.user.getFlag,
                               style: const TextStyle(
                                   fontSize: BrandFonts.flagSize,
                                   color: Colors.black)),
                           Text(
-                            widget.user.country.substring(0, 3),
+                            widget.user.getCountry.substring(0, 3),
                             style: const TextStyle(color: Colors.black),
                           ),
                         ],
@@ -162,17 +162,14 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                     )
                   : GestureDetector(
                       onTap: () async {
-                        UserProfile currentUserProfile =
-                            currentUser; // Use currentUser directly
-                        String iceBreakerMessage =
-                            IceBreakerGenerator.generateIceBreakerMessage(
+                        UserProfile currentUserProfile = currentUser;
+                        IceBreakerGenerator iceBreakerGenerator =
+                            IceBreakerGenerator(
                                 currentUserProfile, widget.user);
-                        showConnectDialog(
-                          context,
-                          iceBreakerMessage,
-                          currentUserProfile,
-                          widget.user,
-                        );
+                        String iceBreakerMessage =
+                            iceBreakerGenerator.generateIceBreakerMessage();
+                        showConnectDialog(context, iceBreakerMessage,
+                            currentUserProfile, widget.user);
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -187,7 +184,6 @@ class _UserProfileContainerState extends State<UserProfileContainer> {
                         ],
                       ),
                     ),
-              
             ),
           );
         }

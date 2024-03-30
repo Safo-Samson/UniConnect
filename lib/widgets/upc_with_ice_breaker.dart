@@ -49,7 +49,7 @@ class _UserProfileContainerWithIceBreakerState
         } else {
           final currentUser = snapshot.data!;
           bool isConnectionRequested =
-              currentUser.requestedUsers.contains(widget.user.userId);
+              currentUser.getRequestedUsers.contains(widget.user.getUserId);
 
           return Container(
             margin: const EdgeInsets.all(10.0),
@@ -65,7 +65,7 @@ class _UserProfileContainerWithIceBreakerState
             child: Column(
               children: [
                 ListTile(
-                  leading: widget.user.imageUrl != null
+                  leading: widget.user.getImageUrl != null
                       ? GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -78,7 +78,7 @@ class _UserProfileContainerWithIceBreakerState
                           },
                           child: CircleAvatar(
                             backgroundImage:
-                                NetworkImage(widget.user.imageUrl!),
+                                NetworkImage(widget.user.getImageUrl!),
                           ),
                         )
                       : GestureDetector(
@@ -95,7 +95,7 @@ class _UserProfileContainerWithIceBreakerState
                             backgroundColor:
                                 const Color.fromARGB(179, 158, 158, 158),
                             child: Text(
-                              widget.user.username
+                              widget.user.getUsername
                                   .substring(0, 1)
                                   .toUpperCase(),
                               style: const TextStyle(
@@ -113,7 +113,7 @@ class _UserProfileContainerWithIceBreakerState
                           ),
                         );
                       },
-                      child: Text(widget.user.username)),
+                      child: Text(widget.user.getUsername)),
                   subtitle: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -130,19 +130,19 @@ class _UserProfileContainerWithIceBreakerState
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(widget.user.course),
-                              Text(widget.user.year),
+                              Text(widget.user.getCourse),
+                              Text(widget.user.getYear),
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(widget.user.flag,
+                              Text(widget.user.getFlag,
                                   style: const TextStyle(
                                       fontSize: BrandFonts.flagSize,
                                       color: Colors.black)),
                               Text(
-                                widget.user.country.substring(0, 3),
+                                widget.user.getCountry.substring(0, 3),
                                 style: const TextStyle(color: Colors.black),
                               ),
                             ],
@@ -262,68 +262,68 @@ class _UserProfileContainerWithIceBreakerState
   Widget buildConnectionSuggestion(
       UserProfile currentUser,
       UserProfile otherUser, bool isConnectionRequested) {
-    if (currentUser.country == otherUser.country &&
-        currentUser.year == otherUser.year &&
-        currentUser.course == otherUser.course) {
+    if (currentUser.getCountry == otherUser.getCountry &&
+        currentUser.getYear == otherUser.getYear &&
+        currentUser.getCourse == otherUser.getCourse) {
       // Same country, year, course,
       return buildTextForConnection(
         currentUser,
         otherUser,
         isConnectionRequested,
         isConnectionRequested
-            ? "Connection has been sent to ${otherUser.username}, no further action required at the moment."
+            ? "Connection has been sent to ${otherUser.getUsername}, no further action required at the moment."
             :
-        "Wow, a perfect match !!!, ${otherUser.username} is from ${otherUser.country}, in ${otherUser.year}, studying ${otherUser.course}. You should definitely connect!",
+        "Wow, a perfect match !!!, ${otherUser.getUsername} is from ${otherUser.getCountry}, in ${otherUser.getYear}, studying ${otherUser.getCourse}. You should definitely connect!",
       );
-    } else if (currentUser.country == otherUser.country &&
-        currentUser.year == otherUser.year) {
+    } else if (currentUser.getCountry == otherUser.getCountry &&
+        currentUser.getYear == otherUser.getYear) {
       // Same country, year,
       return buildTextForConnection(
         currentUser,
         otherUser,
         isConnectionRequested,
         isConnectionRequested
-            ? "You have already sent a connection request to ${otherUser.username}, waiting for a response."
+            ? "You have already sent a connection request to ${otherUser.getUsername}, waiting for a response."
             :
-        "You have a good match with ${otherUser.username}, who is from ${otherUser.country}, and in ${otherUser.year}. Hit the ice breaker to connect with some exciting questions!",
+        "You have a good match with ${otherUser.getUsername}, who is from ${otherUser.getCountry}, and in ${otherUser.getYear}. Hit the ice breaker to connect with some exciting questions!",
       );
-    } else if (currentUser.country == otherUser.country &&
-        currentUser.course == otherUser.course) {
+    } else if (currentUser.getCountry == otherUser.getCountry &&
+        currentUser.getCourse == otherUser.getCourse) {
       // Same country, course,
       return buildTextForConnection(
         currentUser,
         otherUser,
         isConnectionRequested,
         isConnectionRequested
-            ? "Your request was sent to ${otherUser.username}, nothing else is required from you"
+            ? "Your request was sent to ${otherUser.getUsername}, nothing else is required from you"
             :
-        "${otherUser.username} is from ${otherUser.country}, and studying ${otherUser.course}. I sense a great start of friendship, connect with an ice breaker!",
+        "${otherUser.getUsername} is from ${otherUser.getCountry}, and studying ${otherUser.getCourse}. I sense a great start of friendship, connect with an ice breaker!",
       );
-    } else if (currentUser.country == otherUser.country &&
-        currentUser.residence != 'N/A' &&
-        currentUser.residence == otherUser.residence) {
+    } else if (currentUser.getCountry == otherUser.getCountry &&
+        currentUser.getResidence != 'N/A' &&
+        currentUser.getResidence == otherUser.getResidence) {
       // Same country, course,
       return buildTextForConnection(
         currentUser,
         otherUser,
         isConnectionRequested,
         isConnectionRequested
-            ? "${otherUser.username} has already received your connection request. Please wait for a response."
+            ? "${otherUser.getUsername} has already received your connection request. Please wait for a response."
             :
-        "${otherUser.username} is from ${otherUser.country}, and in the same accomodation,  ${otherUser.residence}. Good vibes in the hall don't you think? Connect with an ice breaker!",
+        "${otherUser.getUsername} is from ${otherUser.getCountry}, and in the same accomodation,  ${otherUser.getResidence}. Good vibes in the hall don't you think? Connect with an ice breaker!",
       );
-    } else if (currentUser.country == otherUser.country &&
-        currentUser.residence == 'N/A' &&
-        currentUser.residence == otherUser.residence) {
+    } else if (currentUser.getCountry == otherUser.getCountry &&
+        currentUser.getResidence == 'N/A' &&
+        currentUser.getResidence == otherUser.getResidence) {
       // Same country, course,
       return buildTextForConnection(
         currentUser,
         otherUser,
         isConnectionRequested,
         isConnectionRequested
-            ? "You have already sent a connection request to ${otherUser.username}."
+            ? "You have already sent a connection request to ${otherUser.getUsername}."
             :
-        "${otherUser.username} is from ${otherUser.country}, and doesn't live in any student accommodation, just like you. Start your friendship from there with an ice breaker!",
+        "${otherUser.getUsername} is from ${otherUser.getCountry}, and doesn't live in any student accommodation, just like you. Start your friendship from there with an ice breaker!",
       );
     } else {
       return const SizedBox.shrink();

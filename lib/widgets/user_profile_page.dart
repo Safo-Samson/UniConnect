@@ -21,7 +21,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title:
-            Text(widget.user.username), // Set the title to the user's username
+            Text(
+            widget.user.getUsername), // Set the title to the user's username
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -45,18 +46,19 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey, // Placeholder color
-                            image: widget.user.imageUrl != null
+                            image: widget.user.getImageUrl != null
                                 ? DecorationImage(
-                                    image: NetworkImage(widget.user.imageUrl!),
+                                    image:
+                                        NetworkImage(widget.user.getImageUrl!),
                                     fit: BoxFit.cover,
                                   )
                                 : null, // Use null if imageUrl is not available
                           ),
-                          child: widget.user.imageUrl == null
+                          child: widget.user.getImageUrl == null
                               ? CircleAvatar(
                                   backgroundColor: Colors.grey,
                                   child: Text(
-                                    widget.user.username
+                                    widget.user.getUsername
                                         .substring(0, 1)
                                         .toUpperCase(),
                                     style: const TextStyle(
@@ -71,7 +73,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         verticalSpace(10),
                         // Username
                         Text(
-                          widget.user.username,
+                          widget.user.getUsername,
                           style: const TextStyle(
                             fontSize: BrandFonts.h1,
                             fontWeight: FontWeight.bold,
@@ -88,7 +90,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       children: [
                         // Course and Year
                         Text(
-                          widget.user.course,
+                          widget.user.getCourse,
                           style: TextStyle(
                             fontSize: BrandFonts.regularText,
                             color: BrandColor.grey,
@@ -98,7 +100,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         ),
                         verticalSpace(10),
                         Text(
-                          widget.user.year,
+                          widget.user.getYear,
                           style: TextStyle(
                             fontSize: BrandFonts.regularText,
                             color: BrandColor.grey,
@@ -109,7 +111,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         verticalSpace(10),
                         // Flag and Country
                         Text(
-                          '${widget.user.flag} - ${widget.user.country}',
+                          '${widget.user.getFlag} - ${widget.user.getCountry}',
                           style: TextStyle(
                               fontSize: BrandFonts.regularText,
                               color: BrandColor.grey),
@@ -138,10 +140,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
             ),
             // Bio
-            if (widget.user.bio != null)
+            if (widget.user.getBio != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(widget.user.bio!),
+                child: Text(widget.user.getBio!),
               ),
             // Divider
             const Divider(
@@ -169,7 +171,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                     verticalSpace(10),
                     Text(
-                      'Currently no posts from ${widget.user.username}',
+                      'Currently no posts from ${widget.user.getUsername}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: BrandFonts.regularText,

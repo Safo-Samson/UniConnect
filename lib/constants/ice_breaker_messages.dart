@@ -14,20 +14,20 @@ class IceBreakerGenerator {
     List<String> commonProfiles = [];
 
     // Check for nationality match
-    if (_currentUser.country == _otherUser.country) {
+    if (_currentUser.getCountry == _otherUser.getCountry) {
       commonProfiles.add('same nationality');
     }
     // Check for course match
-    if (_currentUser.course == _otherUser.course) {
+    if (_currentUser.getCourse == _otherUser.getCourse) {
       commonProfiles.add('same course');
     }
     // Check for year match
-    if (_currentUser.year == _otherUser.year) {
+    if (_currentUser.getYear == _otherUser.getYear) {
       commonProfiles.add('same year');
     }
 
     // Generate ice breaker message based on common profiles
-    String iceBreakerMessage = 'Hey ${_otherUser.username}, ';
+    String iceBreakerMessage = 'Hey ${_otherUser.getUsername}, ';
 
     if (commonProfiles.isEmpty) {
       // If no common profiles found, generate a generic message
@@ -43,7 +43,7 @@ class IceBreakerGenerator {
         iceBreakerMessage += '${commonProfiles[0]} and ${commonProfiles[1]} , ';
       } else {
         iceBreakerMessage +=
-            ' we are both from ${_otherUser.country}, both study ${_otherUser.course}, and in ${_otherUser.year}! Now how cool is that😄? \n ';
+            ' we are both from ${_otherUser.getCountry}, both study ${_otherUser.getCourse}, and in ${_otherUser.getYear}! Now how cool is that😄? \n ';
       }
 
       // Add a random interesting question or topic
@@ -51,9 +51,9 @@ class IceBreakerGenerator {
         '\nWhat do you enjoy most about $_university hub? 🏢',
         '\nWhat do you think about the $_university library? 📚',
         '\nWhat is your take the $_university meal deal?  🍔🍟🥤',
-        '\nWhere you born in ${_otherUser.country} or just came to the UK for $_university? 🌍',
-        '\nWhat is your favorite thing about ${_otherUser.course}? 🤔',
-        "\nHow's life in ${_otherUser.year}? 🎓",
+        '\nWhere you born in ${_otherUser.getCountry} or just came to the UK for $_university? 🌍',
+        '\nWhat is your favorite thing about ${_otherUser.getCourse}? 🤔',
+        "\nHow's life in ${_otherUser.getYear}? 🎓",
         '\nWhat are your career aspirations after graduation? 💼',
         '\nDo you have any favorite books or movies? 📖🎥',
         '\nWhat is the most exciting thing you have ever done? 🚀',

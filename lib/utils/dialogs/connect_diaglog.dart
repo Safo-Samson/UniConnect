@@ -100,7 +100,7 @@ class _ConnectDialogState extends State<ConnectDialog>
 
 
     DatabaseService.currentDatabaseService().updateRequestedUsers(
-      widget.otherUser.userId,
+      widget.otherUser.getUserId,
     );
 
     // Start the sent animation  and dismiss the dialog after 1 second
@@ -246,7 +246,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                                             NotificationSenderService
                                                     .awesomeNotification()
                                                 .sendConfirmationNotificationOnConnectWithBreaker(
-                                              widget.otherUser.username,
+                                              widget.otherUser.getUsername,
                                               _textEditingController.text,
                                             );
                                             Navigator.pushNamedAndRemoveUntil(
@@ -254,7 +254,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                                               friendSuggestionsRoute,
                                               (route) => false,
                                               arguments:
-                                                  widget.currentUser.country,
+                                                  widget.currentUser.getCountry,
                                             );
                                               
                                           },
@@ -271,13 +271,14 @@ class _ConnectDialogState extends State<ConnectDialog>
                                       NotificationSenderService
                                               .awesomeNotification()
                                           .sendConfirmationNotificationOnConnect(
-                                        widget.otherUser.username,
+                                        widget.otherUser.getUsername,
                                       );
                                       Navigator.pushNamedAndRemoveUntil(
                                         context,
                                         friendSuggestionsRoute,
                                         (route) => false,
-                                        arguments: widget.currentUser.country,
+                                        arguments:
+                                            widget.currentUser.getCountry,
                                       );
                                      
                                     },
