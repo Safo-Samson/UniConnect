@@ -1,29 +1,33 @@
 import 'dart:math';
 
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 
-
 class IceBreakerGenerator {
-  static String generateIceBreakerMessage(
-      UserProfile currentUser, UserProfile otherUser) {
+  final UserProfile _currentUser;
+  final UserProfile _otherUser;
+  final String _university = 'LSBU';
 
+  IceBreakerGenerator(this._currentUser, this._otherUser);
+
+  String generateIceBreakerMessage() {
     List<String> commonProfiles = [];
-    String university = 'LSBU';
+
     // Check for nationality match
-    if (currentUser.country == otherUser.country) {
+    if (_currentUser.country == _otherUser.country) {
       commonProfiles.add('same nationality');
     }
     // Check for course match
-    if (currentUser.course == otherUser.course) {
+    if (_currentUser.course == _otherUser.course) {
       commonProfiles.add('same course');
     }
     // Check for year match
-    if (currentUser.year == otherUser.year) {
+    if (_currentUser.year == _otherUser.year) {
       commonProfiles.add('same year');
     }
-    
+
     // Generate ice breaker message based on common profiles
-    String iceBreakerMessage = 'Hey ${otherUser.username}, ';
+    String iceBreakerMessage = 'Hey ${_otherUser.username}, ';
 
     if (commonProfiles.isEmpty) {
       // If no common profiles found, generate a generic message
@@ -39,18 +43,17 @@ class IceBreakerGenerator {
         iceBreakerMessage += '${commonProfiles[0]} and ${commonProfiles[1]} , ';
       } else {
         iceBreakerMessage +=
-            ' we are both from ${otherUser.country}, both study ${otherUser.course}, and in ${otherUser.year}! Now how cool is that😄? \n ';
+            ' we are both from ${_otherUser.country}, both study ${_otherUser.course}, and in ${_otherUser.year}! Now how cool is that😄? \n ';
       }
 
       // Add a random interesting question or topic
       List<String> interestingTopics = [
-        '\nWhat do you think about the $university hub? 🏢',
-        '\nWhat do you enjoy most about ${otherUser.course}? 📚',
-        '\nWhat do you think about the $university library? 📚',
-        '\nWhat is your take the $university meal deal?  🍔🍟🥤',
-        '\nWhere you born in ${otherUser.country} or just came to the UK for University? 🌍',
-        '\nWhat is your favorite thing about ${otherUser.course}? 🤔',
-        "\nHow's life in ${otherUser.year}? 🎓",
+        '\nWhat do you enjoy most about $_university hub? 🏢',
+        '\nWhat do you think about the $_university library? 📚',
+        '\nWhat is your take the $_university meal deal?  🍔🍟🥤',
+        '\nWhere you born in ${_otherUser.country} or just came to the UK for $_university? 🌍',
+        '\nWhat is your favorite thing about ${_otherUser.course}? 🤔',
+        "\nHow's life in ${_otherUser.year}? 🎓",
         '\nWhat are your career aspirations after graduation? 💼',
         '\nDo you have any favorite books or movies? 📖🎥',
         '\nWhat is the most exciting thing you have ever done? 🚀',
@@ -72,12 +75,16 @@ class IceBreakerGenerator {
         '\nWhat are your thoughts on the latest trends or developments in technology? 💡',
       ];
 
-
       iceBreakerMessage +=
           interestingTopics[Random().nextInt(interestingTopics.length)];
     }
 
     return iceBreakerMessage;
+  }
+
+  String generateCommentOnTopic() {
+    return moreInterestingTopics[
+        Random().nextInt(moreInterestingTopics.length)];
   }
 }
 

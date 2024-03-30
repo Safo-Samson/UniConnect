@@ -79,11 +79,11 @@ class _ConnectDialogState extends State<ConnectDialog>
 
     // Simulate a delay of 1 second
     await Future.delayed(const Duration(seconds: 1));
+    IceBreakerGenerator iceBreakerGenerator =
+        IceBreakerGenerator(widget.currentUser, widget.otherUser);
 
-    String newIceBreakerMessage = IceBreakerGenerator.generateIceBreakerMessage(
-        // Generate a new ice breaker message
-        widget.currentUser,
-        widget.otherUser);
+    String newIceBreakerMessage =
+        iceBreakerGenerator.generateIceBreakerMessage();
     setState(() {
       _textEditingController.text = newIceBreakerMessage;
       _charCount = newIceBreakerMessage.length;

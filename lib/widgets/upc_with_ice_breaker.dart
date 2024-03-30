@@ -172,9 +172,11 @@ class _UserProfileContainerWithIceBreakerState
                           onTap: () async {
                             UserProfile currentUserProfile =
                                 currentUser; // Use currentUser directly
-                            String iceBreakerMessage =
-                                IceBreakerGenerator.generateIceBreakerMessage(
+                            IceBreakerGenerator iceBreakerGenerator =
+                                IceBreakerGenerator(
                                     currentUserProfile, widget.user);
+                            String iceBreakerMessage =
+                                iceBreakerGenerator.generateIceBreakerMessage();
                             showConnectDialog(
                               context,
                               iceBreakerMessage,
@@ -221,9 +223,10 @@ class _UserProfileContainerWithIceBreakerState
           : () async {
         UserProfile currentUserProfile =
             currentUser; // Use currentUser directly
-        String iceBreakerMessage =
-            IceBreakerGenerator.generateIceBreakerMessage(
-                currentUserProfile, otherUser);
+              IceBreakerGenerator iceBreakerGenerator =
+                  IceBreakerGenerator(currentUserProfile, widget.user);
+              String iceBreakerMessage =
+                  iceBreakerGenerator.generateIceBreakerMessage();
         showConnectDialog(
           context,
           iceBreakerMessage,
