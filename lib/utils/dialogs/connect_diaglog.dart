@@ -244,7 +244,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                                             // Handle sending the message
                                             _startSendingAnimation();
                                             NotificationSenderService
-                                                    .awesomeNotification()
+                                                    .currentNotificationService()
                                                 .sendConfirmationNotificationOnConnectWithBreaker(
                                               widget.otherUser.getUsername,
                                               _textEditingController.text,
@@ -269,7 +269,7 @@ class _ConnectDialogState extends State<ConnectDialog>
                                       // Handle connecting without ice breaker
                                       _startSendingAnimation();
                                       NotificationSenderService
-                                              .awesomeNotification()
+                                              .currentNotificationService()
                                           .sendConfirmationNotificationOnConnect(
                                         widget.otherUser.getUsername,
                                       );

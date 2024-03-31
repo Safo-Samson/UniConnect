@@ -62,6 +62,26 @@ class AwesomeNotificationSender implements NotificationSender {
         'You have sent a connection request to $user with the message: $truncatedMessage');
   }
 
+  Future<void> sendConfirmationNotificationOnConnectWithBreaker2(
+      String user, String breakerMessage) async {
+    // Truncate the breakerMessage to a maximum number of words
+    String truncatedMessage = truncateMessage(
+        breakerMessage, 9); // Change 20 to your desired maximum number of words
+
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: createUniqueID(),
+        channelKey: 'basic_channel',
+        title: 'Suggested Connection',
+        body:
+            'You may know $user, comment on this question to begin interacting: $truncatedMessage',
+      ),
+    );
+
+    addNotificationToList(
+        'You have sent a connection request to $user with the message: $truncatedMessage');
+  }
+
   @override
   void addNotificationToList(String message) {
     notifications.insert(0, NotificationItem(message: message, watched: false));

@@ -282,4 +282,11 @@ class FirebaseCloudService implements DatabaseProvider {
       devtols.log('Error updating user document: $e');
     }
   }
+  
+  @override
+  Future<List<UserProfile>> queryUsersWithSimilarProfiles(
+      UserProfile currentUserProfile) {
+    // TODO: implement queryUsersWithSimilarProfiles
+    throw UnimplementedError();
+  }
 }

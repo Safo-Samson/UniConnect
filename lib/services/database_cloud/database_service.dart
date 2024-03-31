@@ -64,4 +64,10 @@ class DatabaseService implements DatabaseProvider {
   Future<Iterable<UserProfile>> getUsersWithResidence(String residence) {
     return _datbaseProvider.getUsersWithResidence(residence);
   }
+
+@override
+  Future<List<UserProfile>> queryUsersWithSimilarProfiles(
+      UserProfile currentUserProfile) {
+    return _datbaseProvider.queryUsersWithSimilarProfiles(currentUserProfile);
+  }
 }

@@ -6,7 +6,7 @@ class NotificationSenderService implements NotificationSender {
 
   const NotificationSenderService(this._notificationSender);
 
-  factory NotificationSenderService.awesomeNotification() =>
+  factory NotificationSenderService.currentNotificationService() =>
       NotificationSenderService(AwesomeNotificationSender());
 
   @override

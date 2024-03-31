@@ -38,7 +38,7 @@ void main() async {
       .ensureInitialized(); // Require that the Flutter app is initialized before running the app
   await AuthService.currentAuthService()
       .initialize(); // Initialize the firebase app
-  await NotificationSenderService.awesomeNotification()
+  await NotificationSenderService.currentNotificationService()
       .initialize(); // Initialize the awesome notifications
   runApp(const HomePage());
 }

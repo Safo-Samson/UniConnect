@@ -34,4 +34,8 @@ abstract class DatabaseProvider {
   );
 
   Future<void> updateRequestedUsers(String userId);
+
+  Future<List<UserProfile>> queryUsersWithSimilarProfiles(
+      UserProfile currentUserProfile);
 }
+
