@@ -6,6 +6,7 @@ import 'package:uniconnect/constants/ice_breaker_messages.dart';
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
+import 'package:uniconnect/utils/dialogs/comment_dialog.dart';
 import 'package:uniconnect/utils/dialogs/connect_diaglog.dart';
 import 'package:uniconnect/utils/dialogs/requested_dialog.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
@@ -183,6 +184,8 @@ class _UserProfileContainerWithIceBreakerState
                               currentUserProfile,
                               widget.user,
                             );
+                            // showCommentDialog(context);
+
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
