@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uniconnect/constants/ice_breaker_messages.dart';
 import 'package:uniconnect/constants/routes.dart';
 import 'package:uniconnect/services/database_cloud/database_service.dart';
-import 'package:uniconnect/services/notifications/notification_sender_service.dart';
+// import 'package:uniconnect/services/notifications/notification_sender_service.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/brand_fonts.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
@@ -243,12 +243,13 @@ class _ConnectDialogState extends State<ConnectDialog>
                                         : () {
                                             // Handle sending the message
                                             _startSendingAnimation();
-                                            NotificationSenderService
-                                                    .currentNotificationService()
-                                                .sendConfirmationNotificationOnConnectWithBreaker(
-                                              widget.otherUser.getUsername,
-                                              _textEditingController.text,
-                                            );
+                                            /** no notification will be sent after you connect */
+                                            // NotificationSenderService
+                                            //         .currentNotificationService()
+                                            //     .sendConfirmationNotificationOnConnectWithBreaker(
+                                            //   widget.otherUser.getUsername,
+                                            //   _textEditingController.text,
+                                            // );
                                             Navigator.pushNamedAndRemoveUntil(
                                               context,
                                               friendSuggestionsRoute,
@@ -268,11 +269,13 @@ class _ConnectDialogState extends State<ConnectDialog>
                                     onPressed: () {
                                       // Handle connecting without ice breaker
                                       _startSendingAnimation();
-                                      NotificationSenderService
-                                              .currentNotificationService()
-                                          .sendConfirmationNotificationOnConnect(
-                                        widget.otherUser.getUsername,
-                                      );
+
+                                      /** no notification will be sent after you connect */
+                                      // NotificationSenderService
+                                      //         .currentNotificationService()
+                                      //     .sendConfirmationNotificationOnConnect(
+                                      //   widget.otherUser.getUsername,
+                                      // );
                                       Navigator.pushNamedAndRemoveUntil(
                                         context,
                                         friendSuggestionsRoute,

@@ -217,7 +217,7 @@ class FirebaseCloudService implements DatabaseProvider {
     try {
       // Step 1: Fetch user IDs from the specified course collection
       QuerySnapshot<Map<String, dynamic>> allUsersWithCourse = await allcourses
-          .doc(course) // Convert course to lowercase
+          .doc(course) 
           .collection('users')
           .get();
 

@@ -70,7 +70,7 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   image_path: "assets/img/logo ss.png"
   adaptive_icon_background: "assets/img/location.png"
-  adaptive_icon_foreground: "assets/img/small_confetti.png"
+  adaptive_icon_foreground: "assets/img/logo ss.png"
   web:
     generate: true
     image_path: "assets/img/logo ss.png"

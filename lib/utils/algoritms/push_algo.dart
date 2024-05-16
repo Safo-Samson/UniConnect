@@ -4,6 +4,7 @@ import 'package:uniconnect/services/database_cloud/database_service.dart';
 import 'package:uniconnect/services/notifications/notification_sender_service.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 
+// not actually used in the app
 class ActiveConnectionNotifications {
  
   final UserProfile _currentUserProfile;
