@@ -30,7 +30,9 @@ class _StudentVerifyState extends State<StudentVerify> {
   bool isValidEmail(String email) {
     // I could use a regex or any other method to validate the email
     // For simplicity, I'm using a basic check here
-    return email.isNotEmpty && email.contains('@');
+    return email.isNotEmpty &&
+        email.contains('@') &&
+        email.contains('lsbu.ac.uk');
   }
 
   @override

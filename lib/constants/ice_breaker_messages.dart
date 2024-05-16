@@ -51,7 +51,7 @@ class IceBreakerGenerator {
         '\nWhat do you enjoy most about $_university hub? 🏢',
         '\nWhat do you think about the $_university library? 📚',
         '\nWhat is your take the $_university meal deal?  🍔🍟🥤',
-        '\nWhere you born in ${_otherUser.getCountry} or just came to the UK for $_university? 🌍',
+        '\nWere you born in ${_otherUser.getCountry} or just came to the UK for $_university? 🌍',
         '\nWhat is your favorite thing about ${_otherUser.getCourse}? 🤔',
         "\nHow's life in ${_otherUser.getYear}? 🎓",
         '\nWhat are your career aspirations after graduation? 💼',
