@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "uniconnect",
-            "cwd": "uniconnect",
-            "request": "launch",
-            "type": "dart"
+          "name": "uniconnect",
+          "cwd": "uniconnect",
+          "request": "launch",
+          "type": "dart"
         },
         {
             "name": "uniconnect (profile mode)",

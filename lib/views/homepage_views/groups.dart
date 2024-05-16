@@ -114,8 +114,9 @@ class _GroupsState extends State<Groups> {
                 if (snapshot.hasError) {
                   devtols.log(snapshot.error.toString());
 
-                  return const Center(
-                    child: Text('Error fetching groups'),
+                  return Center(
+                    child: Text(
+                        'Error fetching groups ${snapshot.error.toString()}'),
                   );
                 }
 
