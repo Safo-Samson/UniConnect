@@ -2,7 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:uniconnect/constants/notification_list.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
-import 'package:uniconnect/utils/helpers_utilities/unique_id.dart';
+import 'package:uniconnect/utils/helper_utilities/unique_id.dart';
 import 'package:uniconnect/widgets/notification_item.dart';
 import 'dart:developer' as devtols show log;
 
