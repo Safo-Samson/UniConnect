@@ -20,4 +20,6 @@ class CouldNotGetUserCourseException implements Exception {}
 
 class CouldNotGetUserResidenceException implements Exception {}
 
+class CouldNotGetUsersException implements Exception {}
+
 class AllFiltersEmptyException implements Exception {}
