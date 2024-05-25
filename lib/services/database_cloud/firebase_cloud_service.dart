@@ -3,8 +3,8 @@ import 'package:uniconnect/my_trash/firestore_functions/add_initial_user_to_user
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/database_cloud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/services/database_cloud/database_provider.dart';
-import 'package:uniconnect/utils/helpers_utilities/add_user_to_subcollection.dart';
-import 'package:uniconnect/utils/helpers_utilities/get_users_with_field.dart';
+import 'package:uniconnect/utils/helper_utilities/add_user_to_subcollection.dart';
+import 'package:uniconnect/utils/helper_utilities/get_users_with_field.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'dart:developer' as devtols show log;
 
