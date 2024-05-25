@@ -71,7 +71,6 @@ class FirebaseCloudService implements DatabaseProvider {
       String userId, String country) async {
     try {
       await addUserToSubcollection(userId, 'nationalities', country);
-
       devtols.log('User added to $country subcollection');
     } catch (e) {
       devtols.log('Error adding user to nationality subcollection: $e');
@@ -83,7 +82,6 @@ class FirebaseCloudService implements DatabaseProvider {
       String userId, String residence) async {
     try {
       await addUserToSubcollection(userId, 'residence', residence);
-
       devtols.log('User added to $residence subcollection');
     } catch (e) {
       devtols.log('Error adding user to residence subcollection: $e');
@@ -160,9 +158,6 @@ class FirebaseCloudService implements DatabaseProvider {
     }
   }
 
-
-
-
   @override
   Future<Iterable<UserProfile>> getUsersWithNationality(
       String nationality) async {
@@ -197,7 +192,6 @@ class FirebaseCloudService implements DatabaseProvider {
     try {
       DocumentReference userRef = allUsers.doc(userId);
       await userRef.update(dataToUpdate);
-
       devtols.log('User document updated successfully');
     } catch (e) {
       devtols.log('Error updating user document: $e');
