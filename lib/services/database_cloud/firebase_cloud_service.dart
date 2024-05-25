@@ -3,6 +3,7 @@ import 'package:uniconnect/my_trash/firestore_functions/add_initial_user_to_user
 import 'package:uniconnect/services/auth/auth_service.dart';
 import 'package:uniconnect/services/database_cloud/cloud_storage_exceptions.dart';
 import 'package:uniconnect/services/database_cloud/database_provider.dart';
+import 'package:uniconnect/utils/helpers_utilities/add_user_to_subcollection.dart';
 import 'package:uniconnect/utils/helpers_utilities/get_users_with_field.dart';
 import 'package:uniconnect/widgets/user_profile.dart';
 import 'dart:developer' as devtols show log;
@@ -58,15 +59,7 @@ class FirebaseCloudService implements DatabaseProvider {
   Future<void> addUserToCoursesSubcollection(
       String userId, String course) async {
     try {
-      // Reference to the users subcollection under the selected course
-      CollectionReference usersCollection = FirebaseFirestore.instance
-          .collection('courses')
-          .doc(course)
-          .collection('users');
-
-      // Add the user's ID as a document in the subcollection
-      await usersCollection.doc(userId).set({'userId': userId});
-
+      await addUserToSubcollection(userId, 'courses', course);
       devtols.log('User added to $course subcollection');
     } catch (e) {
       devtols.log('Error adding user to courses subcollection: $e');
@@ -77,14 +70,7 @@ class FirebaseCloudService implements DatabaseProvider {
   Future<void> addUserToNationalitySubcollection(
       String userId, String country) async {
     try {
-      // Reference to the users subcollection under the selected country
-      CollectionReference usersCollection = FirebaseFirestore.instance
-          .collection('nationalities')
-          .doc(country)
-          .collection('users');
-
-      // Add the user's ID as a document in the subcollection
-      await usersCollection.doc(userId).set({'userId': userId});
+      await addUserToSubcollection(userId, 'nationalities', country);
 
       devtols.log('User added to $country subcollection');
     } catch (e) {
@@ -96,14 +82,7 @@ class FirebaseCloudService implements DatabaseProvider {
   Future<void> addUserToResidenceSubcollection(
       String userId, String residence) async {
     try {
-      // Reference to the users subcollection under the selected residence
-      CollectionReference usersCollection = FirebaseFirestore.instance
-          .collection('residence')
-          .doc(residence)
-          .collection('users');
-
-      // Add the user's ID as a document in the subcollection
-      await usersCollection.doc(userId).set({'userId': userId});
+      await addUserToSubcollection(userId, 'residence', residence);
 
       devtols.log('User added to $residence subcollection');
     } catch (e) {
