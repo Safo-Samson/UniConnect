@@ -91,6 +91,7 @@ class HomePage extends StatelessWidget {
           return FriendSuggestions(
               currentUserNationality: currentUserNationality);
         },
+        
         groupsRoute: (context) {
           final Map<String, dynamic> arguments = ModalRoute.of(context)!
               .settings
