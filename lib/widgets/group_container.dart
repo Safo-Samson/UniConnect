@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:uniconnect/utils/Brand/brand_colours.dart';
 import 'package:uniconnect/utils/Brand/spaces.dart';
-import 'package:uniconnect/utils/unamed_utilities/random_letter.dart';
+import 'package:uniconnect/utils/helpers_utilities/random_letter.dart';
 
 class GroupContainer extends StatefulWidget {
   final String groupName;
